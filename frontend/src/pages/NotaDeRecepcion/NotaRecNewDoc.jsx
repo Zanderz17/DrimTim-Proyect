@@ -40,7 +40,7 @@ return (
             </Title>
 
             <div className='new-doc-form'>
-                <h2>Registro de orden de compra</h2>   
+                <h2>Registro de nota de recepción</h2>   
                 <form>
                     <div className='container'>
                         <div className="row form-group">
