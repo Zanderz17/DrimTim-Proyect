@@ -1,0 +1,12 @@
+RegisterForm.jsx:
+    
+    <div className="form-group">
+        <label className="form-label" htmlFor="passwordConfirm">Confirmar contraseña</label>
+        <input className="form-control" type="password" id="passwordConfirm" placeholder="********************" required />
+    </div> 
+
+    <div className="form-group form-check">
+            <input className="form-check-input" type="checkbox" id="check" />
+            <label className="form-check-label"> Acepto <a href='#'>los términos y condiciones de uso</a></label>
+    </div>
+

@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Compras nacionales",
+        "icon": "bi-gear-fill",
+        "childrens": [
+            {
+                "title": "Solicitud de compra",
+                "path": "/ComprasNacionales/SolicitudDeCompra"
+            },
+            {
+                "title": "Solicitud de cotización",
+                "path": "/ComprasNacionales/SolicitudDeCotizacion"
+            },
+            {
+                "title": "Orden de compra",
+                "path": "/ComprasNacionales/OrdenDeCompra"
+            },
+            {
+                "title": "Nota de recepción",
+                "path": "/ComprasNacionales/NotaDeRecepcion"
+            }
+        ]
+    },
+    {
+        "title": "Importaciones",
+        "icon": "bi bi-folder",
+        "childrens": [
+            {
+                "title": "Solicitud de compra",
+                "path": "/Importaciones/SolicitudDeCompra"
+            },
+            {
+                "title": "Solicitud de cotización",
+                "path": "/Importaciones/SolicitudDeCotizacion"
+            },
+            {
+                "title": "Orden de compra",
+                "path": "/Importaciones/OrdenDeCompra"
+            },
+            {
+                "title": "Nota de recepción",
+                "path": "/Importaciones/NotaDeRecepcion"
+            }
+        ]
+    },
+    {
+        "title": "Notificaciones",
+        "icon": "bi bi-file-earmark-text",
+        "path": "/Notificaciones"
+    }
+]

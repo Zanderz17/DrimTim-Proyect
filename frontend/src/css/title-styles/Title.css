@@ -1,0 +1,45 @@
+.navigation-bar{
+    height: 80px;
+    margin-left: 12px;
+}
+
+.link-1{
+    margin-right: 10px;
+    text-decoration: none;
+    color: gray;
+}
+
+.navigation-bar i{
+    color: gray;
+}
+
+.link-2{
+    margin-left: 10px;
+    text-decoration: none;
+    color: #4658AC;
+}
+
+.principal-title{
+    margin-left: 12px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.bottom-navbar{
+    margin-top: 30px;
+    margin-left: 2px;
+}
+
+.bottom-navbar a{
+    margin: 10px;
+}
+
+.active{
+    color: #4763E4;
+    text-decoration: none;
+}
+
+.no-active{
+    color: #9FA6B2;
+    text-decoration: none;
+}
