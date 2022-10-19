@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';    
+import { useNavigate } from 'react-router-dom';
 import '../css/pages-styles/LoginForm.css';
 import Axios from 'axios';
 
 function LoginForm() {
     const [loginCorreo, setLoginCorreo] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const navigate = useNavigate();
     const login = () => {
         Axios({
             method: 'POST',
@@ -14,6 +16,10 @@ function LoginForm() {
             },
             withCredentials: true,
             url: "http://localhost:9000/users/login"
+        }).then((res) => {
+            if(res.data === 'Successfully Authenticated'){
+                navigate('/');
+            };
         });
     };
 

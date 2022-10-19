@@ -10,7 +10,7 @@ function RegisterForm() {
     const [registerRol, setRegisterRol] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const navigate = useNavigate();
-    const register = (e) => {
+    const register = () => {
         Axios({
             method: 'POST',
             data: {
@@ -22,9 +22,11 @@ function RegisterForm() {
             },
             withCredentials: true,
             url: "http://localhost:9000/users/register"
+        }).then((res) => {
+            if (res.data === 'Successfully Registered'){
+                navigate('/users/signin');
+            };
         });
-        e.preventDefault();
-        //navigate('/signin');
     };
 
     return (

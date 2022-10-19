@@ -11,7 +11,7 @@ router.post('/users/login', (req, res, next) => {
             req.logIn(user, (err) => {
                 if (err) throw err;
                 res.send("Successfully Authenticated");
-                console.log(req.user);
+                //console.log(req.user);
             });
         }
     })(req, res, next);
@@ -26,7 +26,7 @@ router.post('/users/register', (req, res) => {
             const newUser = await new User({ correo, nombre, apellidos, rol, password });
             newUser.password = await newUser.encryptPassword(password);
             await newUser.save();
-            res.redirect('http://localhost:3000/users/signin');
+            res.send("Successfully Registered");
         }
     }) 
 })
