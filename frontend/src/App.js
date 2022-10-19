@@ -11,6 +11,9 @@ import CodeVerification from './pages/CodeVerification.jsx';
 import RegisterForm from './pages/RegisterForm';
 import TestSidebar from './components/test-components/TestSidebar';
 import SolCompraNewDoc from './pages/SolicitudDeCompra/SolCompraNewDoc';
+import SolCotizacionNewDoc from './pages/SolicitudDeCotizacion/SolCotizacionNewDoc';
+import OrdDeCompraNewDoc from './pages/OrdenDeCompra/OrdDeCompraNewDoc';
+import NotaRecNewDoc from './pages/NotaDeRecepcion/NotaRecNewDoc';
 
 function App() {
   return (
@@ -21,7 +24,10 @@ function App() {
             <Route exact path="/codeVerification" element={<CodeVerification />} />
             <Route exact path="/sidebar" element={<TestSidebar />} />
             <Route exact path="/users/signin" element={<LoginForm />} />
-            <Route exact path="/solCompraNewDoc" element={<SolCompraNewDoc />} />
+            <Route exact path="/ComprasNacionales/SolicitudDeCompra" element={<SolCompraNewDoc />} />
+            <Route exact path="/ComprasNacionales/SolicitudDeCotizacion" element={<SolCotizacionNewDoc />} />
+            <Route exact path="/ComprasNacionales/OrdenDeCompra" element={<OrdDeCompraNewDoc />} />
+            <Route exact path="/ComprasNacionales/NotaDeRecepcion" element={<NotaRecNewDoc />} />
             <Route exact path="/" />
         </Routes>
       </BrowserRouter>

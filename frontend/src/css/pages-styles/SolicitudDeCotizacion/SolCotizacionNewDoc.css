@@ -1,0 +1,28 @@
+.new-doc-form{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.new-doc-form .form-group{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.new-doc-form .final-submit{
+    margin-top: 50px;
+}
+
+.new-doc-form .list-products button{
+    margin-top: 25px;
+
+}
+
+.new-doc-form .final-submit .register{
+    background-color: #4763E4;
+}
+
+.new-doc-form .final-submit .anular{
+    background-color: #fff;
+    color: black;
+    border: 1px solid gray;
+}
