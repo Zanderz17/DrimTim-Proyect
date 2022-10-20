@@ -65,7 +65,7 @@ return (
                         {    
                         inputList.map( (x,i)=>{
                             return(
-                                <div className="list-products row form-group">
+                                <div className="list-products row form-group" key={i}>
                                     <div className='col-5'>
                                         <label className="form-label" htmlFor="IDMaterial" onChange={e=>handleinputchange(e,i)} >Identificador del material</label>
                                         <input className="form-control" type="text" id="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" required />
