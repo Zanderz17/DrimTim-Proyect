@@ -9,7 +9,7 @@ function Title(props) {
                     <a href='/' className='link-1'>
                         {props.type}
                     </a>
-                    <i class="bi bi-chevron-right"></i>
+                    <i className="bi bi-chevron-right"></i>
                     <a href='/' className='link-2'>
                         {props.document}
                     </a>

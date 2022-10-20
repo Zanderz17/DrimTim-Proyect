@@ -43,6 +43,12 @@ return (
                 <h2>Registro de nota de recepción</h2>   
                 <form>
                     <div className='container'>
+                        <div className='row'>
+                            <div className='col-12'>
+
+                            </div>
+                        </div>
+
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="IDNotaRec">Número de nota de recpción</label>

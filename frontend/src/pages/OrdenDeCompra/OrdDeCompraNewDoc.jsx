@@ -39,10 +39,15 @@ return (
             >
             </Title>
 
-            <div className='new-doc-form'>
-                <h2>Registro de orden de compra</h2>   
+            <div className='new-doc-form'> 
                 <form>
                     <div className='container'>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <h2>Registro de orden de compra</h2>  
+                            </div>
+                        </div>
+
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
