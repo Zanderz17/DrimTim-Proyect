@@ -7,7 +7,7 @@ import Title from '../../components/title/Title'
 import '../../css/pages-styles/SolicitudDeCompra/SolCompraNewDoc.css'
 
 function SolCompraNewDoc() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:''}]);
+    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:''}]);
 
     //
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
@@ -23,11 +23,7 @@ function SolCompraNewDoc() {
             data: {
                 nro_solicitud_compra: nroSolicitudCompra,
                 fecha_elaboracion: fechaElaboracion,
-                productos: 
-                    [{
-                        id_material: identificadorMaterial,
-                        cant_requerida: cantidadRequerida
-                    }],
+                productos: inputList,
                 descripcion: descripcion,
                 punto_pedido: puntoPedido
             },
@@ -39,21 +35,22 @@ function SolCompraNewDoc() {
     };
     //
 
-    const handleinputchange=(e, i)=>{
-        const {IDMaterial, stockMaterial}= e.target;
+    const handleinputchange=(e, index)=>{
+        const {name, value}= e.target;
         const list= [...inputList];
-        list[i][IDMaterial]= stockMaterial;
+        list[index][name]= value;
         setinputList(list);
     }
 
-    const handleremove= index=>{
+    const handleremove = index =>{
         const list=[...inputList];
         list.splice(index,1);
         setinputList(list);
     }
 
-    const handleaddclick=()=>{ 
-        setinputList([...inputList, { IDMaterial:'', stockMaterial:''}]);
+    const handleaddclick = () =>{ 
+        setinputList([...inputList, {id_material:'', cant_requerida:''}]);
+        console.log(inputList); //Only to test inputList
     }
 
     return (
@@ -94,16 +91,16 @@ function SolCompraNewDoc() {
                             </div>
 
                             {    
-                            inputList.map( (x,i)=>{
+                            inputList.map((x,i) => {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-5'>
-                                            <label className="form-label" htmlFor="IDMaterial" onChange={e=>handleinputchange(e,i)} >Identificador del material</label>
-                                            <input className="form-control" type="text" id="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={(e) => setIdentificadorMaterial(e.target.value)} required />
+                                            <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-3'>
-                                            <label className="form-label" htmlFor="stockMaterial" onChange={ e=>handleinputchange(e,i)} >Cantidad Requerida</label>
-                                            <input className="form-control" type="number" id="IDMaterial" placeholder="000" onChange={(e) => setCantidadRequerida(e.target.value)} required />
+                                            <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
+                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&

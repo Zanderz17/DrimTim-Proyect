@@ -7,7 +7,7 @@ import Title from '../../components/title/Title'
 import '../../css/pages-styles/SolicitudDeCotizacion/SolCotizacionNewDoc.css'
 
 function SolCotizacionNewDoc() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:''}]);
+    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
 
     //
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
@@ -48,10 +48,10 @@ function SolCotizacionNewDoc() {
 
     //
 
-    const handleinputchange=(e, i)=>{
-        const {IDMaterial, stockMaterial}= e.target;
+    const handleinputchange=(e, index)=>{
+        const {name, value}= e.target;
         const list= [...inputList];
-        list[i][IDMaterial]= stockMaterial;
+        list[index][name]= value;
         setinputList(list);
     }
 
@@ -62,7 +62,8 @@ function SolCotizacionNewDoc() {
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, { IDMaterial:'', stockMaterial:''}]);
+        setinputList([...inputList, { IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+        console.log(inputList);
     }
 
     return (
@@ -124,16 +125,16 @@ function SolCotizacionNewDoc() {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
-                                            <label className="form-label" htmlFor="IDMaterial" onChange={e=>handleinputchange(e,i)} >Identificador del material</label>
-                                            <input className="form-control" type="text" id="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={(e) => setIdentificadorMaterial(e.target.value)} required />
+                                            <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
+                                            <input className="form-control" type="text" name="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="stockMaterial" onChange={ e=>handleinputchange(e,i)} >Cantidad Requerida</label>
-                                            <input className="form-control" type="number" id="IDMaterial" placeholder="000" onChange={(e) => setCantidadRequerida(e.target.value)} required />
+                                            <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
+                                            <input className="form-control" type="number" name="stockMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="priceMaterial" onChange={ e=>handleinputchange(e,i)} >Precio por Unidad</label>
-                                            <input className="form-control" type="number" id="priceMaterial" placeholder="000" onChange={(e) => setPrecioPorUnidad(e.target.value)} required />
+                                            <label className="form-label" htmlFor="priceMaterial">Precio por Unidad</label>
+                                            <input className="form-control" type="number" name="priceMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&

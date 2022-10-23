@@ -7,7 +7,7 @@ import Title from '../../components/title/Title'
 import '../../css/pages-styles/NotaDeRecepcion/NotaRecNewDoc.css'
 
 function NotaRecNewDoc() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:''}]);
+    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
     
     //
     const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
@@ -49,10 +49,10 @@ function NotaRecNewDoc() {
     };
     //
 
-    const handleinputchange=(e, i)=>{
-        const {IDMaterial, stockMaterial}= e.target;
+    const handleinputchange=(e, index)=>{
+        const {name, value}= e.target;
         const list= [...inputList];
-        list[i][IDMaterial]= stockMaterial;
+        list[index][name]= value;
         setinputList(list);
     }
 
@@ -63,7 +63,8 @@ function NotaRecNewDoc() {
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, { IDMaterial:'', stockMaterial:''}]);
+        setinputList([...inputList, {IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+        console.log(inputList);
     }
 
     return (
@@ -131,21 +132,21 @@ function NotaRecNewDoc() {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
-                                            <label className="form-label" htmlFor="IDMaterial" onChange={e=>handleinputchange(e,i)} >Identificador del material</label>
-                                            <input className="form-control" type="text" id="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={(e) => setIdentificadorMaterial(e.target.value)} required />
+                                            <label className="form-label" htmlFor="IDMaterial"> Identificador del material </label>
+                                            <input className="form-control" type="text" name="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="stockMaterial" onChange={ e=>handleinputchange(e,i)} >Cantidad Recibida</label>
-                                            <input className="form-control" type="number" id="stockMaterial" placeholder="000" onChange={(e) => setCantidadRecibida(e.target.value)} required />
+                                            <label className="form-label" htmlFor="stockMaterial"> Cantidad Recibida </label>
+                                            <input className="form-control" type="number" name="stockMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="priceMaterial" onChange={ e=>handleinputchange(e,i)} >Precio por Unidad</label>
-                                            <input className="form-control" type="number" id="priceMaterial" placeholder="000" onChange={(e) => setPrecioUnidad(e.target.value)} required />
+                                            <label className="form-label" htmlFor="priceMaterial"> Precio por Unidad </label>
+                                            <input className="form-control" type="number" name="priceMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&
                                             <div className='col-2 my-auto'>
-                                                <button  className="btn btn-danger w-100" onClick={()=> handleremove(i)}>Eliminar</button>
+                                                <button className="btn btn-danger w-100" onClick={()=> handleremove(i)}>Eliminar</button>
                                             </div>
                                         }
                                         { inputList.length-1===i &&
