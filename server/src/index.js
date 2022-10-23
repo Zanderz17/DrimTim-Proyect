@@ -28,7 +28,11 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 // Routes
-app.use(require('./routes/users'));
+app.use(require('./routes/user'));
+app.use(require('./routes/compras-nacionales/nota-recepcion'));
+app.use(require('./routes/compras-nacionales/orden-compra'));
+app.use(require('./routes/compras-nacionales/solicitud-compra'));
+app.use(require('./routes/compras-nacionales/solicitud-cotizacion'));
 
 // Starting the server
 app.listen(app.get('port'), () => {

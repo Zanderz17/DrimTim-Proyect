@@ -10,7 +10,7 @@ function RegisterForm() {
     const [registerRol, setRegisterRol] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const navigate = useNavigate();
-    const register = () => {
+    const register = (e) => {
         Axios({
             method: 'POST',
             data: {
@@ -27,6 +27,7 @@ function RegisterForm() {
                 navigate('/users/signin');
             };
         });
+        e.preventDefault();
     };
 
     return (

@@ -7,7 +7,7 @@ function LoginForm() {
     const [loginCorreo, setLoginCorreo] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const navigate = useNavigate();
-    const login = () => {
+    const login = (e) => {
         Axios({
             method: 'POST',
             data: {
@@ -18,9 +18,10 @@ function LoginForm() {
             url: "http://localhost:9000/users/login"
         }).then((res) => {
             if(res.data === 'Successfully Authenticated'){
-                navigate('/');
+                navigate('/compras-nacionales/solicitud-compra');
             };
         });
+        e.preventDefault();
     };
 
     return (
@@ -47,7 +48,7 @@ function LoginForm() {
                     <input className="btn btn-success w-100" type="submit" value="Iniciar Sesión" />
 
                     <div className="form-check text-center">
-                        <label className="form-check-label">¿No tienes cuenta? <a href='/users/signup'>Registrate</a></label>
+                        <label className="form-check-label">¿No tienes cuenta? <a href='/users/signup'>Regístrate</a></label>
                     </div>
                 </form>
             </div>

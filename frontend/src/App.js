@@ -24,10 +24,10 @@ function App() {
             <Route exact path="/codeVerification" element={<CodeVerification />} />
             <Route exact path="/sidebar" element={<TestSidebar />} />
             <Route exact path="/users/signin" element={<LoginForm />} />
-            <Route exact path="/ComprasNacionales/SolicitudDeCompra" element={<SolCompraNewDoc />} />
-            <Route exact path="/ComprasNacionales/SolicitudDeCotizacion" element={<SolCotizacionNewDoc />} />
-            <Route exact path="/ComprasNacionales/OrdenDeCompra" element={<OrdDeCompraNewDoc />} />
-            <Route exact path="/ComprasNacionales/NotaDeRecepcion" element={<NotaRecNewDoc />} />
+            <Route exact path="/compras-nacionales/solicitud-compra" element={<SolCompraNewDoc />} />
+            <Route exact path="/compras-nacionales/solicitud-cotizacion" element={<SolCotizacionNewDoc />} />
+            <Route exact path="/compras-nacionales/orden-compra" element={<OrdDeCompraNewDoc />} />
+            <Route exact path="/compras-nacionales/nota-recepcion" element={<NotaRecNewDoc />} />
             <Route exact path="/" />
         </Routes>
       </BrowserRouter>
