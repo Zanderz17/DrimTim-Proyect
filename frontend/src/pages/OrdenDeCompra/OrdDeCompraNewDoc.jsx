@@ -7,7 +7,7 @@ import Title from '../../components/title/Title'
 import '../../css/pages-styles/OrdenDeCompra/OrdDeCompraNewDoc.css'
 
 function OrdDeCompraNewDoc() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:''}]);
+    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
 
 //
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
@@ -60,21 +60,21 @@ function OrdDeCompraNewDoc() {
     };
 //
 
-    const handleinputchange=(e, i)=>{
-        const {IDMaterial, stockMaterial}= e.target;
+    const handleinputchange=(e, index)=>{
+        const {name, value}= e.target;
         const list= [...inputList];
-        list[i][IDMaterial]= stockMaterial;
+        list[index][name]= value;
         setinputList(list);
     }
 
-    const handleremove= index=>{
+    const handleremove= index =>{
         const list=[...inputList];
         list.splice(index,1);
         setinputList(list);
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, { IDMaterial:'', stockMaterial:''}]);
+        setinputList([...inputList, {id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
     }
 
     return (
@@ -136,34 +136,25 @@ function OrdDeCompraNewDoc() {
                                 </div>
                             </div>
 
-                            {/*
-                            <div className="row form-group">
-                                <div className='col-12'>
-                                    <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" required/>
-                                </div>
-                            </div>
-                            */}
-
                             {    
                                 inputList.map( (x,i)=>{
                                     return(
                                         <div className="list-products row form-group" key={i}>
                                             <div className='col-4'>
-                                                <label className="form-label" htmlFor="IDMaterial" onChange={e=>handleinputchange(e,i)} >Identificador del material</label>
-                                                <input className="form-control" type="text" id="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={(e) => setIdentificadorMaterial(e.target.value)} required />
+                                                <label className="form-label" htmlFor="id_material">Identificador del material</label>
+                                                <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             <div className='col-2'>
-                                                <label className="form-label" htmlFor="stockMaterial" onChange={ e=>handleinputchange(e,i)} >Cantidad Requerida</label>
-                                                <input className="form-control" type="number" id="IDMaterial" placeholder="000" onChange={(e) => setCantidadRequerida(e.target.value)} required />
+                                                <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
+                                                <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             <div className='col-2'>
-                                                <label className="form-label" htmlFor="priceMaterial" onChange={ e=>handleinputchange(e,i)} >Precio por Unidad</label>
-                                                <input className="form-control" type="number" id="priceMaterial" placeholder="000" onChange={(e) => setPrecioPorUnidad(e.target.value)} required />
+                                                <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
+                                                <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
-                                            <div className='col-4'>
-                                                <label className="form-label" htmlFor="partialCost" onChange={e=>handleinputchange(e,i)} >Importe Parcial</label>
-                                                <input className="form-control" type="number" id="partialCost" placeholder="000" onChange={(e) => setImporteParcial(e.target.value)} required />
+                                            <div className='col-2'>
+                                                <label className="form-label" htmlFor="importe_parcial">Importe Parcial</label>
+                                                <input className="form-control" type="number" name="importe_parcial" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             {
                                                 inputList.length!==1 &&

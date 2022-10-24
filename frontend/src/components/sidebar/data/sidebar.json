@@ -5,19 +5,19 @@
         "childrens": [
             {
                 "title": "Solicitud de compra",
-                "path": "/ComprasNacionales/SolicitudDeCompra"
+                "path": "/compras-nacionales/solicitud-compra"
             },
             {
                 "title": "Solicitud de cotización",
-                "path": "/ComprasNacionales/SolicitudDeCotizacion"
+                "path": "/compras-nacionales/solicitud-cotizacion"
             },
             {
                 "title": "Orden de compra",
-                "path": "/ComprasNacionales/OrdenDeCompra"
+                "path": "/compras-nacionales/orden-compra"
             },
             {
                 "title": "Nota de recepción",
-                "path": "/ComprasNacionales/NotaDeRecepcion"
+                "path": "/compras-nacionales/nota-recepcion"
             }
         ]
     },
@@ -27,7 +27,7 @@
         "childrens": [
             {
                 "title": "Solicitud de compra",
-                "path": "/Importaciones/SolicitudDeCompra"
+                "path": "/importaciones/solicitud-compra"
             },
             {
                 "title": "Solicitud de cotización",
