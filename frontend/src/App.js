@@ -14,6 +14,7 @@ import SolCompraNewDoc from './pages/SolicitudDeCompra/SolCompraNewDoc';
 import SolCotizacionNewDoc from './pages/SolicitudDeCotizacion/SolCotizacionNewDoc';
 import OrdDeCompraNewDoc from './pages/OrdenDeCompra/OrdDeCompraNewDoc';
 import NotaRecNewDoc from './pages/NotaDeRecepcion/NotaRecNewDoc';
+import SolCompraAceptDoc from './pages/SolicitudDeCompra/SolCompraAceptDoc';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/compras-nacionales/solicitud-cotizacion" element={<SolCotizacionNewDoc />} />
             <Route exact path="/compras-nacionales/orden-compra" element={<OrdDeCompraNewDoc />} />
             <Route exact path="/compras-nacionales/nota-recepcion" element={<NotaRecNewDoc />} />
+            <Route exact path="/importaciones/solicitud-compra" element={<SolCompraAceptDoc />} />
             <Route exact path="/" />
         </Routes>
       </BrowserRouter>

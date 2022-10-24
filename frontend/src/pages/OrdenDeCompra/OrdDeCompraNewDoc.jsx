@@ -7,7 +7,7 @@ import Title from '../../components/title/Title'
 import '../../css/pages-styles/OrdenDeCompra/OrdDeCompraNewDoc.css'
 
 function OrdDeCompraNewDoc() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', stockMaterial: '', partialCost: ''}]);
+    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
 
 //
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
@@ -74,7 +74,7 @@ function OrdDeCompraNewDoc() {
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, {IDMaterial:'', stockMaterial:'', stockMaterial: '', partialCost: ''}]);
+        setinputList([...inputList, {id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
     }
 
     return (
@@ -141,20 +141,20 @@ function OrdDeCompraNewDoc() {
                                     return(
                                         <div className="list-products row form-group" key={i}>
                                             <div className='col-4'>
-                                                <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
-                                                <input className="form-control" type="text" name="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
+                                                <label className="form-label" htmlFor="id_material">Identificador del material</label>
+                                                <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             <div className='col-2'>
-                                                <label className="form-label" htmlFor="stockMaterial" onChange={ e=>handleinputchange(e,i)} >Cantidad Requerida</label>
-                                                <input className="form-control" type="number" name="stockMaterial" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                                <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
+                                                <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             <div className='col-2'>
-                                                <label className="form-label" htmlFor="priceMaterial" onChange={ e=>handleinputchange(e,i)} >Precio por Unidad</label>
-                                                <input className="form-control" type="number" name="priceMaterial" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                                <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
+                                                <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
-                                            <div className='col-4'>
-                                                <label className="form-label" htmlFor="partialCost" onChange={e=>handleinputchange(e,i)} >Importe Parcial</label>
-                                                <input className="form-control" type="number" name="partialCost" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                            <div className='col-2'>
+                                                <label className="form-label" htmlFor="importe_parcial">Importe Parcial</label>
+                                                <input className="form-control" type="number" name="importe_parcial" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                             </div>
                                             {
                                                 inputList.length!==1 &&

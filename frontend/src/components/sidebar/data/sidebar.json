@@ -27,7 +27,7 @@
         "childrens": [
             {
                 "title": "Solicitud de compra",
-                "path": "/Importaciones/SolicitudDeCompra"
+                "path": "/importaciones/solicitud-compra"
             },
             {
                 "title": "Solicitud de cotización",
