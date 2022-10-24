@@ -9,16 +9,12 @@ import '../../css/pages-styles/NotaDeRecepcion/NotaRecNewDoc.css'
 function NotaRecNewDoc() {
     const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
     
-    //
     const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
     const [fechaRecepcion, setFechaRecepcion] = useState("");
     const [fechaElaboracionOrdenCompra, setFechaElaboracionOrdenCompra] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
     const [condicionesPago, setCondicionesPago] = useState("");
-    const [identificadorMaterial, setIdentificadorMaterial] = useState("");
-    const [cantidadRecibida, setCantidadRecibida] = useState("");
-    const [precioUnidad, setPrecioUnidad] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [importeTotalMercanciaRecibida, setImporteTotalMercanciaRecibida] = useState("");
     const [nombreReceptor, setNombreReceptor] = useState("");
@@ -33,11 +29,7 @@ function NotaRecNewDoc() {
                 fecha_elaboracion_orden_compra: fechaElaboracionOrdenCompra,
                 nombre_proveedor: nombreProveedor,
                 condiciones_pago: condicionesPago,
-                productos: [{
-                            id_material: identificadorMaterial,
-                            cant_recibida: cantidadRecibida,
-                            precio_unitario: precioUnidad
-                }],
+                productos: inputList,
                 descripcion: descripcion,
                 importe_total_mercancia_recibida: importeTotalMercanciaRecibida,
                 nombre_receptor: nombreReceptor
@@ -47,11 +39,10 @@ function NotaRecNewDoc() {
         });
         e.preventDefault();
     };
-    //
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;
-        const list= [...inputList];
+        const list=[...inputList];
         list[index][name]= value;
         setinputList(list);
     }

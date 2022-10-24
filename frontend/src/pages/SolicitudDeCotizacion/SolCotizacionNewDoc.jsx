@@ -9,15 +9,11 @@ import '../../css/pages-styles/SolicitudDeCotizacion/SolCotizacionNewDoc.css'
 function SolCotizacionNewDoc() {
     const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
 
-    //
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [fechaLimiteRespuesta, setFechaLimiteRespuesta] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
-    const [identificadorMaterial, setIdentificadorMaterial] = useState("");
-    const [cantidadRequerida, setCantidadRequerida] = useState("");
-    const [precioPorUnidad, setPrecioPorUnidad] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [plazoMaximoEntrega, setPlazoMaximoEntrega] = useState("");
     const [nombreReceptor, setNombreReceptor] = useState("");
@@ -31,11 +27,7 @@ function SolCotizacionNewDoc() {
                 fecha_elaboracion: fechaElaboracion,
                 fecha_lim_respuesta: fechaLimiteRespuesta,
                 nombre_proveedor: nombreProveedor,
-                productos: [{        
-                    id_material: identificadorMaterial,
-                    cant_requerida: cantidadRequerida,
-                    precio_unitario: precioPorUnidad
-                }],
+                productos: inputList,
                 descripcion: descripcion,
                 plazo_max_entrega: plazoMaximoEntrega,
                 nombre_receptor: nombreReceptor
@@ -45,8 +37,6 @@ function SolCotizacionNewDoc() {
         });
         e.preventDefault();
     };
-
-    //
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;
