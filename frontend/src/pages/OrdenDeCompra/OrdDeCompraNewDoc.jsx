@@ -9,17 +9,12 @@ import '../../css/pages-styles/OrdenDeCompra/OrdDeCompraNewDoc.css'
 function OrdDeCompraNewDoc() {
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
 
-//
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [fechaEntregaMercancias, setFechaEntregaMercancias] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
     const [condicionesPago, setCondicionesPago] = useState("");
-    const [identificadorMaterial, setIdentificadorMaterial] = useState("");
-    const [cantidadRequerida, setCantidadRequerida] = useState("");
-    const [precioPorUnidad, setPrecioPorUnidad] = useState("");
-    const [importeParcial, setImporteParcial] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [impuesto, setImpuesto] = useState("");
     const [importeTotal, setImporteTotal] = useState("");
@@ -38,13 +33,7 @@ function OrdDeCompraNewDoc() {
                 fecha_entrega_mercancias: fechaEntregaMercancias,
                 nombre_proveedor: nombreProveedor,
                 condiciones_pago: condicionesPago,
-                productos: [{
-                    id_material: identificadorMaterial,
-                    cant_requerida: cantidadRequerida,
-                    precio_unitario: precioPorUnidad,
-                    importe_parcial: importeParcial
-                    
-                }],
+                productos: inputList,
                 descripcion: descripcion,
                 impuesto: impuesto,
                 importe_total: importeTotal,
@@ -58,7 +47,6 @@ function OrdDeCompraNewDoc() {
         });
         e.preventDefault();
     };
-//
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;

@@ -9,11 +9,8 @@ import '../../css/pages-styles/SolicitudDeCompra/SolCompraNewDoc.css'
 function SolCompraNewDoc() {
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:''}]);
 
-    //
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
     const [fechaElaboracion, setFechaElaboracion] = useState("");
-    const [identificadorMaterial, setIdentificadorMaterial] = useState("");
-    const [cantidadRequerida, setCantidadRequerida] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [puntoPedido, setPuntoPedido] = useState("");
     
@@ -33,7 +30,6 @@ function SolCompraNewDoc() {
         console.log('ok');
         e.preventDefault();
     };
-    //
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;
