@@ -60,6 +60,8 @@ function SolCompraNewDoc() {
                     active1={true}
                     active2={false}
                     active3={false}
+                    link1="/compras-nacionales/solicitud-compra"
+                    link2="/compras-nacionales/solicitud-compra/aceptar-documento"
                 >
                 </Title>
 

@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/compras-nacionales/solicitud-cotizacion" element={<SolCotizacionNewDoc />} />
             <Route exact path="/compras-nacionales/orden-compra" element={<OrdDeCompraNewDoc />} />
             <Route exact path="/compras-nacionales/nota-recepcion" element={<NotaRecNewDoc />} />
-            <Route exact path="/importaciones/solicitud-compra" element={<SolCompraAceptDoc />} />
+            <Route exact path="/compras-nacionales/solicitud-compra/aceptar-documento" element={<SolCompraAceptDoc />} />
             <Route exact path="/" />
         </Routes>
       </BrowserRouter>
