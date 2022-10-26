@@ -21,7 +21,7 @@ function CodeVerification() {
                     <input className="btn btn-success w-100" type="submit" value="Continuar" />
                     
                     <div className="form-group form-check text-center">
-                        <label className="form-check-label">¿Ya tienes cuenta? <a href='#'>Conéctate</a></label>
+                        <label className="form-check-label">¿Ya tienes cuenta? <a href='/'>Conéctate</a></label>
                     </div>
                 </form>
             </div>
