@@ -32,6 +32,10 @@ const solCompraSchema = new Schema({
     punto_pedido: {
         type: String,
         required: true
+    },
+    estado: {
+        type: String,
+        required: true
     }
 })
 

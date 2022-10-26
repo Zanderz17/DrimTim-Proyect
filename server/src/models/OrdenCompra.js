@@ -76,6 +76,10 @@ const ordCompraSchema = new Schema({
     costo_total: {
         type: String,
         required: true
+    },
+    estado: {
+        type: String,
+        required: true
     }
 })
 

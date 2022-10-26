@@ -52,6 +52,10 @@ const solCotizacionSchema = new Schema({
     nombre_receptor: {
         type: String,
         required: true
+    },
+    estado: {
+        type: String,
+        required: true
     }
 })
 

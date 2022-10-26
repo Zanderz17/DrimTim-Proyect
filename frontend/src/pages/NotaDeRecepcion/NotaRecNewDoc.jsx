@@ -32,7 +32,8 @@ function NotaRecNewDoc() {
                 productos: inputList,
                 descripcion: descripcion,
                 importe_total_mercancia_recibida: importeTotalMercanciaRecibida,
-                nombre_receptor: nombreReceptor
+                nombre_receptor: nombreReceptor,
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/nota-recepcion"

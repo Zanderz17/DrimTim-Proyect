@@ -1,10 +1,23 @@
-import React from 'react'
-import Sidebar from '../../components/sidebar/Sidebar'
-import Title from '../../components/title/Title'
+import React from 'react';
+import Axios from 'axios';
+
+import Sidebar from '../../components/sidebar/Sidebar';
+import Title from '../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
 function SolCompraAceptDoc() {
+    const getList = (e) => {
+        Axios({
+            method: 'GET',
+            params: {
+                state: 'Pendiente'
+            },
+            withCredentials: true,
+            url: "http://localhost:9000/compras-nacionales/solicitud-compra/:state"
+        }).then((res) => {console.log(res)});
+        e.preventDefault();
+    };
 
     const columnas = [
         {
@@ -62,7 +75,7 @@ function SolCompraAceptDoc() {
                             {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nroSolicitudCompra)
+                                onClick: getList//(event, rowData) => alert ("Viendo... " + rowData.nroSolicitudCompra)
                             }
                         ]}
                         options= {{
