@@ -12,11 +12,12 @@ router.post('/compras-nacionales/nota-recepcion', async (req, res) => {
 });
 
 /* Aceptar documento */
-// Get all solicitud-cotizacion by its state
-router.get('/compras-nacionales/nota-recepcion/:state', (req, res) => {
+// Get all nota-recepcion with a pending state
+router.get('/compras-nacionales/nota-recepcion/aceptar-documento/:state', (req, res) => {
     const { state } = req.params;
     NotaRecepcion
-        .find({state: state})
+        .find({estado: state})
+        .select(['nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

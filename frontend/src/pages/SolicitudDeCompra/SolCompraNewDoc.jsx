@@ -23,7 +23,7 @@ function SolCompraNewDoc() {
                 productos: inputList,
                 descripcion: descripcion,
                 punto_pedido: puntoPedido,
-                estado: 'Pendiente'
+                estado: 'pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-compra"

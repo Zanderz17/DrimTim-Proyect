@@ -41,7 +41,7 @@ function OrdDeCompraNewDoc() {
                 costo_trasnporte: costoTransporte,
                 fraccion_aduanal: fraccionAduanal,
                 costo_total: costoTotal,
-                estado: 'Pendiente'
+                estado: 'pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/orden-compra"

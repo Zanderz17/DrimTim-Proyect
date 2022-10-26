@@ -31,7 +31,7 @@ function SolCotizacionNewDoc() {
                 descripcion: descripcion,
                 plazo_max_entrega: plazoMaximoEntrega,
                 nombre_receptor: nombreReceptor,
-                estado: 'Pendiente'
+                estado: 'pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion"

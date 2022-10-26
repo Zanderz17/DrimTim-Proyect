@@ -1,45 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Axios from 'axios';
 
 import Sidebar from '../../components/sidebar/Sidebar';
 import Title from '../../components/title/Title';
 
 import MaterialTable from 'material-table';
+import { useState } from 'react';
 
 function SolCompraAceptDoc() {
-    const getList = (e) => {
-        Axios({
-            method: 'GET',
-            params: {
-                state: 'Pendiente'
-            },
-            withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/solicitud-compra/:state"
-        }).then((res) => {console.log(res)});
-        e.preventDefault();
-    };
-
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
-            field: 'nroSolicitudCompra'
+            field: 'nro_solicitud_compra'
         },
         {
             title: 'Fecha de elaboración',
-            field: 'fechaElaboracion'
+            field: 'fecha_elaboracion'
         }
     ];
 
-    const data = [
-        {
-            'nroSolicitudCompra':  '0000-0000-0000-0001',
-            'fechaElaboracion': '28/07/2022'
-        },
-        {
-            'nroSolicitudCompra':  '0000-0000-0000-0002',
-            'fechaElaboracion': '28/07/2023'
-        }
-    ]
+    const [data, setData] = useState([]);
+    useEffect( () => {
+        const getList = async () => {
+            const data =
+                (await
+                    Axios({
+                        method: 'GET',
+                        withCredentials: true,
+                        url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/pendiente"
+                    })
+                ).data
+            setData(data);
+        };
+        getList();
+    }, []);
+
+    const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
+
+    const aceptar = (nSolCompra) => {
+        Axios({
+            method: 'PUT',
+            params: {
+                nroSolicitudCompra: nSolCompra
+            },
+            data: {
+                estado: 'aceptado'
+            },
+            withCredentials: true,
+            url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
+        });
+        //e.preventDefault();
+    };
 
     return (
         <div className='d-flex'>
@@ -65,17 +76,17 @@ function SolCompraAceptDoc() {
                             {
                                 icon: 'check',
                                 tooltip: 'Aceptar',
-                                onClick: (event, rowData) => alert ("Aceptado... " + rowData.nroSolicitudCompra)
+                                onClick: (event, rowData) => {console.log(rowData.nro_solicitud_compra); aceptar(rowData.nro_solicitud_compra); event.preventDefault();}//(event, rowData) => alert ("Aceptado... " + rowData.nro_solicitud_compra)
                             },
                             {
                                 icon: 'clear',
                                 tooltip: 'ELiminar',
-                                onClick: (event, rowData) => alert ("Eliminado... " + rowData.nroSolicitudCompra)
+                                onClick: (event, rowData) => alert ("Eliminado... " + rowData.nro_solicitud_compra)
                             },
                             {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: getList//(event, rowData) => alert ("Viendo... " + rowData.nroSolicitudCompra)
+                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra)
                             }
                         ]}
                         options= {{
@@ -90,7 +101,7 @@ function SolCompraAceptDoc() {
                 </div>
             </div>
         </div>
-)
+    )
 }
 
 export default SolCompraAceptDoc

@@ -12,13 +12,16 @@ router.post('/compras-nacionales/solicitud-cotizacion', async (req, res) => {
 });
 
 /* Aceptar documento */
-// Get all solicitud-cotizacion by its state
-router.get('/compras-nacionales/solicitud-cotizacion/:state', (req, res) => {
+// Get all solicitud-cotizacion with a pending state
+router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/:state', (req, res) => {
     const { state } = req.params;
     SolicitudCotizacion
-        .find({state: state})
+        .find({estado: state})
+        .select(['nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
+
+
 
 module.exports = router;
