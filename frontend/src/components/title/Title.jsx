@@ -24,13 +24,13 @@ function Title(props) {
 
             <div className='row bottom-navbar'>
                 <div className='col-7'>
-                    <a className= {props.active1 ? 'active' : "no-active"}>
+                    <a className= {props.active1 ? 'active' : "no-active"} href={props.link1}>
                         Nuevo documento
                     </a>
-                    <a className= { props.active2 ? 'active' : "no-active"}>
+                    <a className= { props.active2 ? 'active' : "no-active"} href={props.link2}>
                         Aceptar documento
                     </a>
-                    <a className= {props.active3 ? 'active' : "no-active"}>
+                    <a className= {props.active3 ? 'active' : "no-active"} href={props.link3}>
                         Historial de documentos
                     </a>
                     <hr></hr>
