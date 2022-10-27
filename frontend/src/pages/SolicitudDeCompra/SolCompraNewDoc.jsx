@@ -22,12 +22,12 @@ function SolCompraNewDoc() {
                 fecha_elaboracion: fechaElaboracion,
                 productos: inputList,
                 descripcion: descripcion,
-                punto_pedido: puntoPedido
+                punto_pedido: puntoPedido,
+                estado: 'pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-compra"
         });
-        console.log('ok');
         e.preventDefault();
     };
 

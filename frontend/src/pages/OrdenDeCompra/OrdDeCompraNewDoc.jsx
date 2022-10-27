@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState } from 'react';
 import Axios from 'axios';
 
 import Sidebar from '../../components/sidebar/Sidebar'
@@ -40,7 +40,8 @@ function OrdDeCompraNewDoc() {
                 trasnporte: transporte,
                 costo_trasnporte: costoTransporte,
                 fraccion_aduanal: fraccionAduanal,
-                costo_total: costoTotal
+                costo_total: costoTotal,
+                estado: 'pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/orden-compra"
