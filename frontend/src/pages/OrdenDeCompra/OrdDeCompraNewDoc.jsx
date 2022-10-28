@@ -121,7 +121,10 @@ function OrdDeCompraNewDoc() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="condPago">Condiciones de pago</label>
-                                    <input className="form-control" type="text" id="condPago" placeholder="Contado/Cuotas" onChange={(e) => setCondicionesPago(e.target.value)} required/>
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setCondicionesPago(e.target.value)} required>
+                                        <option value="Contado">Contado</option>
+                                        <option value="Cuotas">Cuotas</option>
+                                    </select>
                                 </div>
                             </div>
 
