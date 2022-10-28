@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import Axios from 'axios';
 
-import Sidebar from '../../components/sidebar/Sidebar'
-import Title from '../../components/title/Title'
-import '../../css/pages-styles/OrdenDeCompra/OrdDeCompraNewDoc.css'
+import Sidebar from '../../../components/sidebar/Sidebar'
+import Title from '../../../components/title/Title'
+import '../../../css/pages-styles/ComprasNacionales/OrdenDeCompra/CN_OC_AD.css'
 
-function OrdDeCompraNewDoc() {
+function CN_OC_ND() {
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
 
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
@@ -77,6 +77,8 @@ function OrdDeCompraNewDoc() {
                     active1={true}
                     active2={false}
                     active3={false}
+                    link1="/compras-nacionales/orden-compra"
+                    link2="/compras-nacionales/orden-compra/aceptar-documento"
                 >
                 </Title>
 
@@ -226,4 +228,4 @@ function OrdDeCompraNewDoc() {
     )
 }
 
-export default OrdDeCompraNewDoc;
+export default CN_OC_ND;

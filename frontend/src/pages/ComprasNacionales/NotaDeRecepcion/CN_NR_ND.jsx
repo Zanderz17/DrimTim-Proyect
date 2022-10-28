@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react'
 import Axios from 'axios';
 
-import Sidebar from '../../components/sidebar/Sidebar'
-import Title from '../../components/title/Title'
-import '../../css/pages-styles/NotaDeRecepcion/NotaRecNewDoc.css'
+import Sidebar from '../../../components/sidebar/Sidebar'
+import Title from '../../../components/title/Title'
+import '../../../css/pages-styles/ComprasNacionales/NotaDeRecepcion/CN_NR_ND.css'
 
-function NotaRecNewDoc() {
+function CN_NR_ND() {
     const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
     
     const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
@@ -70,19 +70,19 @@ function NotaRecNewDoc() {
                     active1={true}
                     active2={false}
                     active3={false}
+                    link1="/compras-nacionales/nota-recepcion"
+                    link2="/compras-nacionales/nota-recepcion/aceptar-documento"
                 >
                 </Title>
 
                 <div className='new-doc-form'>
-                    <h2>Registro de nota de recepción</h2>   
                     <form>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
-
+                                    <h2>Registro de nota de recepción</h2>  
                                 </div>
                             </div>
-
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDNotaRec">Número de nota de recpción</label>
@@ -190,4 +190,4 @@ function NotaRecNewDoc() {
     )
 }
 
-export default NotaRecNewDoc;
+export default CN_NR_ND;

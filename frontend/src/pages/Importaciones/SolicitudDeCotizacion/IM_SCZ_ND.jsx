@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react'
 import Axios from 'axios';
 
-import Sidebar from '../../components/sidebar/Sidebar'
-import Title from '../../components/title/Title'
-import '../../css/pages-styles/SolicitudDeCotizacion/SolCotizacionNewDoc.css'
+import Sidebar from '../../../components/sidebar/Sidebar'
+import Title from '../../../components/title/Title'
+import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCotizacion/CN_SCZ_ND.css'
 
-function SolCotizacionNewDoc() {
+function IM_SCZ_ND() {
     const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
 
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
@@ -18,6 +18,7 @@ function SolCotizacionNewDoc() {
     const [plazoMaximoEntrega, setPlazoMaximoEntrega] = useState("");
     const [nombreReceptor, setNombreReceptor] = useState("");
 
+    /*--- CAMBIAR ---*/
     const registrar = (e) => {
         Axios({
             method: 'POST',
@@ -38,6 +39,7 @@ function SolCotizacionNewDoc() {
         });
         e.preventDefault();
     };
+    /*--- CAMBIAR ---*/
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;
@@ -63,11 +65,13 @@ function SolCotizacionNewDoc() {
             <div className='w-100'>
                 <Title 
                     document="Solicitud de cotización" 
-                    type="Compras nacionales" 
+                    type="Importaciones" 
                     subType="Nuevo documento"
                     active1={true}
                     active2={false}
                     active3={false}
+                    link1="/importaciones/solicitud-cotizacion"
+                    link2="/importaciones/solicitud-cotizacion/aceptar-documento"
                 >
                 </Title>
 
@@ -182,4 +186,4 @@ function SolCotizacionNewDoc() {
     )
 }
 
-export default SolCotizacionNewDoc
+export default IM_SCZ_ND;

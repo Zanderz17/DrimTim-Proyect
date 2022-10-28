@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
 
-import Sidebar from '../../components/sidebar/Sidebar';
-import Title from '../../components/title/Title';
+import Sidebar from '../../../components/sidebar/Sidebar';
+import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 import { useState } from 'react';
 
-function SolCompraAceptDoc() {
+function CN_SC_AD() {
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
@@ -84,6 +84,8 @@ function SolCompraAceptDoc() {
                     active1={false}
                     active2={true}
                     active3={false}
+                    link1="/compras-nacionales/solicitud-compra"
+                    link2="/compras-nacionales/solicitud-compra/aceptar-documento"
                 >
                 </Title>
 
@@ -124,4 +126,4 @@ function SolCompraAceptDoc() {
     )
 }
 
-export default SolCompraAceptDoc
+export default CN_SC_AD;
