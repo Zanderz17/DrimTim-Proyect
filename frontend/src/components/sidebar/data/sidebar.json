@@ -31,15 +31,15 @@
             },
             {
                 "title": "Solicitud de cotización",
-                "path": "/Importaciones/SolicitudDeCotizacion"
+                "path": "/importaciones/solicitud-cotizacion"
             },
             {
                 "title": "Orden de compra",
-                "path": "/Importaciones/OrdenDeCompra"
+                "path": "/importaciones/orden-compra"
             },
             {
                 "title": "Nota de recepción",
-                "path": "/Importaciones/NotaDeRecepcion"
+                "path": "/importaciones/nota-recepcion"
             }
         ]
     },

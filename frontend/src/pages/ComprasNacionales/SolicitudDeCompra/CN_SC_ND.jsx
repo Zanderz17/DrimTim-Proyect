@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react'
 import Axios from 'axios';
 
-import Sidebar from '../../components/sidebar/Sidebar'
-import Title from '../../components/title/Title'
-import '../../css/pages-styles/SolicitudDeCompra/SolCompraNewDoc.css'
+import Sidebar from '../../../components/sidebar/Sidebar'
+import Title from '../../../components/title/Title'
+import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
 
-function SolCompraNewDoc() {
+function CN_SC_ND() {
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:''}]);
 
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
@@ -148,4 +148,4 @@ function SolCompraNewDoc() {
     )
 }
 
-export default SolCompraNewDoc
+export default CN_SC_ND;
