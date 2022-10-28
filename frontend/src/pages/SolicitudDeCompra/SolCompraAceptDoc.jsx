@@ -20,37 +20,57 @@ function SolCompraAceptDoc() {
     ];
 
     const [data, setData] = useState([]);
+    const [nroSolCompraKeeper, setNroSolCompraKeeper] = useState('');
+    const [stateKeeper, setStateKeeper] = useState('');
+    
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
     useEffect( () => {
         const getList = async () => {
-            const data =
-                (await
-                    Axios({
-                        method: 'GET',
-                        withCredentials: true,
-                        url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/pendiente"
-                    })
-                ).data
-            setData(data);
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/pendiente"
+            })).data;
+            setData(req);
         };
         getList();
-    }, []);
+    }, [reload]);
 
-    const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
+    useEffect( () => {
+        const aceptar = async (nSolCompra) => { 
+            (await Axios({
+                method: 'PUT',
+                params: { nroSolicitudCompra: nSolCompra },
+                data: { state: 'aceptado' },
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
+            }));
+            setStateKeeper('');
+            setReload(!reload);
+        };
+        if (stateKeeper === 'aceptado'){
+            aceptar(nroSolCompraKeeper);
+        }
+    }, [nroSolCompraKeeper]);
 
-    const aceptar = (nSolCompra) => {
-        Axios({
-            method: 'PUT',
-            params: {
-                nroSolicitudCompra: nSolCompra
-            },
-            data: {
-                estado: 'aceptado'
-            },
-            withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
-        });
-        //e.preventDefault();
-    };
+    useEffect( () => {
+        const rechazar = async (nSolCompra) => {
+            (await Axios({
+                method: 'PUT',
+                params: { nroSolicitudCompra: nSolCompra },
+                data: { state: 'rechazado' },
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/rechazado"
+            }));
+            setStateKeeper('');
+            setReload(!reload);
+        };
+        if (stateKeeper === 'rechazado'){
+            rechazar(nroSolCompraKeeper);
+        }
+    }, [nroSolCompraKeeper]);
 
     return (
         <div className='d-flex'>
@@ -76,12 +96,12 @@ function SolCompraAceptDoc() {
                             {
                                 icon: 'check',
                                 tooltip: 'Aceptar',
-                                onClick: (event, rowData) => {console.log(rowData.nro_solicitud_compra); aceptar(rowData.nro_solicitud_compra); event.preventDefault();}//(event, rowData) => alert ("Aceptado... " + rowData.nro_solicitud_compra)
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado') }
                             },
                             {
                                 icon: 'clear',
                                 tooltip: 'ELiminar',
-                                onClick: (event, rowData) => alert ("Eliminado... " + rowData.nro_solicitud_compra)
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado') }
                             },
                             {
                                 icon: 'visibility',

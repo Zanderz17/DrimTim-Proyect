@@ -12,12 +12,31 @@ router.post('/compras-nacionales/orden-compra', async (req, res) => {
 });
 
 /* Aceptar documento */
-// Get all solicitud-cotizacion with a pending state
-router.get('/compras-nacionales/orden-compra/aceptar-documento/:state', (req, res) => {
-    const { state } = req.params;
+// Get all orden-compra with a pending state
+router.get('/compras-nacionales/orden-compra/aceptar-documento/pendiente', (req, res) => {
     OrdenCompra
-        .find({estado: state})
-        .select(['nro_solicitud_compra', 'fecha_elaboracion'])
+        .find({estado: 'pendiente'})
+        .select(['-id', 'nro_solicitud_compra', 'fecha_elaboracion'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
+// Updating state of orden-compra to accepted
+router.put('/compras-nacionales/orden-compra/aceptar-documento/aceptado', (req, res) => {
+    const  { nroOrdenCompra }  = req.query;
+    const  { state } = req.body;
+    OrdenCompra
+        .findOneAndUpdate({nro_orden_compra: nroOrdenCompra}, {estado: state})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
+// Updating state of orden-compra to rejected
+router.put('/compras-nacionales/orden-compra/aceptar-documento/rechazado', (req, res) => {
+    const  { nroOrdenCompra }  = req.query;
+    const  { state } = req.body;
+    OrdenCompra
+        .findOneAndUpdate({nro_orden_compra: nroOrdenCompra}, {estado: state})
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

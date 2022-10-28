@@ -13,15 +13,32 @@ router.post('/compras-nacionales/solicitud-cotizacion', async (req, res) => {
 
 /* Aceptar documento */
 // Get all solicitud-cotizacion with a pending state
-router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/:state', (req, res) => {
-    const { state } = req.params;
+router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
     SolicitudCotizacion
-        .find({estado: state})
-        .select(['nro_solicitud_compra', 'fecha_elaboracion'])
+        .find({estado: 'pendiente'})
+        .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
 
+// Updating state of solicitud-cotizacion to acsepted
+router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado', (req, res) => {
+    const  { nroSolicitudCotizacion }  = req.query;
+    const  { state } = req.body;
+    SolicitudCotizacion
+        .findOneAndUpdate({nro_solicitud_cotizacion: nroSolicitudCotizacion}, {estado: state})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
 
+// Updating state of solicitud-cotizacion to rejected
+router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado', (req, res) => {
+    const  { nroSolicitudCotizacion }  = req.query;
+    const  { state } = req.body;
+    SolicitudCotizacion
+        .findOneAndUpdate({nro_solicitud_cotizacion: nroSolicitudCotizacion}, {estado: state})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
 
 module.exports = router;
