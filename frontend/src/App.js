@@ -72,6 +72,7 @@ import IM_NR_VD_ID from './pages/Importaciones/NotaDeRecepcion/IM_NR_VD_ID';
         *ND: Nuevo Documento
         *AD: Aceptar Documento
         *HD: Historial de Documento
+        *VD: Visualizar documento
 */
 
 function App() {
