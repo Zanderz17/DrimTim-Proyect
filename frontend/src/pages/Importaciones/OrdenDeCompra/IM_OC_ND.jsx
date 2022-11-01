@@ -187,7 +187,7 @@ function IM_OC_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total</label>
-                                    <input className="form-control" type="number" id="importeTotal" placeholder="Contado/Cuotas" onChange={(e) => setImporteTotal(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="importeTotal" placeholder="99999" onChange={(e) => setImporteTotal(e.target.value)} required/>
                                 </div>
                             </div>
 
@@ -210,7 +210,7 @@ function IM_OC_ND() {
                                 </div>
 
                                 <div className='col-6'>
-                                    <label className="form-label" htmlFor="costoTotal">Costo de total</label>
+                                    <label className="form-label" htmlFor="costoTotal">Costo total</label>
                                     <input className="form-control" type="number" id="costoTotal" placeholder="0000" onChange={(e) => setCostoTotal(e.target.value)} required/>
                                 </div>
                             </div>

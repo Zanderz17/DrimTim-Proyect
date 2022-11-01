@@ -103,7 +103,7 @@ function CN_NR_ND() {
                                 </div>
                                 
                                 <div className='col-6'>
-                                    <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración de orden de compra</label>
+                                    <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración</label>
                                     <input className="form-control" type="date" id="fechaElaboracion" onChange={(e) => setFechaElaboracionOrdenCompra(e.target.value)} required/>
                                 </div>
                             </div>
