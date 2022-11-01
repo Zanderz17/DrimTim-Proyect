@@ -44,7 +44,7 @@ function CN_OC_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/orden-compra"
+            url: "http://localhost:9000/compras-nacionales/orden-compra/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -77,8 +77,9 @@ function CN_OC_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/compras-nacionales/orden-compra"
+                    link1="/compras-nacionales/orden-compra/nuevo-documento"
                     link2="/compras-nacionales/orden-compra/aceptar-documento"
+                    link3="/compras-nacionales/orden-compra/visualizar-documento"
                 >
                 </Title>
 

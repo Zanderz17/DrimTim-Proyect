@@ -46,7 +46,7 @@ function IM_OC_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/orden-compra"
+            url: "http://localhost:9000/importaciones/orden-compra/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -80,7 +80,7 @@ function IM_OC_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/importaciones/orden-compra"
+                    link1="/importaciones/orden-compra/nuevo-documento"
                     link2="/importaciones/orden-compra/aceptar-documento"
                 >
                 </Title>

@@ -86,7 +86,7 @@ function IM_SC_AD() {
                     active1={false}
                     active2={true}
                     active3={false}
-                    link1="/importaciones/solicitud-compra"
+                    link1="/importaciones/solicitud-compra/nuevo-documento"
                     link2="/importaciones/solicitud-compra/aceptar-documento"
                 >
                 </Title>

@@ -44,7 +44,7 @@ function IM_SCZ_AD() {
                         active1={false}
                         active2={true}
                         active3={false}
-                        link1="/importaciones/solicitud-cotizacion"
+                        link1="/importaciones/solicitud-cotizacion/nuevo-documento"
                         link2="/importaciones/solicitud-cotizacion/aceptar-documento"
                     >
                     </Title>

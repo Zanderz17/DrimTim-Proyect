@@ -26,7 +26,7 @@ function CN_SC_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/solicitud-compra"
+            url: "http://localhost:9000/compras-nacionales/solicitud-compra/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -60,8 +60,9 @@ function CN_SC_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/compras-nacionales/solicitud-compra"
+                    link1="/compras-nacionales/solicitud-compra/nuevo-documento"
                     link2="/compras-nacionales/solicitud-compra/aceptar-documento"
+                    link3="/compras-nacionales/solicitud-compra/visualizar-documento"
                 >
                 </Title>
 

@@ -36,7 +36,7 @@ function CN_NR_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/nota-recepcion"
+            url: "http://localhost:9000/compras-nacionales/nota-recepcion/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -70,8 +70,9 @@ function CN_NR_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/compras-nacionales/nota-recepcion"
+                    link1="/compras-nacionales/nota-recepcion/nuevo-documento"
                     link2="/compras-nacionales/nota-recepcion/aceptar-documento"
+                    link3="/compras-nacionales/nota-recepcion/visualizar-documento"
                 >
                 </Title>
 

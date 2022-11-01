@@ -3,7 +3,7 @@ const router = express.Router();
 const SolicitudCompra = require('../../models/SolicitudCompra');
 
 /* Nuevo documento */
-router.post('/compras-nacionales/solicitud-compra/nuevo-documento', async (req, res) => {
+router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) => {
     const solicitud_compra = SolicitudCompra(req.body);
     console.log(solicitud_compra);
     
@@ -16,7 +16,7 @@ router.post('/compras-nacionales/solicitud-compra/nuevo-documento', async (req, 
 
 /* Aceptar documento */
 // Get all solicitud-compra with a pending state
-router.get('/compras-nacionales/solicitud-compra/aceptar-documento/pendiente', (req, res) => {
+router.get('/importaciones/solicitud-compra/aceptar-documento/pendiente', (req, res) => {
     SolicitudCompra
         .find( {estado: 'pendiente'} )
         .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion'])
@@ -25,7 +25,7 @@ router.get('/compras-nacionales/solicitud-compra/aceptar-documento/pendiente', (
 });
 
 // Updating state of solicitud-compra to accepted
-router.put('/compras-nacionales/solicitud-compra/aceptar-documento/aceptado', (req, res) => {
+router.put('/importaciones/solicitud-compra/aceptar-documento/aceptado', (req, res) => {
     const  { nroSolicitudCompra }  = req.query;
     const  { state } = req.body;
     SolicitudCompra
@@ -35,7 +35,7 @@ router.put('/compras-nacionales/solicitud-compra/aceptar-documento/aceptado', (r
 });
 
 // Updating state of solicitud-compra to rejected
-router.put('/compras-nacionales/solicitud-compra/aceptar-documento/rechazado', (req, res) => {
+router.put('/importaciones/solicitud-compra/aceptar-documento/rechazado', (req, res) => {
     const  { nroSolicitudCompra }  = req.query;
     const  { state } = req.body;
     SolicitudCompra
@@ -46,7 +46,7 @@ router.put('/compras-nacionales/solicitud-compra/aceptar-documento/rechazado', (
 
 /* Historial de documento */
 // Get all solicitud-compra
-router.get('/compras-nacionales/solicitud-compra/historial-documento', (req, res) => {
+router.get('/importaciones/solicitud-compra/historial-documento', (req, res) => {
     SolicitudCompra
         .find()
         .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion', 'estado'])
