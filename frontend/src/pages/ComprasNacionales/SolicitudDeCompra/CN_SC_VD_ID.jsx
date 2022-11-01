@@ -40,7 +40,7 @@ function CN_SC_VD() {
                     active3={true}
                     link1="/compras-nacionales/solicitud-compra/nuevo-documento"
                     link2="/compras-nacionales/solicitud-compra/aceptar-documento"
-                    link3="/compras-nacionales/solicitud-compra/visualizar-documento"
+                    link3="/compras-nacionales/solicitud-compra/historial-documento"
                 >
                 </Title>
 

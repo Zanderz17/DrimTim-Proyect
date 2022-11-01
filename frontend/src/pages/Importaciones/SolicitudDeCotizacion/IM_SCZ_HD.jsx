@@ -6,27 +6,36 @@ import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
-function IM_OC_AD() {
+function IM_SCZ_AD() {
 
     const columnas = [
-        {
-            title: 'Nro. Orden de compra',
-            field: 'nro_orden_compra'
-        },
         {
             title: 'Nro. Solicitud de cotización',
             field: 'nro_solicitud_cotizacion'
         },
         {
+            title: 'Nro. Solicitud de compra',
+            field: 'nro_solicitud_compra'
+        },
+        {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
     const data = [
         {
-            'nro_orden_compra': "11111",
-            'nro_solicitud_cotizacion': "22222",
+            'nro_solicitud_cotizacion': "11111",
+            'nro_solicitud_compra': "22222",
             'fecha_elaboracion': "03-12-2020"
         }
     ]
@@ -38,14 +47,15 @@ function IM_OC_AD() {
 
                 <div className='w-100'>
                     <Title 
-                        document="Orden de Compra" 
+                        document="Solicitud de cotización" 
                         type="Importaciones" 
-                        subType="Aceptar Documento"
+                        subType="Historial de documentos"
                         active1={false}
-                        active2={true}
-                        active3={false}
-                        link1="/importaciones/orden-compra/nuevo-documento"
-                        link2="/importaciones/orden-compra/aceptar-documento"
+                        active2={false}
+                        active3={true}
+                        link1="/importaciones/solicitud-cotizacion/nuevo-documento"
+                        link2="/importaciones/solicitud-cotizacion/aceptar-documento"
+                        link3="/importaciones/solicitud-cotizacion/historial-documento"
                     >
                     </Title>
 
@@ -53,26 +63,20 @@ function IM_OC_AD() {
                         <MaterialTable
                             columns={columnas}
                             data={data}
-                            title='Lista de órdenes de compra'
+                            title='Lista de solicitudes de cotización'
                             actions={[
-                                {
-                                    icon: 'check',
-                                    tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
-                                {
-                                    icon: 'clear',
-                                    tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                    iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
                             options= {{
-                                actionsColumnIndex: -1
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'Importaciones-SolicitudCotizacion-Historial'
                             }}
                             localization = {{
                                 header:{
@@ -85,6 +89,6 @@ function IM_OC_AD() {
             </div>
         </div>
     )
-};
+}
 
-export default IM_OC_AD;
+export default IM_SCZ_AD;

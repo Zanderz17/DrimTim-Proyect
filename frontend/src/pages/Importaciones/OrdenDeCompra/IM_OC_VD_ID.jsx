@@ -22,6 +22,7 @@ function IM_OC_VD() {
                     active3={false}
                     link1="/importaciones/orden-compra/nuevo-documento"
                     link2="/importaciones/orden-compra/aceptar-documento"
+                    link3="/importaciones/orden-compra/historial-documento"
                 >
                 </Title>
 

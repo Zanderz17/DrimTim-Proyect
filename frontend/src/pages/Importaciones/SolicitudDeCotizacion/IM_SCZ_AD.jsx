@@ -19,7 +19,8 @@ function IM_SCZ_AD() {
         },
         {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
         }
     ];
 
@@ -46,6 +47,7 @@ function IM_SCZ_AD() {
                         active3={false}
                         link1="/importaciones/solicitud-cotizacion/nuevo-documento"
                         link2="/importaciones/solicitud-cotizacion/aceptar-documento"
+                        link3="/importaciones/solicitud-cotizacion/historial-documento"
                     >
                     </Title>
 
@@ -58,21 +60,27 @@ function IM_SCZ_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    iconProps: { style: { color: "#16A34A" } }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    iconProps: { style: { color: "#FF3C3C" } }                                
                                 },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
                             options= {{
-                                actionsColumnIndex: -1
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'Importaciones-SolicitudCompras-Pendientes'
                             }}
                             localization = {{
                                 header:{

@@ -79,7 +79,7 @@ function CN_OC_ND() {
                     active3={false}
                     link1="/compras-nacionales/orden-compra/nuevo-documento"
                     link2="/compras-nacionales/orden-compra/aceptar-documento"
-                    link3="/compras-nacionales/orden-compra/visualizar-documento"
+                    link3="/compras-nacionales/orden-compra/historial-documento"
                 >
                 </Title>
 

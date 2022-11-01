@@ -73,6 +73,7 @@ function IM_NR_ND() {
                     active3={false}
                     link1="/importaciones/nota-recepcion/nuevo-documento"
                     link2="/importaciones/nota-recepcion/aceptar-documento"
+                    link3="/importaciones/nota-recepcion/historial-documento"
                 >
                 </Title>
 

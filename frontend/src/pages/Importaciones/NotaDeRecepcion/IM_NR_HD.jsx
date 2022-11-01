@@ -6,7 +6,7 @@ import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
-function CN_NR_AD() {
+function IM_NR_AD() {
     
 
     const columnas = [
@@ -20,7 +20,16 @@ function CN_NR_AD() {
         },
         {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
@@ -40,14 +49,14 @@ function CN_NR_AD() {
                 <div className='w-100'>
                     <Title 
                         document="Nota de recepción" 
-                        type="Compras nacionales" 
-                        subType="Aceptar Documento"
+                        type="Importaciones" 
+                        subType="Historial de Documentos"
                         active1={false}
-                        active2={true}
+                        active2={false}
                         active3={false}
-                        link1="/compras-nacionales/nota-recepcion/nuevo-documento"
-                        link2="/compras-nacionales/nota-recepcion/aceptar-documento"
-                        link3="/compras-nacionales/nota-recepcion/visualizar-documento"
+                        link1="/importaciones/nota-recepcion/nuevo-documento"
+                        link2="/importaciones/nota-recepcion/aceptar-documento"
+                        link3="/importaciones/nota-recepcion/historial-documento"
                     >
                     </Title>
 
@@ -58,23 +67,17 @@ function CN_NR_AD() {
                             title='Lista de notas de recepción'
                             actions={[
                                 {
-                                    icon: 'check',
-                                    tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
-                                {
-                                    icon: 'clear',
-                                    tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
-                                {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                    iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
                             options= {{
-                                actionsColumnIndex: -1
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'Importaciones-NotaRecepcion-Historial'
                             }}
                             localization = {{
                                 header:{
@@ -89,4 +92,4 @@ function CN_NR_AD() {
     )
 }
 
-export default CN_NR_AD;
+export default IM_NR_AD;

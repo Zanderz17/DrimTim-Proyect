@@ -6,28 +6,36 @@ import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
-function IM_NR_AD() {
-    
+function IM_OC_AD() {
 
     const columnas = [
-        {
-            title: 'Nro. Nota de recepción',
-            field: 'nro_nota_recepcion'
-        },
         {
             title: 'Nro. Orden de compra',
             field: 'nro_orden_compra'
         },
         {
+            title: 'Nro. Solicitud de cotización',
+            field: 'nro_solicitud_cotizacion'
+        },
+        {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
     const data = [
         {
-            'nro_nota_recepcion': "11111",
-            'nro_orden_compra': "22222",
+            'nro_orden_compra': "11111",
+            'nro_solicitud_cotizacion': "22222",
             'fecha_elaboracion': "03-12-2020"
         }
     ]
@@ -39,14 +47,14 @@ function IM_NR_AD() {
 
                 <div className='w-100'>
                     <Title 
-                        document="Nota de recepción" 
+                        document="Orden de Compra" 
                         type="Importaciones" 
-                        subType="Aceptar Documento"
+                        subType="Historial de Documentos"
                         active1={false}
-                        active2={true}
-                        active3={false}
-                        link1="/importaciones/nota-recepcion/nuevo-documento"
-                        link2="/importaciones/nota-recepcion/aceptar-documento"
+                        active2={false}
+                        active3={true}
+                        link1="/importaciones/orden-compra/nuevo-documento"
+                        link2="/importaciones/orden-compra/aceptar-documento"
                     >
                     </Title>
 
@@ -54,26 +62,20 @@ function IM_NR_AD() {
                         <MaterialTable
                             columns={columnas}
                             data={data}
-                            title='Lista de notas de recepción'
+                            title='Lista de órdenes de compra'
                             actions={[
-                                {
-                                    icon: 'check',
-                                    tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
-                                {
-                                    icon: 'clear',
-                                    tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
-                                },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                    iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
                             options= {{
-                                actionsColumnIndex: -1
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'ComprasNacionales-SolicitudCompras-Historial'
                             }}
                             localization = {{
                                 header:{
@@ -86,6 +88,6 @@ function IM_NR_AD() {
             </div>
         </div>
     )
-}
+};
 
-export default IM_NR_AD;
+export default IM_OC_AD;

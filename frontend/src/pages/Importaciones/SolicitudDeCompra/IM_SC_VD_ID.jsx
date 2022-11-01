@@ -19,9 +19,10 @@ function IM_SC_VD() {
                     subType="Nuevo documento"
                     active1={false}
                     active2={false}
-                    active3={true}
+                    active3={false}
                     link1="/importaciones/solicitud-compra/nuevo-documento"
                     link2="/importaciones/solicitud-compra/aceptar-documento"
+                    link3="/importaciones/solicitud-compra/historial-documento"
                 >
                 </Title>
 

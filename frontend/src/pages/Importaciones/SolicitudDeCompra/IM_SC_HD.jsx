@@ -7,7 +7,7 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 import { useState } from 'react';
 
-function IM_SC_AD() {
+function IM_SC_HD() {
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
@@ -15,7 +15,16 @@ function IM_SC_AD() {
         },
         {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
@@ -82,12 +91,13 @@ function IM_SC_AD() {
                 <Title 
                     document="Solicitud de compra" 
                     type="Importaciones" 
-                    subType="Aceptar Documento"
+                    subType="Historial de documentos"
                     active1={false}
-                    active2={true}
-                    active3={false}
+                    active2={false}
+                    active3={true}
                     link1="/importaciones/solicitud-compra/nuevo-documento"
                     link2="/importaciones/solicitud-compra/aceptar-documento"
+                    link3="/importaciones/solicitud-compra/historial-documento"
                 >
                 </Title>
 
@@ -98,23 +108,17 @@ function IM_SC_AD() {
                         title='Lista de solicitudes de compra'
                         actions={[
                             {
-                                icon: 'check',
-                                tooltip: 'Aceptar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado') }
-                            },
-                            {
-                                icon: 'clear',
-                                tooltip: 'ELiminar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado') }
-                            },
-                            {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra)
+                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                iconProps: { style: { color: "#4763E4" } }
                             }
                         ]}
                         options= {{
-                            actionsColumnIndex: -1
+                            actionsColumnIndex: -1,
+                            exportButton: true,
+                            exportAllData: true,
+                            exportFileName: 'ComprasNacionales-SolicitudCompras-Historial'
                         }}
                         localization = {{
                             header:{
@@ -128,4 +132,4 @@ function IM_SC_AD() {
     )
 }
 
-export default IM_SC_AD;
+export default IM_SC_HD;

@@ -22,6 +22,14 @@ function CN_NR_AD() {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
             type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
@@ -44,8 +52,8 @@ function CN_NR_AD() {
                         type="Compras nacionales" 
                         subType="Aceptar Documento"
                         active1={false}
-                        active2={true}
-                        active3={false}
+                        active2={false}
+                        active3={true}
                         link1="/compras-nacionales/nota-recepcion/nuevo-documento"
                         link2="/compras-nacionales/nota-recepcion/aceptar-documento"
                         link3="/compras-nacionales/nota-recepcion/historial-documento"
@@ -59,21 +67,9 @@ function CN_NR_AD() {
                             title='Lista de notas de recepción'
                             actions={[
                                 {
-                                    icon: 'check',
-                                    tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
-                                    iconProps: { style: { color: "#16A34A" } }
-                                },
-                                {
-                                    icon: 'clear',
-                                    tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
-                                    iconProps: { style: { color: "#FF3C3C" } }
-                                },
-                                {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
@@ -81,7 +77,7 @@ function CN_NR_AD() {
                                 actionsColumnIndex: -1,
                                 exportButton: true,
                                 exportAllData: true,
-                                exportFileName: 'ComprasNacionales-SolicitudCompras-Pendientes'
+                                exportFileName: 'ComprasNacionales-NotaRecepcion-Historial'
                             }}
                             localization = {{
                                 header:{
