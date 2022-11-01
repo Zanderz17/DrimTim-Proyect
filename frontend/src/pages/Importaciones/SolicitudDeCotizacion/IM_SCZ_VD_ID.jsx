@@ -23,6 +23,7 @@ function IM_SCZ_VD() {
                     active3={false}
                     link1="/importaciones/solicitud-cotizacion/nuevo-documento"
                     link2="/importaciones/solicitud-cotizacion/aceptar-documento"
+                    link3="/importaciones/solicitud-cotizacion/historial-documento"
                 >
                 </Title>
 

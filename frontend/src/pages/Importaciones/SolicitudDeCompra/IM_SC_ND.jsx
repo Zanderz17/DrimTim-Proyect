@@ -64,6 +64,7 @@ function IM_SC_ND() {
                     active3={false}
                     link1="/importaciones/solicitud-compra/nuevo-documento"
                     link2="/importaciones/solicitud-compra/aceptar-documento"
+                    link3="/importaciones/solicitud-compra/historial-documento"
                 >
                 </Title>
 

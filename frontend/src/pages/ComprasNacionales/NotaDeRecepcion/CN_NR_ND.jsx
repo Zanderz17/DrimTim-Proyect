@@ -72,7 +72,7 @@ function CN_NR_ND() {
                     active3={false}
                     link1="/compras-nacionales/nota-recepcion/nuevo-documento"
                     link2="/compras-nacionales/nota-recepcion/aceptar-documento"
-                    link3="/compras-nacionales/nota-recepcion/visualizar-documento"
+                    link3="/compras-nacionales/nota-recepcion/historial-documento"
                 >
                 </Title>
 

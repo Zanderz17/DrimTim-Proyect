@@ -6,26 +6,35 @@ import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
-function CN_OC_AD() {
+function CN_SCZ_HD() {
     const columnas = [
-        {
-            title: 'Nro. Orden de compra',
-            field: 'nro_orden_compra'
-        },
         {
             title: 'Nro. Solicitud de cotización',
             field: 'nro_solicitud_cotizacion'
         },
         {
+            title: 'Nro. Solicitud de compra',
+            field: 'nro_solicitud_compra'
+        },
+        {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
         }
     ];
 
     const [data, setData] = useState([]);
-    const [nroOrdCompraKeeper, setNroOrdCompraKeeper] = useState('');
+    const [nroSolCotizacionKeeper, setNroSolCotizacionKeeper] = useState('');
     const [stateKeeper, setStateKeeper] = useState('');
-    
+
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
 
@@ -34,7 +43,7 @@ function CN_OC_AD() {
             const req = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/pendiente"
+                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente"
             })).data;
             setData(req);
         };
@@ -42,39 +51,39 @@ function CN_OC_AD() {
     }, [reload]);
 
     useEffect( () => {
-        const aceptar = async (nOrdCompra) => { 
+        const aceptar = async (nSolCotizacion) => { 
             (await Axios({
                 method: 'PUT',
-                params: { nroOrdenCompra: nOrdCompra },
+                params: { nroSolicitudCotizacion: nSolCotizacion },
                 data: { state: 'aceptado' },
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/aceptado"
+                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado"
             }));
             setStateKeeper(''); 
             setReload(!reload);
         };
         if (stateKeeper === 'aceptado'){
-            aceptar(nroOrdCompraKeeper); 
+            aceptar(nroSolCotizacionKeeper); 
         }
-    }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
+    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     useEffect( () => {
-        const rechazar = async (nOrdCompra) => {
+        const rechazar = async (nSolCotizacion) => {
             (await Axios({
                 method: 'PUT',
-                params: { nroOrdenCompra: nOrdCompra },
+                params: { nroSolicitudCotizacion: nSolCotizacion },
                 data: { state: 'rechazado' },
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/rechazado"
+                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado"
             }));
             setStateKeeper('');
             setReload(!reload);
         };
         if (stateKeeper === 'rechazado'){
-            rechazar(nroOrdCompraKeeper);
+            rechazar(nroSolCotizacionKeeper);
         }
-    }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
+    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
@@ -84,15 +93,15 @@ function CN_OC_AD() {
 
                 <div className='w-100'>
                     <Title 
-                        document="Orden de Compra" 
+                        document="Solicitud de cotización" 
                         type="Compras nacionales" 
-                        subType="Aceptar Documento"
+                        subType="Historial de documentos"
                         active1={false}
-                        active2={true}
-                        active3={false}
-                        link1="/compras-nacionales/orden-compra/nuevo-documento"
-                        link2="/compras-nacionales/orden-compra/aceptar-documento"
-                        link3="/compras-nacionales/orden-compra/visualizar-documento"
+                        active2={false}
+                        active3={true}
+                        link1="/compras-nacionales/solicitud-cotizacion/nuevo-documento"
+                        link2="/compras-nacionales/solicitud-cotizacion/aceptar-documento"
+                        link3="/compras-nacionales/solicitud-cotizacion/historial-documento"
                     >
                     </Title>
 
@@ -100,22 +109,13 @@ function CN_OC_AD() {
                         <MaterialTable
                             columns={columnas}
                             data={data}
-                            title='Lista de órdenes de compra'
+                            title='Lista de solicitudes de cotización'
                             actions={[
-                                {
-                                    icon: 'check',
-                                    tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('aceptado'); }
-                                },
-                                {
-                                    icon: 'clear',
-                                    tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('rechazado') }
-                                },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                    iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
                             options= {{
@@ -132,6 +132,6 @@ function CN_OC_AD() {
             </div>
         </div>
     )
-};
+}
 
-export default CN_OC_AD;
+export default CN_SCZ_HD;

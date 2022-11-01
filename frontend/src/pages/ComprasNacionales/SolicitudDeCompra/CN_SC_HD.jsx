@@ -6,7 +6,7 @@ import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
 
-function CN_SC_AD() {
+function CN_SC_HD() {
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
@@ -14,7 +14,34 @@ function CN_SC_AD() {
         },
         {
             title: 'Fecha de elaboración',
-            field: 'fecha_elaboracion'
+            field: 'fecha_elaboracion',
+            type: 'date'
+        },
+        {
+            title: 'Estado',
+            field: 'estado',
+            render: (rowData) => 
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                    {rowData.estado}
+                </div>
+        }
+    ];
+
+    const dataTest = [
+        {
+            nro_solicitud_compra: '121213',
+            fecha_elaboracion: '2020-01-10',
+            estado: 'Aceptado'
+        },
+        {
+            nro_solicitud_compra: '121213',
+            fecha_elaboracion: '2021-01-22',
+            estado: 'En progreso'
+        },
+        {
+            nro_solicitud_compra: '121213',
+            fecha_elaboracion: '2022-01-30',
+            estado: 'Rechazado'
         }
     ];
 
@@ -81,40 +108,34 @@ function CN_SC_AD() {
                 <Title 
                     document="Solicitud de compra" 
                     type="Compras nacionales" 
-                    subType="Aceptar Documento"
+                    subType="Historial de documentos"
                     active1={false}
-                    active2={true}
-                    active3={false}
+                    active2={false}
+                    active3={true}
                     link1="/compras-nacionales/solicitud-compra/nuevo-documento"
                     link2="/compras-nacionales/solicitud-compra/aceptar-documento"
-                    link3="/compras-nacionales/solicitud-compra/visualizar-documento"
+                    link3="/compras-nacionales/solicitud-compra/historial-documento"
                 >
                 </Title>
 
                 <div className='dataTable container'>
                     <MaterialTable
                         columns={columnas}
-                        data={data}
+                        data={dataTest}
                         title='Lista de solicitudes de compra'
                         actions={[
                             {
-                                icon: 'check',
-                                tooltip: 'Aceptar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado'); }
-                            },
-                            {
-                                icon: 'clear',
-                                tooltip: 'ELiminar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado') }
-                            },
-                            {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra)
+                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                iconProps: { style: { color: "#4763E4" } }
                             }
                         ]}
                         options= {{
-                            actionsColumnIndex: -1
+                            actionsColumnIndex: -1,
+                            exportButton: true,
+                            exportAllData: true,
+                            exportFileName: 'ComprasNacionales-SolicitudCompras-Historial'
                         }}
                         localization = {{
                             header:{
@@ -128,4 +149,4 @@ function CN_SC_AD() {
     )
 }
 
-export default CN_SC_AD;
+export default CN_SC_HD;

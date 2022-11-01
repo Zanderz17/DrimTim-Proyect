@@ -82,6 +82,7 @@ function IM_OC_ND() {
                     active3={false}
                     link1="/importaciones/orden-compra/nuevo-documento"
                     link2="/importaciones/orden-compra/aceptar-documento"
+                    link3="/importaciones/orden-compra/historial-documento"
                 >
                 </Title>
 

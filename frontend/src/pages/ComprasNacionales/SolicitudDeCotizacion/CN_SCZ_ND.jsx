@@ -70,7 +70,7 @@ function CN_SCZ_ND() {
                     active3={false}
                     link1="/compras-nacionales/solicitud-cotizacion/nuevo-documento"
                     link2="/compras-nacionales/solicitud-cotizacion/aceptar-documento"
-                    link3="/compras-nacionales/solicitud-cotizacion/visualizar-documento"
+                    link3="/compras-nacionales/solicitud-cotizacion/historial-documento"
                 >
                 </Title>
 

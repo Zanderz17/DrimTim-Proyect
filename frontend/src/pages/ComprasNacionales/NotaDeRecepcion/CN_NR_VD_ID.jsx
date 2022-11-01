@@ -8,7 +8,6 @@ import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.c
 
 function CN_NR_VD() {
     const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
-
     
     return (
         <div className='d-flex'>
@@ -23,7 +22,7 @@ function CN_NR_VD() {
                     active3={false}
                     link1="/compras-nacionales/nota-recepcion/nuevo-documento"
                     link2="/compras-nacionales/nota-recepcion/aceptar-documento"
-                    link3="/compras-nacionales/nota-recepcion/visualizar-documento"
+                    link3="/compras-nacionales/nota-recepcion/historial-documento"
                 >
                 </Title>
 
