@@ -35,7 +35,7 @@ function IM_SCZ_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion"
+            url: "http://localhost:9000/importaciones/solicitud-cotizacion/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -70,7 +70,7 @@ function IM_SCZ_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/importaciones/solicitud-cotizacion"
+                    link1="/importaciones/solicitud-cotizacion/nuevo-documento"
                     link2="/importaciones/solicitud-cotizacion/aceptar-documento"
                 >
                 </Title>

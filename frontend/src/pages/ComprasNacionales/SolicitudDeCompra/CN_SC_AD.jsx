@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
 import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
-import { useState } from 'react';
 
 function CN_SC_AD() {
     const columnas = [
@@ -47,13 +46,14 @@ function CN_SC_AD() {
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
             }));
-            setStateKeeper('');
+            setStateKeeper(''); 
             setReload(!reload);
         };
         if (stateKeeper === 'aceptado'){
-            aceptar(nroSolCompraKeeper);
+            aceptar(nroSolCompraKeeper); 
         }
-    }, [nroSolCompraKeeper]);
+    }, [nroSolCompraKeeper, stateKeeper, reload]); // previously: [nroSolCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     useEffect( () => {
         const rechazar = async (nSolCompra) => {
@@ -70,7 +70,8 @@ function CN_SC_AD() {
         if (stateKeeper === 'rechazado'){
             rechazar(nroSolCompraKeeper);
         }
-    }, [nroSolCompraKeeper]);
+    }, [nroSolCompraKeeper, stateKeeper, reload]); // previously: [nroSolCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
         <div className='d-flex'>
@@ -84,8 +85,9 @@ function CN_SC_AD() {
                     active1={false}
                     active2={true}
                     active3={false}
-                    link1="/compras-nacionales/solicitud-compra"
+                    link1="/compras-nacionales/solicitud-compra/nuevo-documento"
                     link2="/compras-nacionales/solicitud-compra/aceptar-documento"
+                    link3="/compras-nacionales/solicitud-compra/visualizar-documento"
                 >
                 </Title>
 
@@ -98,7 +100,7 @@ function CN_SC_AD() {
                             {
                                 icon: 'check',
                                 tooltip: 'Aceptar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado') }
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado'); }
                             },
                             {
                                 icon: 'clear',

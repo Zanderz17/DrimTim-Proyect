@@ -45,7 +45,7 @@ function IM_NR_AD() {
                         active1={false}
                         active2={true}
                         active3={false}
-                        link1="/importaciones/nota-recepcion"
+                        link1="/importaciones/nota-recepcion/nuevo-documento"
                         link2="/importaciones/nota-recepcion/aceptar-documento"
                     >
                     </Title>

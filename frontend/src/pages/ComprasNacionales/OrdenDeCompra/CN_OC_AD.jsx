@@ -7,7 +7,6 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 
 function CN_OC_AD() {
-
     const columnas = [
         {
             title: 'Nro. Orden de compra',
@@ -23,13 +22,60 @@ function CN_OC_AD() {
         }
     ];
 
-    const data = [
-        {
-            'nro_orden_compra': "11111",
-            'nro_solicitud_cotizacion': "22222",
-            'fecha_elaboracion': "03-12-2020"
+    const [data, setData] = useState([]);
+    const [nroOrdCompraKeeper, setNroOrdCompraKeeper] = useState('');
+    const [stateKeeper, setStateKeeper] = useState('');
+    
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/pendiente"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
+
+    useEffect( () => {
+        const aceptar = async (nOrdCompra) => { 
+            (await Axios({
+                method: 'PUT',
+                params: { nroOrdenCompra: nOrdCompra },
+                data: { state: 'aceptado' },
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/aceptado"
+            }));
+            setStateKeeper(''); 
+            setReload(!reload);
+        };
+        if (stateKeeper === 'aceptado'){
+            aceptar(nroOrdCompraKeeper); 
         }
-    ]
+    }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
+
+    useEffect( () => {
+        const rechazar = async (nOrdCompra) => {
+            (await Axios({
+                method: 'PUT',
+                params: { nroOrdenCompra: nOrdCompra },
+                data: { state: 'rechazado' },
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/orden-compra/aceptar-documento/rechazado"
+            }));
+            setStateKeeper('');
+            setReload(!reload);
+        };
+        if (stateKeeper === 'rechazado'){
+            rechazar(nroOrdCompraKeeper);
+        }
+    }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
         <div>
@@ -44,8 +90,9 @@ function CN_OC_AD() {
                         active1={false}
                         active2={true}
                         active3={false}
-                        link1="/compras-nacionales/orden-compra"
+                        link1="/compras-nacionales/orden-compra/nuevo-documento"
                         link2="/compras-nacionales/orden-compra/aceptar-documento"
+                        link3="/compras-nacionales/orden-compra/visualizar-documento"
                     >
                     </Title>
 
@@ -58,12 +105,12 @@ function CN_OC_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('aceptado'); }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ }
+                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('rechazado') }
                                 },
                                 {
                                     icon: 'visibility',

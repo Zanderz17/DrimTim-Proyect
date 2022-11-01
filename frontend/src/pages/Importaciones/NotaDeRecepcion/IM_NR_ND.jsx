@@ -37,7 +37,7 @@ function IM_NR_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/nota-recepcion"
+            url: "http://localhost:9000/importaciones/nota-recepcion/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -71,7 +71,7 @@ function IM_NR_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/importaciones/nota-recepcion"
+                    link1="/importaciones/nota-recepcion/nuevo-documento"
                     link2="/importaciones/nota-recepcion/aceptar-documento"
                 >
                 </Title>

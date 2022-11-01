@@ -44,7 +44,7 @@ function IM_OC_AD() {
                         active1={false}
                         active2={true}
                         active3={false}
-                        link1="/importaciones/orden-compra"
+                        link1="/importaciones/orden-compra/nuevo-documento"
                         link2="/importaciones/orden-compra/aceptar-documento"
                     >
                     </Title>

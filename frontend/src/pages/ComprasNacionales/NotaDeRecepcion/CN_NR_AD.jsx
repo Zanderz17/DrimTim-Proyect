@@ -45,8 +45,9 @@ function CN_NR_AD() {
                         active1={false}
                         active2={true}
                         active3={false}
-                        link1="/compras-nacionales/nota-recepcion"
+                        link1="/compras-nacionales/nota-recepcion/nuevo-documento"
                         link2="/compras-nacionales/nota-recepcion/aceptar-documento"
+                        link3="/compras-nacionales/nota-recepcion/visualizar-documento"
                     >
                     </Title>
 

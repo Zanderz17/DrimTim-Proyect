@@ -27,7 +27,7 @@ function IM_SC_ND() {
                 estado: 'pendiente'
             },
             withCredentials: true,
-            url: "http://localhost:9000/compras-nacionales/solicitud-compra"
+            url: "http://localhost:9000/importaciones/solicitud-compra/nuevo-documento"
         });
         e.preventDefault();
     };
@@ -62,7 +62,7 @@ function IM_SC_ND() {
                     active1={true}
                     active2={false}
                     active3={false}
-                    link1="/importaciones/solicitud-compra"
+                    link1="/importaciones/solicitud-compra/nuevo-documento"
                     link2="/importaciones/solicitud-compra/aceptar-documento"
                 >
                 </Title>

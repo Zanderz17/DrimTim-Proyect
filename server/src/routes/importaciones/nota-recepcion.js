@@ -3,7 +3,7 @@ const router = express.Router();
 const NotaRecepcion = require('../../models/NotaRecepcion');
 
 /* Nuevo documento */
-router.post('/compras-nacionales/nota-recepcion/nuevo-documento', async (req, res) => {
+router.post('/importaciones/nota-recepcion/nuevo-documento', async (req, res) => {
     const nota_recepcion = NotaRecepcion(req.body);
     await nota_recepcion
         .save()
@@ -13,7 +13,7 @@ router.post('/compras-nacionales/nota-recepcion/nuevo-documento', async (req, re
 
 /* Aceptar documento */
 // Get all nota-recepcion with a pending state
-router.get('/compras-nacionales/nota-recepcion/aceptar-documento/pendiente', (req, res) => {
+router.get('/importaciones/nota-recepcion/aceptar-documento/pendiente', (req, res) => {
     NotaRecepcion
         .find({estado: 'pendiente'})
         .select(['-_id', 'nro_nota_recepcion', 'fecha_elaboracion'])
@@ -22,7 +22,7 @@ router.get('/compras-nacionales/nota-recepcion/aceptar-documento/pendiente', (re
 });
 
 // Updating state of nota-recepcion to accepted
-router.put('/compras-nacionales/nota-recepcion/aceptar-documento/aceptado', (req, res) => {
+router.put('/importaciones/nota-recepcion/aceptar-documento/aceptado', (req, res) => {
     const  { nroNotaRecepcion }  = req.query;
     const  { state } = req.body;
     NotaRecepcion
@@ -32,7 +32,7 @@ router.put('/compras-nacionales/nota-recepcion/aceptar-documento/aceptado', (req
 });
 
 // Updating state of nota-recepcion to rejected
-router.put('/compras-nacionales/nota-recepcion/aceptar-documento/rechazado', (req, res) => {
+router.put('/importaciones/nota-recepcion/aceptar-documento/rechazado', (req, res) => {
     const  { nroNotaRecepcion }  = req.query;
     const  { state } = req.body;
     NotaRecepcion
@@ -43,7 +43,7 @@ router.put('/compras-nacionales/nota-recepcion/aceptar-documento/rechazado', (re
 
 /* Historial de documento */
 // Get all nota-recepcion
-router.get('/compras-nacionales/nota-recepcion/historial-documento', (req, res) => {
+router.get('/importaciones/nota-recepcion/historial-documento', (req, res) => {
     NotaRecepcion
         .find()
         .select(['-_id', 'nro_nota_recepcion', 'fecha_elaboracion', 'estado'])

@@ -3,7 +3,7 @@ const router = express.Router();
 const SolicitudCotizacion = require('../../models/SolicitudCotizacion');
 
 /* Nuevo documento */
-router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (req, res) => {
+router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, res) => {
     const solicitud_cotizacion = SolicitudCotizacion(req.body);
     await solicitud_cotizacion
         .save()
@@ -13,16 +13,16 @@ router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (r
 
 /* Aceptar documento */
 // Get all solicitud-cotizacion with a pending state
-router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
+router.get('/importaciones/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
     SolicitudCotizacion
         .find({estado: 'pendiente'})
-        .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion'])
+        .select(['-_id', 'nro_solicitud_cotizacion', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
 
 // Updating state of solicitud-cotizacion to acsepted
-router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado', (req, res) => {
+router.put('/importaciones/solicitud-cotizacion/aceptar-documento/aceptado', (req, res) => {
     const  { nroSolicitudCotizacion }  = req.query;
     const  { state } = req.body;
     SolicitudCotizacion
@@ -32,7 +32,7 @@ router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado'
 });
 
 // Updating state of solicitud-cotizacion to rejected
-router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado', (req, res) => {
+router.put('/importaciones/solicitud-cotizacion/aceptar-documento/rechazado', (req, res) => {
     const  { nroSolicitudCotizacion }  = req.query;
     const  { state } = req.body;
     SolicitudCotizacion
@@ -43,7 +43,7 @@ router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado
 
 /* Historial de documento */
 // Get all solicitud-cotizacion
-router.get('/compras-nacionales/solicitud-cotizacion/historial-documento', (req, res) => {
+router.get('/importaciones/solicitud-cotizacion/historial-documento', (req, res) => {
     SolicitudCotizacion
         .find()
         .select(['-_id', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])

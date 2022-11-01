@@ -5,19 +5,19 @@
         "childrens": [
             {
                 "title": "Solicitud de compra",
-                "path": "/compras-nacionales/solicitud-compra"
+                "path": "/compras-nacionales/solicitud-compra/nuevo-documento"
             },
             {
                 "title": "Solicitud de cotización",
-                "path": "/compras-nacionales/solicitud-cotizacion"
+                "path": "/compras-nacionales/solicitud-cotizacion/nuevo-documento"
             },
             {
                 "title": "Orden de compra",
-                "path": "/compras-nacionales/orden-compra"
+                "path": "/compras-nacionales/orden-compra/nuevo-documento"
             },
             {
                 "title": "Nota de recepción",
-                "path": "/compras-nacionales/nota-recepcion"
+                "path": "/compras-nacionales/nota-recepcion/nuevo-documento"
             }
         ]
     },
@@ -27,19 +27,19 @@
         "childrens": [
             {
                 "title": "Solicitud de compra",
-                "path": "/importaciones/solicitud-compra"
+                "path": "/importaciones/solicitud-compra/nuevo-documento"
             },
             {
                 "title": "Solicitud de cotización",
-                "path": "/importaciones/solicitud-cotizacion"
+                "path": "/importaciones/solicitud-cotizacion/nuevo-documento"
             },
             {
                 "title": "Orden de compra",
-                "path": "/importaciones/orden-compra"
+                "path": "/importaciones/orden-compra/nuevo-documento"
             },
             {
                 "title": "Nota de recepción",
-                "path": "/importaciones/nota-recepcion"
+                "path": "/importaciones/nota-recepcion/nuevo-documento"
             }
         ]
     },
