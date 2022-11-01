@@ -25,7 +25,7 @@ function CN_OC_HD() {
             title: 'Estado',
             field: 'estado',
             render: (rowData) => 
-                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='En progreso'?'#0A4ED1': '#B42D1B'}}>
+                <div style={{color: rowData.estado==='Aceptado'?'#099440': rowData.estado==='Pendiente'?'#0A4ED1': '#B42D1B'}}>
                     {rowData.estado}
                 </div>
         }

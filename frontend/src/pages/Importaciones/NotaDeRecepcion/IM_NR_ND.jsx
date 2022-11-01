@@ -78,12 +78,11 @@ function IM_NR_ND() {
                 </Title>
 
                 <div className='new-doc-form'>
-                    <h2>Registro de nota de recepción</h2>   
                     <form>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
-
+                                    <h2>Registro de nota de recepción</h2>   
                                 </div>
                             </div>
 
@@ -106,7 +105,7 @@ function IM_NR_ND() {
                                 </div>
                                 
                                 <div className='col-6'>
-                                    <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración de orden de compra</label>
+                                    <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración</label>
                                     <input className="form-control" type="date" id="fechaElaboracion" onChange={(e) => setFechaElaboracionOrdenCompra(e.target.value)} required/>
                                 </div>
                             </div>

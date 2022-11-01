@@ -184,31 +184,7 @@ function CN_OC_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total</label>
-                                    <input className="form-control" type="number" id="importeTotal" placeholder="Contado/Cuotas" onChange={(e) => setImporteTotal(e.target.value)} required/>
-                                </div>
-                            </div>
-
-                            <div className="row form-group">
-                                <div className='col-6'>
-                                    <label className="form-label" htmlFor="transporte">Transporte</label>
-                                    <input className="form-control" type="text" id="transporte" placeholder="Platillo volador" onChange={(e) => setTransporte(e.target.value)} required/>
-                                </div>
-
-                                <div className='col-6'>
-                                    <label className="form-label" htmlFor="costoTransporte">Costo de transporte</label>
-                                    <input className="form-control" type="number" id="costoTransporte" placeholder="000" onChange={(e) => setCostoTransporte(e.target.value)} required/>
-                                </div>
-                            </div>
-
-                            <div className="row form-group">
-                                <div className='col-6'>
-                                    <label className="form-label" htmlFor="aduana">Fracción aduanal aplicable</label>
-                                    <input className="form-control" type="number" id="aduana" placeholder="0000" onChange={(e) => setFraccionAduanal(e.target.value)} required/>
-                                </div>
-
-                                <div className='col-6'>
-                                    <label className="form-label" htmlFor="costoTotal">Costo de total</label>
-                                    <input className="form-control" type="number" id="costoTotal" placeholder="0000" onChange={(e) => setCostoTotal(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="importeTotal" placeholder="999999999" onChange={(e) => setImporteTotal(e.target.value)} required/>
                                 </div>
                             </div>
 
