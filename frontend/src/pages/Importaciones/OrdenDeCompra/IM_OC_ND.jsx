@@ -25,7 +25,6 @@ function IM_OC_ND() {
 
     const registrar = (e) => {
 
-        /* CAMBIAR */
         Axios({
             method: 'POST',
             data: {
@@ -39,7 +38,7 @@ function IM_OC_ND() {
                 descripcion: descripcion,
                 impuesto: impuesto,
                 importe_total: importeTotal,
-                trasnporte: transporte,
+                transporte: transporte,
                 costo_trasnporte: costoTransporte,
                 fraccion_aduanal: fraccionAduanal,
                 costo_total: costoTotal,

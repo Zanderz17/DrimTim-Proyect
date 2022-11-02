@@ -39,4 +39,4 @@ const solCompraSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('solicitud-compra', solCompraSchema);
+module.exports = mongoose.model('importaciones-solicitud-compra', solCompraSchema);

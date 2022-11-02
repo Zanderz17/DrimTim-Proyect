@@ -12,7 +12,7 @@ function CN_NR_ND() {
     const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
     const [fechaRecepcion, setFechaRecepcion] = useState("");
-    const [fechaElaboracionOrdenCompra, setFechaElaboracionOrdenCompra] = useState("");
+    const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
     const [condicionesPago, setCondicionesPago] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -26,7 +26,7 @@ function CN_NR_ND() {
                 nro_nota_recepcion: nroNotaRecepcion,
                 nro_orden_compra: nroOrdenCompra,
                 fecha_recepcion: fechaRecepcion,
-                fecha_elaboracion_orden_compra: fechaElaboracionOrdenCompra,
+                fecha_elaboracion: fechaElaboracion,
                 nombre_proveedor: nombreProveedor,
                 condiciones_pago: condicionesPago,
                 productos: inputList,
@@ -104,7 +104,7 @@ function CN_NR_ND() {
                                 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración</label>
-                                    <input className="form-control" type="date" id="fechaElaboracion" onChange={(e) => setFechaElaboracionOrdenCompra(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaElaboracion" onChange={(e) => setFechaElaboracion(e.target.value)} required/>
                                 </div>
                             </div>
 

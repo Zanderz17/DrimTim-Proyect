@@ -18,7 +18,6 @@ function IM_SCZ_ND() {
     const [plazoMaximoEntrega, setPlazoMaximoEntrega] = useState("");
     const [nombreReceptor, setNombreReceptor] = useState("");
 
-    /*--- CAMBIAR ---*/
     const registrar = (e) => {
         Axios({
             method: 'POST',
@@ -39,7 +38,6 @@ function IM_SCZ_ND() {
         });
         e.preventDefault();
     };
-    /*--- CAMBIAR ---*/
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;

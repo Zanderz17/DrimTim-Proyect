@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const OrdenCompra = require('../../models/OrdenCompra');
+const OrdenCompra = require('../../models/importaciones/OrdenCompra');
 
 /* Nuevo documento */
 router.post('/importaciones/orden-compra/nuevo-documento', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/importaciones/orden-compra/nuevo-documento', async (req, res) => {
 router.get('/importaciones/orden-compra/aceptar-documento/pendiente', (req, res) => {
     OrdenCompra
         .find({estado: 'pendiente'})
-        .select(['-id', 'nro_orden_compra', 'fecha_elaboracion'])
+        .select(['-id', 'nro_orden_compra', 'nro_solicitud_cotizacion', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
@@ -46,7 +46,7 @@ router.put('/importaciones/orden-compra/aceptar-documento/rechazado', (req, res)
 router.get('/importaciones/orden-compra/historial-documento', (req, res) => {
     OrdenCompra
         .find()
-        .select(['-_id', 'nro_orden_compra', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_orden_compra', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
