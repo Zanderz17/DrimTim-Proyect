@@ -127,7 +127,7 @@ function IM_SCZ_AD() {
                                 actionsColumnIndex: -1,
                                 exportButton: true,
                                 exportAllData: true,
-                                exportFileName: 'Importaciones-SolicitudCompras-Pendientes'
+                                exportFileName: 'Importaciones-SolicitudCotizacion-Pendientes'
                             }}
                             localization = {{
                                 header:{

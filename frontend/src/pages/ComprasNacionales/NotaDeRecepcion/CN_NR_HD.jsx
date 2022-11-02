@@ -33,13 +33,24 @@ function CN_NR_AD() {
         }
     ];
 
-    const data = [
-        {
-            'nro_nota_recepcion': "11111",
-            'nro_orden_compra': "22222",
-            'fecha_elaboracion': "03-12-2020"
-        }
-    ]
+    const [data, setData] = useState([]);
+    //const [nroNotaRecepcionKeeper, setNroNotaRecepcionKeeper] = useState('');
+    //const [stateKeeper, setStateKeeper] = useState('');
+    
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/nota-recepcion/historial-documento"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
 
     return (
         <div>

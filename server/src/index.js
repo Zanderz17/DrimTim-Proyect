@@ -33,6 +33,10 @@ app.use(require('./routes/compras-nacionales/nota-recepcion'));
 app.use(require('./routes/compras-nacionales/orden-compra'));
 app.use(require('./routes/compras-nacionales/solicitud-compra'));
 app.use(require('./routes/compras-nacionales/solicitud-cotizacion'));
+app.use(require('./routes/importaciones/nota-recepcion'));
+app.use(require('./routes/importaciones/orden-compra'));
+app.use(require('./routes/importaciones/solicitud-compra'));
+app.use(require('./routes/importaciones/solicitud-cotizacion'));
 
 // Starting the server
 app.listen(app.get('port'), () => {
