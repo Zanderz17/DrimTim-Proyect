@@ -6,7 +6,6 @@ const SolicitudCompra = require('../../models/compras-nacionales/SolicitudCompra
 router.post('/compras-nacionales/solicitud-compra/nuevo-documento', async (req, res) => {
     const solicitud_compra = SolicitudCompra(req.body);
     console.log(solicitud_compra);
-    
     await solicitud_compra
         .save()
         .then((data) => res.json(data))
@@ -18,7 +17,7 @@ router.post('/compras-nacionales/solicitud-compra/nuevo-documento', async (req, 
 // Get all solicitud-compra with a pending state
 router.get('/compras-nacionales/solicitud-compra/aceptar-documento/pendiente', (req, res) => {
     SolicitudCompra
-        .find( {estado: 'pendiente'} )
+        .find( {estado: 'Pendiente'} )
         .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
@@ -50,6 +49,16 @@ router.get('/compras-nacionales/solicitud-compra/historial-documento', (req, res
     SolicitudCompra
         .find()
         .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion', 'estado'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
+/* Visualizar documento */
+// Get one solicitud-compra by nro_solicitud_compra
+router.get('/compras-nacionales/solicitud-compra/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    SolicitudCompra
+        .findOne({nro_solicitud_compra: id})
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

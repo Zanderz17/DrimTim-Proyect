@@ -23,12 +23,12 @@ function CN_SC_ND() {
                 productos: inputList,
                 descripcion: descripcion,
                 punto_pedido: puntoPedido,
-                estado: 'pendiente'
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-compra/nuevo-documento"
         });
-        e.preventDefault();
+        //e.preventDefault();
     };
 
     const handleinputchange=(e, index)=>{
@@ -94,11 +94,11 @@ function CN_SC_ND() {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-5'>
-                                            <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
+                                            <label className="form-label" htmlFor="id_material">Identificador del material</label>
                                             <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-3'>
-                                            <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
+                                            <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
                                             <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
                                         </div>
                                         {

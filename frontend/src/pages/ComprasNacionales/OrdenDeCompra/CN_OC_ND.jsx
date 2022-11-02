@@ -14,7 +14,7 @@ function CN_OC_ND() {
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [fechaEntregaMercancias, setFechaEntregaMercancias] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
-    const [condicionesPago, setCondicionesPago] = useState("");
+    const [condicionesPago, setCondicionesPago] = useState("Contado");
     const [descripcion, setDescripcion] = useState("");
     const [impuesto, setImpuesto] = useState("");
     const [importeTotal, setImporteTotal] = useState("");
@@ -33,12 +33,12 @@ function CN_OC_ND() {
                 descripcion: descripcion,
                 impuesto: impuesto,
                 importe_total: importeTotal,
-                estado: 'pendiente'
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/orden-compra/nuevo-documento"
         });
-        e.preventDefault();
+        //e.preventDefault();
     };
 
     const handleinputchange=(e, index)=>{

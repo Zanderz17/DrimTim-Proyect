@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar'
@@ -7,8 +8,39 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
 
 function IM_NR_VD() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+    let { id } = useParams();
 
+    const [inputList, setinputList]= useState([{id_material:'', cant_recibida:'', precio_unitario: ''}]);
+    const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
+    const [nroOrdenCompra, setNroOrdenCompra] = useState("");
+    const [fechaRecepcion, setFechaRecepcion] = useState("");
+    const [fechaElaboracion, setFechaElaboracion] = useState("");
+    const [nombreProveedor, setNombreProveedor] = useState("");
+    const [condicionesPago, setCondicionesPago] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [importeTotalMercanciaRecibida, setImporteTotalMercanciaRecibida] = useState("");
+    const [nombreReceptor, setNombreReceptor] = useState("");
+
+    useEffect( () => {
+        const getData = async () => {
+            const data = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: `http://localhost:9000/importaciones/nota-recepcion/visualizar-documento/${id}`
+            })).data;
+            setinputList(data.productos);
+            setNroNotaRecepcion(data.nro_nota_recepcion);
+            setNroOrdenCompra(data.nro_orden_compra);
+            setFechaRecepcion(data.fecha_recepcion);
+            setFechaElaboracion(data.fecha_elaboracion);
+            setNombreProveedor(data.nombre_proveedor);
+            setCondicionesPago(data.condiciones_pago);
+            setDescripcion(data.descripcion);
+            setImporteTotalMercanciaRecibida(data.importe_total_mercancia_recibida);
+            setNombreReceptor(data.nombre_receptor);
+        };
+        getData();
+    }, []);
     
     return (
         <div className='d-flex'>
@@ -39,36 +71,36 @@ function IM_NR_VD() {
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDNotaRec">Número de nota de recpción</label>
-                                    <input className="form-control" type="number" id="IDNotaRec" value={322323} disabled/>
+                                    <input className="form-control" type="number" id="IDNotaRec" value={nroNotaRecepcion} disabled/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
-                                    <input className="form-control" type="number" id="IDOrCompra" value={4343} disabled/>
+                                    <input className="form-control" type="number" id="IDOrCompra" value={nroOrdenCompra} disabled/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaRecepcion">Fecha de recepción</label>
-                                    <input className="form-control" type="date" id="fechaRecepcion" disabled/>
+                                    <input className="form-control" type="date" id="fechaRecepcion" value={fechaRecepcion} disabled/>
                                 </div>
                                 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaElaboracion">Fecha de elaboración de orden de compra</label>
-                                    <input className="form-control" type="date" id="fechaElaboracion" disabled/>
+                                    <input className="form-control" type="date" id="fechaElaboracion" value={fechaElaboracion} disabled/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                    <input className="form-control" type="text" id="proveedor" value="DrimTim" disabled/>
+                                    <input className="form-control" type="text" id="proveedor" value={nombreProveedor} disabled/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="condPago">Condiciones de pago</label>
-                                    <input className="form-control" type="text" id="condPago" value="Contado/Cuotas" disabled/>
+                                    <input className="form-control" type="text" id="condPago" value={condicionesPago} disabled/>
                                 </div>
                             </div>
 
@@ -78,15 +110,15 @@ function IM_NR_VD() {
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
                                             <label className="form-label" htmlFor="IDMaterial"> Identificador del material </label>
-                                            <input className="form-control" type="text" name="IDMaterial" value={"fsafdsfd"} disabled/>
+                                            <input className="form-control" type="text" name="IDMaterial" value={inputList.id_material} disabled/>
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="stockMaterial"> Cantidad Recibida </label>
-                                            <input className="form-control" type="number" name="stockMaterial" value={323223} disabled/>
+                                            <input className="form-control" type="number" name="stockMaterial" value={inputList.cant_recibida} disabled/>
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="priceMaterial"> Precio por Unidad </label>
-                                            <input className="form-control" type="number" name="priceMaterial" value={323223} disabled/>
+                                            <input className="form-control" type="number" name="priceMaterial" value={inputList.precio_unitario} disabled/>
                                         </div>
                                     </div> 
                                 );
@@ -96,21 +128,21 @@ function IM_NR_VD() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                    <input className="form-control" type="text" id="descripcion" value={'Descripcion ...'} disabled/>
+                                    <input className="form-control" type="text" id="descripcion" value={descripcion} disabled/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total de la mercancia recibida</label>
-                                    <input className="form-control" type="number" id="importeTotal" value={3223} disabled/>
+                                    <input className="form-control" type="number" id="importeTotal" value={importeTotalMercanciaRecibida} disabled/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="receptor">Nombre del receptor</label>
-                                    <input className="form-control" type="text" id="receptor" value={"DrimTim"} disabled/>
+                                    <input className="form-control" type="text" id="receptor" value={nombreReceptor} disabled/>
                                 </div>
                             </div>
 

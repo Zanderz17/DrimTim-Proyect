@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -14,12 +15,12 @@ function CN_OC_HD() {
         },
         {
             title: 'Nro. Solicitud de cotización',
-            field: 'nro_solicitud_cotizacion'
+            field: 'nro_sol_cotizacion'
         },
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         },
         {
             title: 'Estado',
@@ -50,6 +51,11 @@ function CN_OC_HD() {
         getList();
     }, [reload]);
 
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/compras-nacionales/orden-compra/visualizar-documento/${id}`);
+    };
+
     return (
         <div className='d-flex'>
             <Sidebar />
@@ -77,7 +83,7 @@ function CN_OC_HD() {
                             {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                onClick: (event, rowData) => { view(rowData.nro_orden_compra); },
                                 iconProps: { style: { color: "#4763E4" } }
                             }
                         ]}

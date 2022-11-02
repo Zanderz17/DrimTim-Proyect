@@ -5,6 +5,7 @@ const SolicitudCotizacion = require('../../models/compras-nacionales/SolicitudCo
 /* Nuevo documento */
 router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (req, res) => {
     const solicitud_cotizacion = SolicitudCotizacion(req.body);
+    console.log(solicitud_cotizacion);
     await solicitud_cotizacion
         .save()
         .then((data) => res.json(data))
@@ -15,7 +16,7 @@ router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (r
 // Get all solicitud-cotizacion with a pending state
 router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
     SolicitudCotizacion
-        .find({estado: 'pendiente'})
+        .find({estado: 'Pendiente'})
         .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
@@ -47,6 +48,16 @@ router.get('/compras-nacionales/solicitud-cotizacion/historial-documento', (req,
     SolicitudCotizacion
         .find()
         .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion', 'estado'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
+/* Visualizar documento */
+// Get one solicitud-cotizacion by nro_solicitud_cotizacion
+router.get('/compras-nacionales/solicitud-cotizacion/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    SolicitudCotizacion
+        .findOne({nro_solicitud_cotizacion: id})
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

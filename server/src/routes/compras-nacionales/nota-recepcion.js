@@ -5,6 +5,7 @@ const NotaRecepcion = require('../../models/compras-nacionales/NotaRecepcion');
 /* Nuevo documento */
 router.post('/compras-nacionales/nota-recepcion/nuevo-documento', async (req, res) => {
     const nota_recepcion = NotaRecepcion(req.body);
+    console.log(nota_recepcion);
     await nota_recepcion
         .save()
         .then((data) => res.json(data))
@@ -15,7 +16,7 @@ router.post('/compras-nacionales/nota-recepcion/nuevo-documento', async (req, re
 // Get all nota-recepcion with a pending state
 router.get('/compras-nacionales/nota-recepcion/aceptar-documento/pendiente', (req, res) => {
     NotaRecepcion
-        .find({estado: 'pendiente'})
+        .find({estado: 'Pendiente'})
         .select(['-_id', 'nro_nota_recepcion', 'nro_orden_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
@@ -47,6 +48,16 @@ router.get('/compras-nacionales/nota-recepcion/historial-documento', (req, res) 
     NotaRecepcion
         .find()
         .select(['-_id', 'nro_nota_recepcion', 'nro_orden_compra', 'fecha_elaboracion', 'estado'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
+/* Visualizar documento */
+// Get one nota-recepcion by nro_nota_recepcion
+router.get('/compras-nacionales/nota-recepcion/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    NotaRecepcion
+        .findOne({nro_nota_recepcion: id})
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

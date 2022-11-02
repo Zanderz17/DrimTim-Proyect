@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -15,12 +16,12 @@ function IM_OC_AD() {
         },
         {
             title: 'Nro. Solicitud de cotización',
-            field: 'nro_solicitud_cotizacion'
+            field: 'nro_sol_cotizacion'
         },
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         }
     ];
 
@@ -48,14 +49,14 @@ function IM_OC_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroOrdenCompra: nOrdCompra },
-                data: { state: 'aceptado' },
+                data: { state: 'Aceptado' },
                 withCredentials: true,
                 url: "http://localhost:9000/importaciones/orden-compra/aceptar-documento/aceptado"
             }));
             setStateKeeper(''); 
             setReload(!reload);
         };
-        if (stateKeeper === 'aceptado'){
+        if (stateKeeper === 'Aceptado'){
             aceptar(nroOrdCompraKeeper); 
         }
     }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
@@ -66,18 +67,23 @@ function IM_OC_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroOrdenCompra: nOrdCompra },
-                data: { state: 'rechazado' },
+                data: { state: 'Rechazado' },
                 withCredentials: true,
                 url: "http://localhost:9000/importaciones/orden-compra/aceptar-documento/rechazado"
             }));
             setStateKeeper('');
             setReload(!reload);
         };
-        if (stateKeeper === 'rechazado'){
+        if (stateKeeper === 'Rechazado'){
             rechazar(nroOrdCompraKeeper);
         }
     }, [nroOrdCompraKeeper, stateKeeper, reload]); // previously: [nroOrdCompraKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/importaciones/orden-compra/visualizar-documento/${id}`);
+    };
 
     return (
         <div>
@@ -107,19 +113,19 @@ function IM_OC_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('aceptado'); },
+                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('Aceptado'); },
                                     iconProps: { style: { color: "#16A34A" } }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('rechazado'); },
+                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('Rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }                                
                                 },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { view(rowData.nro_orden_compra); },
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -19,7 +20,7 @@ function CN_NR_AD() {
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         }
     ];
 
@@ -47,14 +48,14 @@ function CN_NR_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroNotaRecepcion: nNotaRecepcion },
-                data: { state: 'aceptado' },
+                data: { state: 'Aceptado' },
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/nota-recepcion/aceptar-documento/aceptado"
             }));
             setStateKeeper(''); 
             setReload(!reload);
         };
-        if (stateKeeper === 'aceptado'){
+        if (stateKeeper === 'Aceptado'){
             aceptar(nroNotaRecepcionKeeper); 
         }
     }, [nroNotaRecepcionKeeper, stateKeeper, reload]); // previously: [nroNotaRecepcionKeeper]
@@ -65,18 +66,23 @@ function CN_NR_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroNotaRecepcion: nNotaRecepcion },
-                data: { state: 'rechazado' },
+                data: { state: 'Rechazado' },
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/nota-recepcion/aceptar-documento/rechazado"
             }));
             setStateKeeper('');
             setReload(!reload);
         };
-        if (stateKeeper === 'rechazado'){
+        if (stateKeeper === 'Rechazado'){
             rechazar(nroNotaRecepcionKeeper);
         }
     }, [nroNotaRecepcionKeeper, stateKeeper, reload]); // previously: [nroNotaRecepcionKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/compras-nacionales/nota-recepcion/visualizar-documento/${id}`);
+    };
 
     return (
         <div>
@@ -106,19 +112,19 @@ function CN_NR_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { setNroNotaRecepcionKeeper(rowData.nro_nota_recepcion); setStateKeeper('aceptado'); },
+                                    onClick: (event, rowData) => { setNroNotaRecepcionKeeper(rowData.nro_nota_recepcion); setStateKeeper('Aceptado'); },
                                     iconProps: { style: { color: "#16A34A" } }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroNotaRecepcionKeeper(rowData.nro_nota_recepcion); setStateKeeper('rechazado'); },
+                                    onClick: (event, rowData) => { setNroNotaRecepcionKeeper(rowData.nro_nota_recepcion); setStateKeeper('Rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }
                                 },
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { view(rowData.nro_nota_recepcion); },
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}
