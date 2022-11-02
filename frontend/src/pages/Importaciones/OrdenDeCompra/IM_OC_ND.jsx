@@ -39,7 +39,7 @@ function IM_OC_ND() {
                 impuesto: impuesto,
                 importe_total: importeTotal,
                 transporte: transporte,
-                costo_trasnporte: costoTransporte,
+                costo_transporte: costoTransporte,
                 fraccion_aduanal: fraccionAduanal,
                 costo_total: costoTotal,
                 estado: 'Pendiente'

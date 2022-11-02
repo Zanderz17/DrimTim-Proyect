@@ -24,7 +24,7 @@ function CN_SC_VD() {
                 url: `http://localhost:9000/compras-nacionales/solicitud-compra/visualizar-documento/${id}`
             })).data;
             setinputList(data.productos);
-            setNroSolicitudCompra(data.nro_sol_cotizacion);
+            setNroSolicitudCompra(data.nro_solicitud_compra);
             setFechaElaboracion(data.fecha_elaboracion);
             setDescripcion(data.descripcion);
             setPuntoPedido(data.punto_pedido);

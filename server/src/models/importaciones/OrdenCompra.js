@@ -65,7 +65,7 @@ const ordCompraSchema = new Schema({
         type: String,
         required: true
     },
-    costo_trasnporte: {
+    costo_transporte: {
         type: String,
         required: true
     },

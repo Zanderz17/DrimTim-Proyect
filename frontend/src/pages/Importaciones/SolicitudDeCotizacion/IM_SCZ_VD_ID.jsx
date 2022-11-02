@@ -29,7 +29,7 @@ function IM_SCZ_VD() {
             })).data;
             setinputList(data.productos);
             setNroSolicitudCotizacion(data.nro_solicitud_cotizacion)
-            setNroSolicitudCompra(data.nro_sol_cotizacion);
+            setNroSolicitudCompra(data.nro_solicitud_compra);
             setFechaElaboracion(data.fecha_elaboracion);
             setFechaLimiteRespuesta(data.fecha_lim_respuesta);
             setNombreProveedor(data.nombre_proveedor);
