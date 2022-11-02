@@ -5,6 +5,7 @@ const SolicitudCotizacion = require('../../models/importaciones/SolicitudCotizac
 /* Nuevo documento */
 router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, res) => {
     const solicitud_cotizacion = SolicitudCotizacion(req.body);
+    console.log(solicitud_cotizacion);
     await solicitud_cotizacion
         .save()
         .then((data) => res.json(data))
@@ -15,7 +16,7 @@ router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, r
 // Get all solicitud-cotizacion with a pending state
 router.get('/importaciones/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
     SolicitudCotizacion
-        .find({estado: 'pendiente'})
+        .find({estado: 'Pendiente'})
         .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));

@@ -7,7 +7,7 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCotizacion/CN_SCZ_ND.css'
 
 function CN_SCZ_ND() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: ''}]);
 
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
@@ -31,12 +31,12 @@ function CN_SCZ_ND() {
                 descripcion: descripcion,
                 plazo_max_entrega: plazoMaximoEntrega,
                 nombre_receptor: nombreReceptor,
-                estado: 'pendiente'
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/nuevo-documento"
         });
-        e.preventDefault();
+        //e.preventDefault();
     };
 
     const handleinputchange=(e, index)=>{
@@ -53,7 +53,7 @@ function CN_SCZ_ND() {
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, { IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+        setinputList([...inputList, { id_material:'', cant_requerida:'', precio_unitario: ''}]);
         console.log(inputList);
     }
 
@@ -119,16 +119,16 @@ function CN_SCZ_ND() {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
-                                            <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
-                                            <input className="form-control" type="text" name="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="id_material">Identificador del material</label>
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
-                                            <input className="form-control" type="number" name="stockMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
+                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="priceMaterial">Precio por Unidad</label>
-                                            <input className="form-control" type="number" name="priceMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
+                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&

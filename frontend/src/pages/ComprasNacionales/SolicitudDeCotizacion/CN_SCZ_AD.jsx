@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -19,7 +20,7 @@ function CN_SCZ_AD() {
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         }
     ];
 
@@ -47,14 +48,14 @@ function CN_SCZ_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroSolicitudCotizacion: nSolCotizacion },
-                data: { state: 'aceptado' },
+                data: { state: 'Aceptado' },
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado"
             }));
             setStateKeeper(''); 
             setReload(!reload);
         };
-        if (stateKeeper === 'aceptado'){
+        if (stateKeeper === 'Aceptado'){
             aceptar(nroSolCotizacionKeeper); 
         }
     }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
@@ -65,18 +66,23 @@ function CN_SCZ_AD() {
             (await Axios({
                 method: 'PUT',
                 params: { nroSolicitudCotizacion: nSolCotizacion },
-                data: { state: 'rechazado' },
+                data: { state: 'Rechazado' },
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado"
             }));
             setStateKeeper('');
             setReload(!reload);
         };
-        if (stateKeeper === 'rechazado'){
+        if (stateKeeper === 'Rechazado'){
             rechazar(nroSolCotizacionKeeper);
         }
     }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/compras-nacionales/solicitud-cotizacion/visualizar-documento/${id}`);
+    };
 
     return (
         <div>
@@ -106,13 +112,13 @@ function CN_SCZ_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('aceptado'); },
+                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('Aceptado'); },
                                     iconProps: { style: { color: "#16A34A" } }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('rechazado'); },
+                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('Rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }
                                 },
                                 {

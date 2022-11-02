@@ -5,6 +5,7 @@ const OrdenCompra = require('../../models/compras-nacionales/OrdenCompra');
 /* Nuevo documento */
 router.post('/compras-nacionales/orden-compra/nuevo-documento', async (req, res) => {
     const orden_compra = OrdenCompra(req.body);
+    console.log(orden_compra);
     await orden_compra
         .save()
         .then((data) => res.json(data))
@@ -15,8 +16,8 @@ router.post('/compras-nacionales/orden-compra/nuevo-documento', async (req, res)
 // Get all orden-compra with a pending state
 router.get('/compras-nacionales/orden-compra/aceptar-documento/pendiente', (req, res) => {
     OrdenCompra
-        .find({estado: 'pendiente'})
-        .select(['-id', 'nro_orden_compra', 'nro_solicitud_cotizacion', 'fecha_elaboracion'])
+        .find({estado: 'Pendiente'})
+        .select(['-_id', 'nro_orden_compra', 'nro_sol_cotizacion', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
@@ -46,7 +47,7 @@ router.put('/compras-nacionales/orden-compra/aceptar-documento/rechazado', (req,
 router.get('/compras-nacionales/orden-compra/historial-documento', (req, res) => {
     OrdenCompra
         .find()
-        .select(['-_id', 'nro_orden_compra', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_orden_compra', 'nro_sol_cotizacion', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

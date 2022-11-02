@@ -5,6 +5,7 @@ const NotaRecepcion = require('../../models/importaciones/NotaRecepcion');
 /* Nuevo documento */
 router.post('/importaciones/nota-recepcion/nuevo-documento', async (req, res) => {
     const nota_recepcion = NotaRecepcion(req.body);
+    console.log(nota_recepcion);
     await nota_recepcion
         .save()
         .then((data) => res.json(data))
@@ -15,7 +16,7 @@ router.post('/importaciones/nota-recepcion/nuevo-documento', async (req, res) =>
 // Get all nota-recepcion with a pending state
 router.get('/importaciones/nota-recepcion/aceptar-documento/pendiente', (req, res) => {
     NotaRecepcion
-        .find({estado: 'pendiente'})
+        .find({estado: 'Pendiente'})
         .select(['-_id', 'nro_nota_recepcion', 'nro_orden_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));

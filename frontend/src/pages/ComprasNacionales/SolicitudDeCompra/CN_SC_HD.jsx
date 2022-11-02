@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -15,7 +16,7 @@ function CN_SC_HD() {
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         },
         {
             title: 'Estado',
@@ -45,6 +46,11 @@ function CN_SC_HD() {
         };
         getList();
     }, [reload]);
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/compras-nacionales/solicitud-compra/visualizar-documento/${id}`);
+    };
 
     return (
         <div className='d-flex'>

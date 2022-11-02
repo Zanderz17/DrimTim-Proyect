@@ -6,7 +6,6 @@ const SolicitudCompra = require('../../models/importaciones/SolicitudCompra');
 router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) => {
     const solicitud_compra = SolicitudCompra(req.body);
     console.log(solicitud_compra);
-    
     await solicitud_compra
         .save()
         .then((data) => res.json(data))
@@ -18,7 +17,7 @@ router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) 
 // Get all solicitud-compra with a pending state
 router.get('/importaciones/solicitud-compra/aceptar-documento/pendiente', (req, res) => {
     SolicitudCompra
-        .find( {estado: 'pendiente'} )
+        .find( {estado: 'Pendiente'} )
         .select(['-_id', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));

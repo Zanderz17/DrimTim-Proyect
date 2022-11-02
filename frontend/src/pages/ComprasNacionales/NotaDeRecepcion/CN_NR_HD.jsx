@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -7,8 +9,6 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 
 function CN_NR_AD() {
-    
-
     const columnas = [
         {
             title: 'Nro. Nota de recepción',
@@ -21,7 +21,7 @@ function CN_NR_AD() {
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         },
         {
             title: 'Estado',
@@ -51,6 +51,11 @@ function CN_NR_AD() {
         };
         getList();
     }, [reload]);
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/compras-nacionales/nota-recepcion/visualizar-documento/${id}`);
+    };
 
     return (
         <div>

@@ -7,7 +7,7 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/NotaDeRecepcion/CN_NR_ND.css'
 
 function CN_NR_ND() {
-    const [inputList, setinputList]= useState([{IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+    const [inputList, setinputList]= useState([{id_material:'', cant_recibida:'', precio_unitario: ''}]);
     
     const [nroNotaRecepcion, setNroNotaRecepcion] = useState("");
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
@@ -33,12 +33,12 @@ function CN_NR_ND() {
                 descripcion: descripcion,
                 importe_total_mercancia_recibida: importeTotalMercanciaRecibida,
                 nombre_receptor: nombreReceptor,
-                estado: 'pendiente'
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/nota-recepcion/nuevo-documento"
         });
-        e.preventDefault();
+        //e.preventDefault();
     };
 
     const handleinputchange=(e, index)=>{
@@ -55,7 +55,7 @@ function CN_NR_ND() {
     }
 
     const handleaddclick=()=>{ 
-        setinputList([...inputList, {IDMaterial:'', stockMaterial:'', priceMaterial: ''}]);
+        setinputList([...inputList, {id_material:'', cant_recibida:'', precio_unitario: ''}]);
         console.log(inputList);
     }
 
@@ -86,7 +86,7 @@ function CN_NR_ND() {
                             </div>
                             <div className="row form-group">
                                 <div className='col-6'>
-                                    <label className="form-label" htmlFor="IDNotaRec">Número de nota de recpción</label>
+                                    <label className="form-label" htmlFor="IDNotaRec">Número de nota de recepción</label>
                                     <input className="form-control" type="number" id="IDNotaRec" placeholder="0000-0000-0000-0000" onChange={(e) => setNroNotaRecepcion(e.target.value)} required/>
                                 </div>
 
@@ -125,16 +125,16 @@ function CN_NR_ND() {
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
-                                            <label className="form-label" htmlFor="IDMaterial"> Identificador del material </label>
-                                            <input className="form-control" type="text" name="IDMaterial" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="id_material"> Identificador del material </label>
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="stockMaterial"> Cantidad Recibida </label>
-                                            <input className="form-control" type="number" name="stockMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="cant_recibida"> Cantidad Recibida </label>
+                                            <input className="form-control" type="number" name="cant_recibida" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         <div className='col-2'>
-                                            <label className="form-label" htmlFor="priceMaterial"> Precio por Unidad </label>
-                                            <input className="form-control" type="number" name="priceMaterial" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <label className="form-label" htmlFor="precio_unitario"> Precio por Unidad </label>
+                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&

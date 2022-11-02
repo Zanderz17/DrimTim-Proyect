@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -15,12 +16,12 @@ function IM_OC_AD() {
         },
         {
             title: 'Nro. Solicitud de cotización',
-            field: 'nro_solicitud_cotizacion'
+            field: 'nro_sol_cotizacion'
         },
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         },
         {
             title: 'Estado',
@@ -50,6 +51,11 @@ function IM_OC_AD() {
         };
         getList();
     }, [reload]);
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/importaciones/orden-compra/visualizar-documento/${id}`);
+    };
 
     return (
         <div>

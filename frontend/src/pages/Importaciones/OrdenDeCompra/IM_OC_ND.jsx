@@ -14,7 +14,7 @@ function IM_OC_ND() {
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [fechaEntregaMercancias, setFechaEntregaMercancias] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
-    const [condicionesPago, setCondicionesPago] = useState("");
+    const [condicionesPago, setCondicionesPago] = useState("Contado");
     const [descripcion, setDescripcion] = useState("");
     const [impuesto, setImpuesto] = useState("");
     const [importeTotal, setImporteTotal] = useState("");
@@ -42,14 +42,13 @@ function IM_OC_ND() {
                 costo_trasnporte: costoTransporte,
                 fraccion_aduanal: fraccionAduanal,
                 costo_total: costoTotal,
-                estado: 'pendiente'
+                estado: 'Pendiente'
             },
             withCredentials: true,
             url: "http://localhost:9000/importaciones/orden-compra/nuevo-documento"
         });
-        e.preventDefault();
+        //e.preventDefault();
     };
-    /* CAMBIAR */
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;

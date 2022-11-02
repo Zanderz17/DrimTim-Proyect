@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar';
@@ -20,7 +21,7 @@ function IM_SCZ_AD() {
         {
             title: 'Fecha de elaboración',
             field: 'fecha_elaboracion',
-            type: 'date'
+            //type: 'date'
         },
         {
             title: 'Estado',
@@ -50,6 +51,11 @@ function IM_SCZ_AD() {
         };
         getList();
     }, [reload]);
+
+    const navigate = useNavigate();
+    const view = (id) => {
+        navigate(`/importaciones/solicitud-cotizacion/visualizar-documento/${id}`);
+    };
 
     return (
         <div>
