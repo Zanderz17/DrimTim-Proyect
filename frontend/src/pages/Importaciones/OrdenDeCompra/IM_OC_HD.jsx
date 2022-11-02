@@ -32,13 +32,24 @@ function IM_OC_AD() {
         }
     ];
 
-    const data = [
-        {
-            'nro_orden_compra': "11111",
-            'nro_solicitud_cotizacion': "22222",
-            'fecha_elaboracion': "03-12-2020"
-        }
-    ]
+    const [data, setData] = useState([]);
+    //const [nroOrdCompraKeeper, setNroOrdCompraKeeper] = useState('');
+    //const [stateKeeper, setStateKeeper] = useState('');
+    
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/orden-compra/historial-documento"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
 
     return (
         <div>
@@ -55,6 +66,7 @@ function IM_OC_AD() {
                         active3={true}
                         link1="/importaciones/orden-compra/nuevo-documento"
                         link2="/importaciones/orden-compra/aceptar-documento"
+                        link3="/importaciones/orden-compra/historial-documento"
                     >
                     </Title>
 
@@ -75,7 +87,7 @@ function IM_OC_AD() {
                                 actionsColumnIndex: -1,
                                 exportButton: true,
                                 exportAllData: true,
-                                exportFileName: 'ComprasNacionales-SolicitudCompras-Historial'
+                                exportFileName: 'Importaciones-OrdenCompra-Historial'
                             }}
                             localization = {{
                                 header:{

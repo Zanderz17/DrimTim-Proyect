@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SolicitudCotizacion = require('../../models/SolicitudCotizacion');
+const SolicitudCotizacion = require('../../models/compras-nacionales/SolicitudCotizacion');
 
 /* Nuevo documento */
 router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (req, res) => {
@@ -46,7 +46,7 @@ router.put('/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado
 router.get('/compras-nacionales/solicitud-cotizacion/historial-documento', (req, res) => {
     SolicitudCotizacion
         .find()
-        .select(['-_id', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

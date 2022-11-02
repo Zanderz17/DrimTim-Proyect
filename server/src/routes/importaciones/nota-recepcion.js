@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const NotaRecepcion = require('../../models/NotaRecepcion');
+const NotaRecepcion = require('../../models/importaciones/NotaRecepcion');
 
 /* Nuevo documento */
 router.post('/importaciones/nota-recepcion/nuevo-documento', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/importaciones/nota-recepcion/nuevo-documento', async (req, res) =>
 router.get('/importaciones/nota-recepcion/aceptar-documento/pendiente', (req, res) => {
     NotaRecepcion
         .find({estado: 'pendiente'})
-        .select(['-_id', 'nro_nota_recepcion', 'fecha_elaboracion'])
+        .select(['-_id', 'nro_nota_recepcion', 'nro_orden_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
@@ -46,7 +46,7 @@ router.put('/importaciones/nota-recepcion/aceptar-documento/rechazado', (req, re
 router.get('/importaciones/nota-recepcion/historial-documento', (req, res) => {
     NotaRecepcion
         .find()
-        .select(['-_id', 'nro_nota_recepcion', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_nota_recepcion', 'nro_orden_compra', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

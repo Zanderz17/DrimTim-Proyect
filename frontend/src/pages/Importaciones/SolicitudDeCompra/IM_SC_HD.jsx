@@ -29,59 +29,23 @@ function IM_SC_HD() {
     ];
 
     const [data, setData] = useState([]);
-    const [nroSolCompraKeeper, setNroSolCompraKeeper] = useState('');
-    const [stateKeeper, setStateKeeper] = useState('');
+    //const [nroSolCompraKeeper, setNroSolCompraKeeper] = useState('');
+    //const [stateKeeper, setStateKeeper] = useState('');
     
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
 
-    /* --- CAMBIAR --- */
     useEffect( () => {
         const getList = async () => {
             const req = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/pendiente"
+                url: "http://localhost:9000/importaciones/solicitud-compra/historial-documento"
             })).data;
             setData(req);
         };
         getList();
     }, [reload]);
-
-    useEffect( () => {
-        const aceptar = async (nSolCompra) => { 
-            (await Axios({
-                method: 'PUT',
-                params: { nroSolicitudCompra: nSolCompra },
-                data: { state: 'aceptado' },
-                withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
-            }));
-            setStateKeeper('');
-            setReload(!reload);
-        };
-        if (stateKeeper === 'aceptado'){
-            aceptar(nroSolCompraKeeper);
-        }
-    }, [nroSolCompraKeeper]);
-
-    useEffect( () => {
-        const rechazar = async (nSolCompra) => {
-            (await Axios({
-                method: 'PUT',
-                params: { nroSolicitudCompra: nSolCompra },
-                data: { state: 'rechazado' },
-                withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/rechazado"
-            }));
-            setStateKeeper('');
-            setReload(!reload);
-        };
-        if (stateKeeper === 'rechazado'){
-            rechazar(nroSolCompraKeeper);
-        }
-    }, [nroSolCompraKeeper]);
-    /* -------------- */
 
     return (
         <div className='d-flex'>
@@ -118,7 +82,7 @@ function IM_SC_HD() {
                             actionsColumnIndex: -1,
                             exportButton: true,
                             exportAllData: true,
-                            exportFileName: 'ComprasNacionales-SolicitudCompras-Historial'
+                            exportFileName: 'Importaciones-SolicitudCompra-Historial'
                         }}
                         localization = {{
                             header:{

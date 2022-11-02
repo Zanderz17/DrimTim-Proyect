@@ -14,7 +14,6 @@ function IM_SC_ND() {
     const [descripcion, setDescripcion] = useState("");
     const [puntoPedido, setPuntoPedido] = useState("");
     
-    /*------------------- CAMBIAR ---------------*/
     const registrar = (e) => {
         Axios({
             method: 'POST',
@@ -31,7 +30,6 @@ function IM_SC_ND() {
         });
         e.preventDefault();
     };
-    /* ------------------------------------------ */
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;

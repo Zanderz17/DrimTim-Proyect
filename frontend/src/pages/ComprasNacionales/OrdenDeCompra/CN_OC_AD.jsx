@@ -112,7 +112,7 @@ function CN_OC_AD() {
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('rechazado') },
+                                    onClick: (event, rowData) => { setNroOrdCompraKeeper(rowData.nro_orden_compra); setStateKeeper('rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }
                                 },
                                 {

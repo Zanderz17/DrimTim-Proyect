@@ -18,10 +18,6 @@ function CN_OC_ND() {
     const [descripcion, setDescripcion] = useState("");
     const [impuesto, setImpuesto] = useState("");
     const [importeTotal, setImporteTotal] = useState("");
-    const [transporte, setTransporte] = useState("");
-    const [costoTransporte, setCostoTransporte] = useState("");
-    const [fraccionAduanal, setFraccionAduanal] = useState("");
-    const [costoTotal, setCostoTotal] = useState("");
 
     const registrar = (e) => {
         Axios({
@@ -37,10 +33,6 @@ function CN_OC_ND() {
                 descripcion: descripcion,
                 impuesto: impuesto,
                 importe_total: importeTotal,
-                trasnporte: transporte,
-                costo_trasnporte: costoTransporte,
-                fraccion_aduanal: fraccionAduanal,
-                costo_total: costoTotal,
                 estado: 'pendiente'
             },
             withCredentials: true,

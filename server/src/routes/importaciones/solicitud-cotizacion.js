@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SolicitudCotizacion = require('../../models/SolicitudCotizacion');
+const SolicitudCotizacion = require('../../models/importaciones/SolicitudCotizacion');
 
 /* Nuevo documento */
 router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, r
 router.get('/importaciones/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {
     SolicitudCotizacion
         .find({estado: 'pendiente'})
-        .select(['-_id', 'nro_solicitud_cotizacion', 'fecha_elaboracion'])
+        .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });
@@ -46,7 +46,7 @@ router.put('/importaciones/solicitud-cotizacion/aceptar-documento/rechazado', (r
 router.get('/importaciones/solicitud-cotizacion/historial-documento', (req, res) => {
     SolicitudCotizacion
         .find()
-        .select(['-_id', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_solicitud_cotizacion', 'nro_solicitud_compra', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

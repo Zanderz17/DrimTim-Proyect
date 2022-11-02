@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SolicitudCompra = require('../../models/SolicitudCompra');
+const SolicitudCompra = require('../../models/importaciones/SolicitudCompra');
 
 /* Nuevo documento */
 router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) => {

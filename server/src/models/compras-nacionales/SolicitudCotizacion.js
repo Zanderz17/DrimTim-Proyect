@@ -1,28 +1,24 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const notaRecepcionSchema = new Schema({
-    nro_nota_recepcion: {
+const solCotizacionSchema = new Schema({
+    nro_solicitud_cotizacion: {
         type: String,
         required: true
     },
-    nro_orden_compra: {
+    nro_solicitud_compra: {
         type: String,
         required: true
     },
-    fecha_recepcion: {
+    fecha_elaboracion: {
         type: String,
         required: true
     },
-    fecha_elaboracion_orden_compra: {
+    fecha_lim_respuesta: {
         type: String,
         required: true
     },
     nombre_proveedor: {
-        type: String,
-        required: true
-    },
-    condiciones_pago: {
         type: String,
         required: true
     },
@@ -33,7 +29,7 @@ const notaRecepcionSchema = new Schema({
                     type: String,
                     required: true
                 },
-                cant_recibida: {
+                cant_requerida: {
                     type: String,
                     required: true
                 },
@@ -49,7 +45,7 @@ const notaRecepcionSchema = new Schema({
         type: String,
         required: true
     },
-    importe_total_mercancia_recibida: {
+    plazo_max_entrega: {
         type: String,
         required: true
     },
@@ -63,4 +59,4 @@ const notaRecepcionSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('nota-recepcion', notaRecepcionSchema);
+module.exports = mongoose.model('compras-nacionales-solicitud-cotizacion', solCotizacionSchema);

@@ -107,7 +107,7 @@ function CN_SC_AD() {
                             {
                                 icon: 'clear',
                                 tooltip: 'ELiminar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado') },
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado'); },
                                 iconProps: { style: { color: "#FF3C3C" } }
                             },
                             {
@@ -121,7 +121,7 @@ function CN_SC_AD() {
                             actionsColumnIndex: -1,
                             exportButton: true,
                             exportAllData: true,
-                            exportFileName: 'ComprasNacionales-SolicitudCompras-Pendientes'
+                            exportFileName: 'ComprasNacionales-SolicitudCompra-Pendientes'
                         }}
                         localization = {{
                             header:{

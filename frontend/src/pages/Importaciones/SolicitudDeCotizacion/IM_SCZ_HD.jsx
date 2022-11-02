@@ -32,13 +32,24 @@ function IM_SCZ_AD() {
         }
     ];
 
-    const data = [
-        {
-            'nro_solicitud_cotizacion': "11111",
-            'nro_solicitud_compra': "22222",
-            'fecha_elaboracion': "03-12-2020"
-        }
-    ]
+    const [data, setData] = useState([]);
+    //const [nroSolCotizacionKeeper, setNroSolCotizacionKeeper] = useState('');
+    //const [stateKeeper, setStateKeeper] = useState('');
+
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/solicitud-cotizacion/historial-documento"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
 
     return (
         <div>

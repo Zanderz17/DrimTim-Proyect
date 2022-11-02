@@ -32,8 +32,8 @@ function CN_SCZ_HD() {
     ];
 
     const [data, setData] = useState([]);
-    const [nroSolCotizacionKeeper, setNroSolCotizacionKeeper] = useState('');
-    const [stateKeeper, setStateKeeper] = useState('');
+    //const [nroSolCotizacionKeeper, setNroSolCotizacionKeeper] = useState('');
+    //const [stateKeeper, setStateKeeper] = useState('');
 
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
@@ -43,48 +43,12 @@ function CN_SCZ_HD() {
             const req = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente"
+                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/historial-documento"
             })).data;
             setData(req);
         };
         getList();
     }, [reload]);
-
-    useEffect( () => {
-        const aceptar = async (nSolCotizacion) => { 
-            (await Axios({
-                method: 'PUT',
-                params: { nroSolicitudCotizacion: nSolCotizacion },
-                data: { state: 'aceptado' },
-                withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/aceptado"
-            }));
-            setStateKeeper(''); 
-            setReload(!reload);
-        };
-        if (stateKeeper === 'aceptado'){
-            aceptar(nroSolCotizacionKeeper); 
-        }
-    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
-    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
-
-    useEffect( () => {
-        const rechazar = async (nSolCotizacion) => {
-            (await Axios({
-                method: 'PUT',
-                params: { nroSolicitudCotizacion: nSolCotizacion },
-                data: { state: 'rechazado' },
-                withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/aceptar-documento/rechazado"
-            }));
-            setStateKeeper('');
-            setReload(!reload);
-        };
-        if (stateKeeper === 'rechazado'){
-            rechazar(nroSolCotizacionKeeper);
-        }
-    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
-    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
         <div>
@@ -119,7 +83,10 @@ function CN_SCZ_HD() {
                                 }
                             ]}
                             options= {{
-                                actionsColumnIndex: -1
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'ComprasNacionales-SolicitudCotizacion-Historial'
                             }}
                             localization = {{
                                 header:{

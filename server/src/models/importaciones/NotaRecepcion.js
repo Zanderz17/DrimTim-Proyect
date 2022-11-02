@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const ordCompraSchema = new Schema({
+const notaRecepcionSchema = new Schema({
+    nro_nota_recepcion: {
+        type: String,
+        required: true
+    },
     nro_orden_compra: {
         type: String,
         required: true
     },
-    nro_sol_cotizacion: {
+    fecha_recepcion: {
         type: String,
         required: true
     },
     fecha_elaboracion: {
-        type: String,
-        required: true
-    },
-    fecha_entrega_mercancias: {
         type: String,
         required: true
     },
@@ -33,15 +33,11 @@ const ordCompraSchema = new Schema({
                     type: String,
                     required: true
                 },
-                cant_requerida: {
+                cant_recibida: {
                     type: String,
                     required: true
                 },
                 precio_unitario: {
-                    type: String,
-                    required: true
-                },
-                importe_parcial: {
                     type: String,
                     required: true
                 }
@@ -53,27 +49,11 @@ const ordCompraSchema = new Schema({
         type: String,
         required: true
     },
-    impuesto: {
+    importe_total_mercancia_recibida: {
         type: String,
         required: true
     },
-    importe_total: {
-        type: String,
-        required: true
-    },
-    trasnporte: {
-        type: String,
-        required: true
-    },
-    costo_trasnporte: {
-        type: String,
-        required: true
-    },
-    fraccion_aduanal: {
-        type: String,
-        required: true
-    },
-    costo_total: {
+    nombre_receptor: {
         type: String,
         required: true
     },
@@ -83,4 +63,4 @@ const ordCompraSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Orden-compra', ordCompraSchema);
+module.exports = mongoose.model('importaciones-nota-recepcion', notaRecepcionSchema);

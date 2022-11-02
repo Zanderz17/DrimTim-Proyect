@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const OrdenCompra = require('../../models/OrdenCompra');
+const OrdenCompra = require('../../models/compras-nacionales/OrdenCompra');
 
 /* Nuevo documento */
 router.post('/compras-nacionales/orden-compra/nuevo-documento', async (req, res) => {
@@ -46,7 +46,7 @@ router.put('/compras-nacionales/orden-compra/aceptar-documento/rechazado', (req,
 router.get('/compras-nacionales/orden-compra/historial-documento', (req, res) => {
     OrdenCompra
         .find()
-        .select(['-_id', 'nro_orden_compra', 'fecha_elaboracion', 'estado'])
+        .select(['-_id', 'nro_orden_compra', 'nro_solicitud_cotizacion', 'fecha_elaboracion', 'estado'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 });

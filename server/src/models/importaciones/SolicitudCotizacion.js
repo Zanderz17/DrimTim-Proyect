@@ -59,4 +59,4 @@ const solCotizacionSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('solicitud-cotizacion', solCotizacionSchema);
+module.exports = mongoose.model('importaciones-solicitud-cotizacion', solCotizacionSchema);
