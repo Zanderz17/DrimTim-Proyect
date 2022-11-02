@@ -72,16 +72,16 @@ function IM_SC_VD() {
                         </div>
 
                         {    
-                        inputList.map((x,i) => {
+                        inputList.map((product,i) => {
                             return(
                                 <div className="list-products row form-group" key={i}>
                                     <div className='col-5'>
                                         <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
-                                        <input className="form-control" type="text" name="id_material" value={inputList.id_material} disabled/>
+                                        <input className="form-control" type="text" name="id_material" value={product.id_material} disabled/>
                                     </div>
                                     <div className='col-3'>
                                         <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
-                                        <input className="form-control" type="number" name="cant_requerida" value={inputList.cant_requerida} disabled />
+                                        <input className="form-control" type="number" name="cant_requerida" value={product.cant_requerida} disabled />
                                     </div>
                                 </div> 
                             );
