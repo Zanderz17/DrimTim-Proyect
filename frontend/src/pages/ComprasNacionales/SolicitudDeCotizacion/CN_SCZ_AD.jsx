@@ -112,7 +112,7 @@ function CN_SCZ_AD() {
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('rechazado') },
+                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }
                                 },
                                 {

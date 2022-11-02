@@ -27,13 +27,12 @@ function IM_SC_AD() {
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
 
-    /* --- CAMBIAR --- */
     useEffect( () => {
         const getList = async () => {
             const req = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/pendiente"
+                url: "http://localhost:9000/importaciones/solicitud-compra/aceptar-documento/pendiente"
             })).data;
             setData(req);
         };
@@ -47,15 +46,16 @@ function IM_SC_AD() {
                 params: { nroSolicitudCompra: nSolCompra },
                 data: { state: 'aceptado' },
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/aceptado"
+                url: "http://localhost:9000/importaciones/solicitud-compra/aceptar-documento/aceptado"
             }));
-            setStateKeeper('');
+            setStateKeeper(''); 
             setReload(!reload);
         };
         if (stateKeeper === 'aceptado'){
-            aceptar(nroSolCompraKeeper);
+            aceptar(nroSolCompraKeeper); 
         }
-    }, [nroSolCompraKeeper]);
+    }, [nroSolCompraKeeper, stateKeeper, reload]); // previously: [nroSolCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     useEffect( () => {
         const rechazar = async (nSolCompra) => {
@@ -64,7 +64,7 @@ function IM_SC_AD() {
                 params: { nroSolicitudCompra: nSolCompra },
                 data: { state: 'rechazado' },
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/aceptar-documento/rechazado"
+                url: "http://localhost:9000/importaciones/solicitud-compra/aceptar-documento/rechazado"
             }));
             setStateKeeper('');
             setReload(!reload);
@@ -72,8 +72,8 @@ function IM_SC_AD() {
         if (stateKeeper === 'rechazado'){
             rechazar(nroSolCompraKeeper);
         }
-    }, [nroSolCompraKeeper]);
-    /* -------------- */
+    }, [nroSolCompraKeeper, stateKeeper, reload]); // previously: [nroSolCompraKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
         <div className='d-flex'>
@@ -102,13 +102,13 @@ function IM_SC_AD() {
                             {
                                 icon: 'check',
                                 tooltip: 'Aceptar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado') },
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('aceptado'); },
                                 iconProps: { style: { color: "#16A34A" } }
                             },
                             {
                                 icon: 'clear',
                                 tooltip: 'ELiminar',
-                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado') },
+                                onClick: (event, rowData) => { setNroSolCompraKeeper(rowData.nro_solicitud_compra); setStateKeeper('rechazado'); },
                                 iconProps: { style: { color: "#FF3C3C" } }                                
                             },
                             {
@@ -122,7 +122,7 @@ function IM_SC_AD() {
                             actionsColumnIndex: -1,
                             exportButton: true,
                             exportAllData: true,
-                            exportFileName: 'Importaciones-SolicitudCompras-Pendientes'
+                            exportFileName: 'Importaciones-SolicitudCompra-Pendientes'
                         }}
                         localization = {{
                             header:{

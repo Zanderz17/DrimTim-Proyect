@@ -24,13 +24,60 @@ function IM_SCZ_AD() {
         }
     ];
 
-    const data = [
-        {
-            'nro_solicitud_cotizacion': "11111",
-            'nro_solicitud_compra': "22222",
-            'fecha_elaboracion': "03-12-2020"
+    const [data, setData] = useState([]);
+    const [nroSolCotizacionKeeper, setNroSolCotizacionKeeper] = useState('');
+    const [stateKeeper, setStateKeeper] = useState('');
+
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/solicitud-cotizacion/aceptar-documento/pendiente"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
+
+    useEffect( () => {
+        const aceptar = async (nSolCotizacion) => { 
+            (await Axios({
+                method: 'PUT',
+                params: { nroSolicitudCotizacion: nSolCotizacion },
+                data: { state: 'aceptado' },
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/solicitud-cotizacion/aceptar-documento/aceptado"
+            }));
+            setStateKeeper(''); 
+            setReload(!reload);
+        };
+        if (stateKeeper === 'aceptado'){
+            aceptar(nroSolCotizacionKeeper); 
         }
-    ]
+    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
+
+    useEffect( () => {
+        const rechazar = async (nSolCotizacion) => {
+            (await Axios({
+                method: 'PUT',
+                params: { nroSolicitudCotizacion: nSolCotizacion },
+                data: { state: 'rechazado' },
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/solicitud-cotizacion/aceptar-documento/rechazado"
+            }));
+            setStateKeeper('');
+            setReload(!reload);
+        };
+        if (stateKeeper === 'rechazado'){
+            rechazar(nroSolCotizacionKeeper);
+        }
+    }, [nroSolCotizacionKeeper, stateKeeper, reload]); // previously: [nroSolCotizacionKeeper]
+    // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
     return (
         <div>
@@ -60,13 +107,13 @@ function IM_SCZ_AD() {
                                 {
                                     icon: 'check',
                                     tooltip: 'Aceptar',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('aceptado'); },
                                     iconProps: { style: { color: "#16A34A" } }
                                 },
                                 {
                                     icon: 'clear',
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { setNroSolCotizacionKeeper(rowData.nro_solicitud_cotizacion); setStateKeeper('rechazado'); },
                                     iconProps: { style: { color: "#FF3C3C" } }                                
                                 },
                                 {
