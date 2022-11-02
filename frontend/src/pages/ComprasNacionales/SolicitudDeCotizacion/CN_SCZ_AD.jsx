@@ -124,7 +124,7 @@ function CN_SCZ_AD() {
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { view(rowData.nro_solicitud_cotizacion); },
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}

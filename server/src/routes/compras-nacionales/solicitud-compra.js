@@ -53,4 +53,14 @@ router.get('/compras-nacionales/solicitud-compra/historial-documento', (req, res
         .catch((error) => res.json({message: error}));
 });
 
+/* Visualizar documento */
+// Get one solicitud-compra by nro_solicitud_compra
+router.get('/compras-nacionales/solicitud-compra/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    SolicitudCompra
+        .findOne({nro_solicitud_compra: id})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
 module.exports = router;

@@ -52,4 +52,14 @@ router.get('/importaciones/solicitud-cotizacion/historial-documento', (req, res)
         .catch((error) => res.json({message: error}));
 });
 
+/* Visualizar documento */
+// Get one solicitud-cotizacion by nro_solicitud_cotizacion
+router.get('/importaciones/solicitud-cotizacion/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    SolicitudCotizacion
+        .findOne({nro_solicitud_cotizacion: id})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
 module.exports = router;

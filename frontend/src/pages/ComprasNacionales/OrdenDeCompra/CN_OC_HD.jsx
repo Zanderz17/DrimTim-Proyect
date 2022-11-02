@@ -83,7 +83,7 @@ function CN_OC_HD() {
                             {
                                 icon: 'visibility',
                                 tooltip: 'Ver',
-                                onClick: (event, rowData) => alert ("Viendo... " + rowData.nro_solicitud_compra),
+                                onClick: (event, rowData) => { view(rowData.nro_orden_compra); },
                                 iconProps: { style: { color: "#4763E4" } }
                             }
                         ]}

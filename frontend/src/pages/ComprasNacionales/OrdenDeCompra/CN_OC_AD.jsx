@@ -124,7 +124,7 @@ function CN_OC_AD() {
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { view(rowData.nro_orden_compra); },
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}

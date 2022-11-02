@@ -52,4 +52,14 @@ router.get('/importaciones/orden-compra/historial-documento', (req, res) => {
         .catch((error) => res.json({message: error}));
 });
 
+/* Visualizar documento */
+// Get one orden-compra by nro_orden_compra
+router.get('/importaciones/orden-compra/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    OrdenCompra
+        .findOne({nro_orden_compra: id})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
 module.exports = router;

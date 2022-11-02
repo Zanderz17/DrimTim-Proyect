@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar'
@@ -7,7 +8,47 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
 
 function IM_OC_VD() {
+    let { id } = useParams();
+
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
+    const [nroOrdenCompra, setNroOrdenCompra] = useState("");
+    const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");
+    const [fechaElaboracion, setFechaElaboracion] = useState("");
+    const [fechaEntregaMercancias, setFechaEntregaMercancias] = useState("");
+    const [nombreProveedor, setNombreProveedor] = useState("");
+    const [condicionesPago, setCondicionesPago] = useState("Contado");
+    const [descripcion, setDescripcion] = useState("");
+    const [impuesto, setImpuesto] = useState("");
+    const [importeTotal, setImporteTotal] = useState("");
+    const [transporte, setTransporte] = useState("");
+    const [costoTransporte, setCostoTransporte] = useState("");
+    const [fraccionAduanal, setFraccionAduanal] = useState("");
+    const [costoTotal, setCostoTotal] = useState("");
+
+    useEffect( () => {
+        const getData = async () => {
+            const data = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: `http://localhost:9000/importaciones/orden-compra/visualizar-documento/${id}`
+            })).data;
+            setinputList(data.productos);
+            setNroOrdenCompra(data.nro_orden_compra);
+            setNroSolicitudCotizacion(data.nro_sol_cotizacion);
+            setFechaElaboracion(data.fecha_elaboracion);
+            setFechaEntregaMercancias(data.fecha_entrega_mercancias);
+            setNombreProveedor(data.nombre_proveedor);
+            setCondicionesPago(data.condiciones_pago);
+            setDescripcion(data.descripcion);
+            setImpuesto(data.impuesto);
+            setImporteTotal(data.importe_total);
+            setTransporte(data.transporte);
+            setCostoTransporte(data.costo_transporte);
+            setFraccionAduanal(data.fraccion_aduanal);
+            setCostoTotal(data.costo_total);
+        };
+        getData();
+    }, []);
 
     return (
         <div className='d-flex'>
@@ -37,39 +78,36 @@ function IM_OC_VD() {
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
-                                <input className="form-control" type="number" id="IDOrCompra" value={2342} disabled/>
+                                <input className="form-control" type="number" id="IDOrCompra" value={nroOrdenCompra} disabled/>
                             </div>
 
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                <input className="form-control" type="number" id="IDSolCompra" value={3232} disabled/>
+                                <input className="form-control" type="number" id="IDSolCompra" value={nroSolicitudCotizacion} disabled/>
                             </div>
                         </div>
 
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="fechaSolCompra">Fecha de elaboración</label>
-                                <input className="form-control" type="date" id="fechaSolCompra" value={"2018-09-21"} disabled/>
+                                <input className="form-control" type="date" id="fechaSolCompra" value={fechaElaboracion} disabled/>
                             </div>
                             
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="fechaEntrega">Fecha de entrega de mercancias</label>
-                                <input className="form-control" type="date" id="fechaEntrega" value={"2018-09-21"} disabled/>
+                                <input className="form-control" type="date" id="fechaEntrega" value={fechaEntregaMercancias} disabled/>
                             </div>
                         </div>
 
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                <input className="form-control" type="text" id="proveedor" value={"DrimTim"} disabled/>
+                                <input className="form-control" type="text" id="proveedor" value={nombreProveedor} disabled/>
                             </div>
 
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="condPago">Condiciones de pago</label>
-                                <select className="form-select" aria-label="Default" disabled>
-                                    <option value="Contado">Contado</option>
-                                    <option value="Cuotas">Cuotas</option>
-                                </select>
+                                <input className="form-control" type="text" id="condPago" value={condicionesPago} disabled/>
                             </div>
                         </div>
 
@@ -79,19 +117,19 @@ function IM_OC_VD() {
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
                                             <label className="form-label" htmlFor="id_material">Identificador del material</label>
-                                            <input className="form-control" type="text" name="id_material" value={"XXXX-XXXX-XXXX-XXXX"} disabled />
+                                            <input className="form-control" type="text" name="id_material" value={inputList.id_material} disabled />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
-                                            <input className="form-control" type="number" name="cant_requerida" value={2323} disabled />
+                                            <input className="form-control" type="number" name="cant_requerida" value={inputList.cant_requerida} disabled />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
-                                            <input className="form-control" type="number" name="precio_unitario" value={3223} disabled/>
+                                            <input className="form-control" type="number" name="precio_unitario" value={inputList.precio_unitario} disabled/>
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="importe_parcial">Importe Parcial</label>
-                                            <input className="form-control" type="number" name="importe_parcial" value={221} disabled/>
+                                            <input className="form-control" type="number" name="importe_parcial" value={inputList.importe_parcial} disabled/>
                                         </div>
                                     </div> 
                                 );
@@ -101,43 +139,43 @@ function IM_OC_VD() {
                         <div className="row form-group">
                             <div className='col-12'>
                                 <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                <input className="form-control" type="text" id="descripcion" value={'Descripción...'} disabled/>
+                                <input className="form-control" type="text" id="descripcion" value={descripcion} disabled/>
                             </div>
                         </div>
 
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="impuesto">Impuesto</label>
-                                <input className="form-control" type="number" id="impuesto" value={323223} disabled/>
+                                <input className="form-control" type="number" id="impuesto" value={impuesto} disabled/>
                             </div>
 
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="importeTotal">Importe total</label>
-                                <input className="form-control" type="number" id="importeTotal" value={3232} disabled/>
+                                <input className="form-control" type="number" id="importeTotal" value={importeTotal} disabled/>
                             </div>
                         </div>
 
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="transporte">Transporte</label>
-                                <input className="form-control" type="text" id="transporte" value={"Platillo volador"} disabled/>
+                                <input className="form-control" type="text" id="transporte" value={transporte} disabled/>
                             </div>
 
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="costoTransporte">Costo de transporte</label>
-                                <input className="form-control" type="number" id="costoTransporte" value={3232} disabled/>
+                                <input className="form-control" type="number" id="costoTransporte" value={costoTransporte} disabled/>
                             </div>
                         </div>
 
                         <div className="row form-group">
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="aduana">Fracción aduanal aplicable</label>
-                                <input className="form-control" type="number" id="aduana" value={3232} disabled/>
+                                <input className="form-control" type="number" id="aduana" value={fraccionAduanal} disabled/>
                             </div>
 
                             <div className='col-6'>
                                 <label className="form-label" htmlFor="costoTotal">Costo de total</label>
-                                <input className="form-control" type="number" id="costoTotal" value={3232} disabled/>
+                                <input className="form-control" type="number" id="costoTotal" value={costoTotal} disabled/>
                             </div>
                         </div>
 

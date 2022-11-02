@@ -126,7 +126,7 @@ function IM_NR_AD() {
                                 {
                                     icon: 'visibility',
                                     tooltip: 'Ver',
-                                    onClick: (event, rowData) => { /*Agregar*/ },
+                                    onClick: (event, rowData) => { view(rowData.nro_nota_recepcion); },
                                     iconProps: { style: { color: "#4763E4" } }
                                 }
                             ]}

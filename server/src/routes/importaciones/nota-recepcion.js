@@ -52,4 +52,14 @@ router.get('/importaciones/nota-recepcion/historial-documento', (req, res) => {
         .catch((error) => res.json({message: error}));
 });
 
+/* Visualizar documento */
+// Get one nota-recepcion by nro_nota_recepcion
+router.get('/importaciones/nota-recepcion/visualizar-documento/:id', (req, res) => {
+    const { id } = req.params;
+    NotaRecepcion
+        .findOne({nro_nota_recepcion: id})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+});
+
 module.exports = router;
