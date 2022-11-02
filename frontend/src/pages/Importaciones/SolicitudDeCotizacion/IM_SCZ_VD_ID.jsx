@@ -96,20 +96,20 @@ function IM_SCZ_VD() {
                         </div>
 
                         {    
-                        inputList.map( (x,i)=>{
+                        inputList.map( (product,i)=>{
                             return(
                                 <div className="list-products row form-group" key={i}>
                                     <div className='col-4'>
                                         <label className="form-label" htmlFor="IDMaterial">Identificador del material</label>
-                                        <input className="form-control" type="text" name="IDMaterial" value={inputList.id_material} disabled />
+                                        <input className="form-control" type="text" name="IDMaterial" value={product.id_material} disabled />
                                     </div>
                                     <div className='col-2'>
                                         <label className="form-label" htmlFor="stockMaterial">Cantidad Requerida</label>
-                                        <input className="form-control" type="number" name="stockMaterial" value={inputList.cant_requerida} disabled/>
+                                        <input className="form-control" type="number" name="stockMaterial" value={product.cant_requerida} disabled/>
                                     </div>
                                     <div className='col-2'>
                                         <label className="form-label" htmlFor="priceMaterial">Precio por Unidad</label>
-                                        <input className="form-control" type="number" name="priceMaterial" value={inputList.precio_unitario} disabled/>
+                                        <input className="form-control" type="number" name="priceMaterial" value={product.precio_unitario} disabled/>
                                     </div>
                                 </div> 
                             );

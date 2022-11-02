@@ -105,20 +105,20 @@ function CN_NR_VD() {
                             </div>
 
                             {    
-                            inputList.map( (x,i)=>{
+                            inputList.map( (product,i)=>{
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
                                             <label className="form-label" htmlFor="id_material"> Identificador del material </label>
-                                            <input className="form-control" type="text" name="id_material" value={inputList.id_material} disabled/>
+                                            <input className="form-control" type="text" name="id_material" value={product.id_material} disabled/>
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="cant_recibida"> Cantidad Recibida </label>
-                                            <input className="form-control" type="number" name="cant_recibida" value={inputList.cant_recibida} disabled/>
+                                            <input className="form-control" type="number" name="cant_recibida" value={product.cant_recibida} disabled/>
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="precio_unitario"> Precio por Unidad </label>
-                                            <input className="form-control" type="number" name="precio_unitario" value={inputList.precio_unitario} disabled/>
+                                            <input className="form-control" type="number" name="precio_unitario" value={product.precio_unitario} disabled/>
                                         </div>
                                     </div> 
                                 );

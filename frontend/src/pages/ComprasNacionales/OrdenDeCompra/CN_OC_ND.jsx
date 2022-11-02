@@ -171,7 +171,7 @@ function CN_OC_ND() {
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="impuesto">Impuesto</label>
-                                    <input className="form-control" type="number" id="impuesto" placeholder="DrimTim" onChange={(e) => setImpuesto(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="impuesto" placeholder="999999999" onChange={(e) => setImpuesto(e.target.value)} required/>
                                 </div>
 
                                 <div className='col-6'>
