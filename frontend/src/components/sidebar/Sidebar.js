@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 import SidebarItem from './SidebarItem'
 import items from './data/sidebar.json'
@@ -6,6 +8,19 @@ import '../../css/sidebar-styles/Sidebar.css'
 
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const logout = (e) => {
+      Axios({
+          method: 'GET',
+          withCredentials: true,
+          url: "http://localhost:9000/users/logout"
+      }).then((res) => {
+          console.log(res.data);
+          navigate('/users/signin');
+      });
+      e.preventDefault();
+  };
+
   return (
     <div className='sidebar'>
       <div className='img-div'>
@@ -20,7 +35,7 @@ function Sidebar() {
           Jefe de compras
         </div>
         <div className='footer-button'>
-          <button type="button" className="btn btn-primary">Cerrar Sesión</button>
+          <button type="button" className="btn btn-primary" onClick={logout}>Cerrar Sesión</button>
         </div>
       </div>
     </div>

@@ -20,16 +20,18 @@ module.exports = function (passport) {
     })
   );
 
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
   });
   
-  passport.deserializeUser((id, cb) => {
+  passport.deserializeUser((id, done) => {
     User.findOne({ _id: id }, (err, user) => {
       const userInformation = {
         correo: user.correo,
+        rol: user.rol
       };
-      cb(err, userInformation);
+      //console.log('userInformation: ', userInformation);
+      done(err, userInformation);
     });
   });
 };

@@ -1,7 +1,24 @@
-import React from 'react'
-import '../../css/title-styles/Title.css'
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+
+import '../../css/title-styles/Title.css';
 
 function Title(props) {
+    const [userRol, setUserRol] = useState('');
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            setUserRol(user.rol);
+        };
+        isLoggedIn()
+    }, []);
+
     return (
         <div className='container'>
             <div className='row navigation-bar'>
@@ -27,9 +44,11 @@ function Title(props) {
                     <a className= {props.active1 ? 'active' : "no-active"} href={props.link1}>
                         Nuevo documento
                     </a>
-                    <a className= { props.active2 ? 'active' : "no-active"} href={props.link2}>
-                        Aceptar documento
-                    </a>
+                    {userRol==="Jefe de Compras" ? 
+                        <a className= { props.active2 ? 'active' : "no-active"} href={props.link2}>
+                            Aceptar documento
+                        </a>
+                    :null}
                     <a className= {props.active3 ? 'active' : "no-active"} href={props.link3}>
                         Historial de documentos
                     </a>

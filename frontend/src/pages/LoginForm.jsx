@@ -1,11 +1,14 @@
 import React, { useState } from 'react';    
 import { useNavigate } from 'react-router-dom';
-import '../css/pages-styles/LoginForm.css';
 import Axios from 'axios';
+
+import '../css/pages-styles/LoginForm.css';
+
 
 function LoginForm() {
     const [loginCorreo, setLoginCorreo] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+
     const navigate = useNavigate();
     const login = (e) => {
         Axios({
@@ -18,7 +21,7 @@ function LoginForm() {
             url: "http://localhost:9000/users/login"
         }).then((res) => {
             if(res.data === 'Successfully Authenticated'){
-                navigate('/compras-nacionales/solicitud-compra');
+                navigate('/compras-nacionales/solicitud-compra/nuevo-documento');
             };
         });
         e.preventDefault();

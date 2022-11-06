@@ -24,7 +24,9 @@ app.use(session({
 }));
 app.use(cookieParser('secretcode'));
 app.use(passport.initialize());
+app.use(passport.authenticate('session'));
 app.use(passport.session());
+
 require('./config/passport')(passport);
 
 // Routes
