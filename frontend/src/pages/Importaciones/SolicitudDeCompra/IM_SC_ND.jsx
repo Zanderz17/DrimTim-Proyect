@@ -46,7 +46,8 @@ function IM_SC_ND() {
             withCredentials: true,
             url: "http://localhost:9000/importaciones/solicitud-compra/nuevo-documento"
         });
-        //e.preventDefault();
+        e.preventDefault();
+        resetAll();
     };
 
     const handleinputchange=(e, index)=>{
@@ -65,6 +66,15 @@ function IM_SC_ND() {
     const handleaddclick = () =>{ 
         setinputList([...inputList, {id_material:'', cant_requerida:''}]);
         console.log(inputList); //Only to test inputList
+    }
+
+    const resetAll = () => {
+        setinputList([{id_material:'', cant_requerida:''}]);
+        setNroSolicitudCompra("");
+        setFechaElaboracion("");
+        setDescripcion("");
+        setPuntoPedido("");
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
     return (

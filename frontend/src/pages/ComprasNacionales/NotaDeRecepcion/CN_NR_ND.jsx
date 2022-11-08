@@ -32,7 +32,7 @@ function CN_NR_ND() {
     const [fechaRecepcion, setFechaRecepcion] = useState("");
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [nombreProveedor, setNombreProveedor] = useState("");
-    const [condicionesPago, setCondicionesPago] = useState("");
+    const [condicionesPago, setCondicionesPago] = useState("Contado");
     const [descripcion, setDescripcion] = useState("");
     const [importeTotalMercanciaRecibida, setImporteTotalMercanciaRecibida] = useState("");
     const [nombreReceptor, setNombreReceptor] = useState("");
@@ -56,7 +56,8 @@ function CN_NR_ND() {
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/nota-recepcion/nuevo-documento"
         });
-        //e.preventDefault();
+        e.preventDefault();
+        resetAll();
     };
 
     const handleinputchange=(e, index)=>{
@@ -64,18 +65,50 @@ function CN_NR_ND() {
         const list=[...inputList];
         list[index][name]= value;
         setinputList(list);
+
+        totalPriceCalculator();
     }
 
-    const handleremove= index=>{
+    const handleremove = index => {
         const list=[...inputList];
         list.splice(index,1);
         setinputList(list);
     }
 
+
     const handleaddclick=()=>{ 
         setinputList([...inputList, {id_material:'', cant_recibida:'', precio_unitario: ''}]);
-        console.log(inputList);
-    }
+    };
+
+    const totalPriceCalculator = () => {
+        let sum = 0;
+
+        inputList.forEach(item => {
+            sum += item.cant_recibida * item.precio_unitario;
+        });
+
+        setImporteTotalMercanciaRecibida(sum);
+    };
+
+    useEffect(() => {
+        totalPriceCalculator()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [inputList]);
+
+
+    const resetAll = () => {
+        setinputList([{id_material:'', cant_recibida:'', precio_unitario: ''}]);
+        setNroNotaRecepcion("");
+        setNroOrdenCompra("");
+        setFechaRecepcion("");
+        setFechaElaboracion("");
+        setNombreProveedor("");
+        setCondicionesPago("Contado");
+        setDescripcion("");
+        setImporteTotalMercanciaRecibida("");
+        setNombreReceptor("");
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    };
 
     return (
         <div className='d-flex'>
@@ -95,7 +128,7 @@ function CN_NR_ND() {
                 </Title>
 
                 <div className='new-doc-form'>
-                    <form>
+                    <form onSubmit={registrar}>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
@@ -134,30 +167,33 @@ function CN_NR_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="condPago">Condiciones de pago</label>
-                                    <input className="form-control" type="text" id="condPago" placeholder="Contado/Cuotas" onChange={(e) => setCondicionesPago(e.target.value)} required/>
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setCondicionesPago(e.target.value)} value={condicionesPago} required>
+                                        <option value="Contado">Contado</option>
+                                        <option value="Cuotas">Cuotas</option>
+                                    </select>
                                 </div>
                             </div>
 
-                            {    
+                            { 
                             inputList.map( (x,i)=>{
                                 return(
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
                                             <label className="form-label" htmlFor="id_material"> Identificador del material </label>
-                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} value={x.id_material} required />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="cant_recibida"> Cantidad Recibida </label>
-                                            <input className="form-control" type="number" name="cant_recibida" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="number" name="cant_recibida" placeholder="000" onChange={ e=>handleinputchange(e,i)} value={x.cant_recibida} required />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="precio_unitario"> Precio por Unidad </label>
-                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} value={x.precio_unitario} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&
                                             <div className='col-2 my-auto'>
-                                                <button className="btn btn-danger w-100" onClick={()=> handleremove(i)}>Eliminar</button>
+                                                <button className="btn btn-danger w-100" onClick={(i) => handleremove(i)}>Eliminar</button>
                                             </div>
                                         }
                                         { inputList.length-1===i &&
@@ -181,7 +217,7 @@ function CN_NR_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total de la mercancia recibida</label>
-                                    <input className="form-control" type="number" id="importeTotal" placeholder='000' onChange={(e) => setImporteTotalMercanciaRecibida(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="importeTotal" placeholder='000' value={importeTotalMercanciaRecibida} disabled />
                                 </div>
                             </div>
 
@@ -194,10 +230,10 @@ function CN_NR_ND() {
 
                             <div className='final-submit row'>
                                 <div className='col-2'>
-                                    <button className="btn btn-success register w-100" onClick={registrar}>Registrar</button>
+                                    <button className="btn btn-success register w-100" type="submit">Registrar</button>
                                 </div>
                                 <div className='col-2'>
-                                    <button className="btn btn-danger anular w-100">Anular</button>
+                                    <button className="btn btn-danger anular w-100" type="reset" onClick={resetAll}>Anular</button>
                                 </div>
                             </div>
 
