@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
-=======
->>>>>>> Stashed changes
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar'
