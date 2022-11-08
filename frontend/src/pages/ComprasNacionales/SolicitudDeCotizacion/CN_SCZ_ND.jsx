@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCotizacion/CN_SCZ_ND.css'
@@ -53,8 +54,19 @@ function CN_SCZ_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/solicitud-cotizacion/nuevo-documento"
-        });
-        //e.preventDefault();
+        })
+        .then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
+        })
+        e.preventDefault();
+        resetAll();
     };
 
     const handleinputchange=(e, index)=>{
@@ -75,8 +87,30 @@ function CN_SCZ_ND() {
         console.log(inputList);
     }
 
+    const resetAll = () =>{
+        setinputList([{id_material:'', cant_requerida:'', precio_unitario: ''}]);
+        setNroSolicitudCotizacion("");
+        setNroSolicitudCompra("");
+        setFechaElaboracion("");
+        setFechaLimiteRespuesta("");
+        setNombreProveedor("");
+        setDescripcion("");
+        setPlazoMaximoEntrega("");
+        setNombreReceptor("");
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    };
+
+    /* Start Example test */
+    const example = [
+        "3113313",
+        "43243242",
+        "234243242"
+    ]
+    /* End Example test */
+
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -93,7 +127,7 @@ function CN_SCZ_ND() {
                 </Title>
 
                 <div className='new-doc-form'>              
-                    <form>
+                    <form onSubmit={registrar}>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
@@ -104,31 +138,42 @@ function CN_SCZ_ND() {
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required />
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de compra</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} required/>
+                                    {/*
+                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required />
+                                    */}
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
+                                        {
+                                            example.map ( (numberSol, numberSolIndex) => {
+                                                return(
+                                                    <option value={numberSol} key={numberSolIndex}>{numberSol}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha de elaboración</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} value={fechaElaboracion} required />
                                 </div>
                                 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha límite de respuesta</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaLimiteRespuesta(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaLimiteRespuesta(e.target.value)} value={fechaLimiteRespuesta} required />
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} value={nombreProveedor} required />
                                 </div>
                             </div>
 
@@ -138,15 +183,15 @@ function CN_SCZ_ND() {
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-4'>
                                             <label className="form-label" htmlFor="id_material">Identificador del material</label>
-                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={ e=>handleinputchange(e,i)} value={x.id_material} required />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
-                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={ e=>handleinputchange(e,i)} value={x.cant_requerida} required />
                                         </div>
                                         <div className='col-2'>
                                             <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
-                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={ e=>handleinputchange(e,i)} value={x.precio_unitario} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&
@@ -168,30 +213,30 @@ function CN_SCZ_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} value={descripcion} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="fechaMax">Plazo máximo de entrega de mercancias</label>
-                                    <input className="form-control" type="date" id="fechaMax" onChange={(e) => setPlazoMaximoEntrega(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaMax" onChange={(e) => setPlazoMaximoEntrega(e.target.value)} value={plazoMaximoEntrega} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="receptor">Nombre del receptor</label>
-                                    <input className="form-control" type="text" id="receptor" placeholder="DrimTim" onChange={(e) => setNombreReceptor(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="receptor" placeholder="DrimTim" onChange={(e) => setNombreReceptor(e.target.value)} value={nombreReceptor} required/>
                                 </div>
                             </div>
 
                             <div className='final-submit row'>
                                 <div className='col-2'>
-                                    <button className="btn btn-success register w-100" onClick={registrar}>Registrar</button>
+                                    <button className="btn btn-success register w-100" type="submit">Registrar</button>
                                 </div>
                                 <div className='col-2'>
-                                    <button className="btn btn-danger anular w-100">Anular</button>
+                                    <button className="btn btn-danger anular w-100" type="reset" onClick={resetAll}>Anular</button>
                                 </div>
                             </div>
                         </div>

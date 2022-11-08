@@ -1,8 +1,13 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+=======
+import { useState, useEffect} from 'react';
+>>>>>>> Stashed changes
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/OrdenDeCompra/CN_OC_AD.css'
@@ -55,14 +60,30 @@ function CN_OC_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/compras-nacionales/orden-compra/nuevo-documento"
-        });
-        //e.preventDefault();
+        })
+        .then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
+        })
+        e.preventDefault();
+        resetAll();
     };
 
     const handleinputchange=(e, index)=>{
         const {name, value}= e.target;
         const list= [...inputList];
         list[index][name]= value;
+        setinputList(list);
+        
+        /* Control parcial Price */
+        const parcialPrice = list[index]["cant_requerida"] * list[index]["precio_unitario"];
+        list[index]["importe_parcial"]= parcialPrice;
         setinputList(list);
     }
 
@@ -76,8 +97,50 @@ function CN_OC_ND() {
         setinputList([...inputList, {id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
     }
 
+    useEffect(() => {
+        parcialPriceCalculator()
+    }, [inputList]);
+
+    const parcialPriceCalculator = (cant, price) => {
+        const parcialPrice = cant * price;
+        return parcialPrice;
+    }
+
+    const totalPriceCalculator = () =>{
+        let sum = 0;
+        inputList.forEach(item => {
+            sum += item.importe_parcial;
+        });
+        if (impuesto) {
+            sum = sum + (sum*(impuesto/100));
+        }
+        return sum;
+    }
+
+    const handleTotalPrice = (e) =>{
+        const sum = totalPriceCalculator();
+        setImpuesto(e.target.value); 
+        setImporteTotal(sum + (sum*(e.target.value/100)));
+    }
+
+
+    const resetAll = () => {
+        setinputList([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
+        setNroOrdenCompra('');
+        setNroSolicitudCotizacion('');
+        setFechaElaboracion('');
+        setFechaEntregaMercancias('');
+        setNombreProveedor('');
+        setCondicionesPago('Contado');
+        setDescripcion('');
+        setImpuesto('');
+        setImporteTotal('');
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    };
+
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -94,7 +157,7 @@ function CN_OC_ND() {
                 </Title>
 
                 <div className='new-doc-form'> 
-                    <form>
+                    <form onSubmit={registrar}>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
@@ -105,36 +168,36 @@ function CN_OC_ND() {
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
-                                    <input className="form-control" type="number" id="IDOrCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroOrdenCompra(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="IDOrCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroOrdenCompra(e.target.value)} value={nroOrdenCompra} required/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha de elaboración</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} value={fechaElaboracion} required/>
                                 </div>
                                 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaEntrega">Fecha de entrega de mercancias</label>
-                                    <input className="form-control" type="date" id="fechaEntrega" onChange={(e) => setFechaEntregaMercancias(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaEntrega" onChange={(e) => setFechaEntregaMercancias(e.target.value)} value={fechaEntregaMercancias} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} value={nombreProveedor} required/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="condPago">Condiciones de pago</label>
-                                    <select className="form-select" aria-label="Default" onChange={(e) => setCondicionesPago(e.target.value)} required>
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setCondicionesPago(e.target.value)} value={condicionesPago} required>
                                         <option value="Contado">Contado</option>
                                         <option value="Cuotas">Cuotas</option>
                                     </select>
@@ -147,19 +210,19 @@ function CN_OC_ND() {
                                         <div className="list-products row form-group" key={i}>
                                             <div className='col-4'>
                                                 <label className="form-label" htmlFor="id_material">Identificador del material</label>
-                                                <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
+                                                <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} value={x.id_material} required />
                                             </div>
                                             <div className='col-2'>
                                                 <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
-                                                <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                                <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} value={x.cant_requerida} required />
                                             </div>
                                             <div className='col-2'>
                                                 <label className="form-label" htmlFor="precio_unitario">Precio por Unidad</label>
-                                                <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                                <input className="form-control" type="number" name="precio_unitario" placeholder="000" onChange={e=>handleinputchange(e,i)} value={x.precio_unitario} required />
                                             </div>
                                             <div className='col-2'>
                                                 <label className="form-label" htmlFor="importe_parcial">Importe Parcial</label>
-                                                <input className="form-control" type="number" name="importe_parcial" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                                <input className="form-control" type="number" name="importe_parcial" placeholder="000" onChange={e=>handleinputchange(e,i)} value={parcialPriceCalculator(x.cant_requerida, x.precio_unitario)} disabled />
                                             </div>
                                             {
                                                 inputList.length!==1 &&
@@ -182,28 +245,28 @@ function CN_OC_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} value={descripcion} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="impuesto">Impuesto</label>
-                                    <input className="form-control" type="number" id="impuesto" placeholder="999999999" onChange={(e) => setImpuesto(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="impuesto" placeholder="Ingrese porcentaje de impuesto" onChange={(e) => {handleTotalPrice(e)}} value={impuesto} required/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total</label>
-                                    <input className="form-control" type="number" id="importeTotal" placeholder="999999999" onChange={(e) => setImporteTotal(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="importeTotal" placeholder="999999999" value={totalPriceCalculator()} disabled/>
                                 </div>
                             </div>
 
                             <div className='final-submit row'>
                                 <div className='col-2'>
-                                    <button className="btn btn-success register w-100" onClick={registrar}>Registrar</button>
+                                    <button className="btn btn-success register w-100" type="submit">Registrar</button>
                                 </div>
                                 <div className='col-2'>
-                                    <button className="btn btn-danger anular w-100">Anular</button>
+                                    <button className="btn btn-danger anular w-100" type="reset" onClick={resetAll}>Anular</button>
                                 </div>
                             </div>
 
