@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router";
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar'
@@ -8,8 +9,24 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
 
 function IM_OC_VD() {
-    let { id } = useParams();
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+        };
+        isLoggedIn()
+    }, []);
 
+    let { id } = useParams();
     const [inputList, setinputList]= useState([{id_material:'', cant_requerida:'', precio_unitario: '', importe_parcial: ''}]);
     const [nroOrdenCompra, setNroOrdenCompra] = useState("");
     const [nroSolicitudCotizacion, setNroSolicitudCotizacion] = useState("");

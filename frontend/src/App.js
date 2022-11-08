@@ -3,7 +3,7 @@ import {
   BrowserRouter,
   Route,
   Routes
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 import './App.css';
 import LoginForm from './pages/LoginForm.jsx';

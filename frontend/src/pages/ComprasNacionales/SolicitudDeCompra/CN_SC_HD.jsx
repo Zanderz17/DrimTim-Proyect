@@ -8,6 +8,23 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 
 function CN_SC_HD() {
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+        };
+        isLoggedIn()
+    }, [])
+
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
@@ -47,7 +64,6 @@ function CN_SC_HD() {
         getList();
     }, [reload]);
 
-    const navigate = useNavigate();
     const view = (id) => {
         navigate(`/compras-nacionales/solicitud-compra/visualizar-documento/${id}`);
     };

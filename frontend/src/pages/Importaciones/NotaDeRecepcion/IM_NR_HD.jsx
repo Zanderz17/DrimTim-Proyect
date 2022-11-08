@@ -8,6 +8,23 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 
 function IM_NR_AD() {
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+        };
+        isLoggedIn()
+    }, []);
+
     const columnas = [
         {
             title: 'Nro. Nota de recepción',
@@ -51,7 +68,6 @@ function IM_NR_AD() {
         getList();
     }, [reload]);
 
-    const navigate = useNavigate();
     const view = (id) => {
         navigate(`/importaciones/nota-recepcion/visualizar-documento/${id}`);
     };

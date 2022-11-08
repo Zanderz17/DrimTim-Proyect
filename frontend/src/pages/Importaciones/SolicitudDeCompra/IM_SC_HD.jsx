@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
@@ -6,9 +6,25 @@ import Sidebar from '../../../components/sidebar/Sidebar';
 import Title from '../../../components/title/Title';
 
 import MaterialTable from 'material-table';
-import { useState } from 'react';
 
 function IM_SC_HD() {
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+        };
+        isLoggedIn()
+    }, []);
+
     const columnas = [
         {
             title: 'Nro. Solicitud de compra',
@@ -48,7 +64,6 @@ function IM_SC_HD() {
         getList();
     }, [reload]);
 
-    const navigate = useNavigate();
     const view = (id) => {
         navigate(`/importaciones/solicitud-compra/visualizar-documento/${id}`);
     };

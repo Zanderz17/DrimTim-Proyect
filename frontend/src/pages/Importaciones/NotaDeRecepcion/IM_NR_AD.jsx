@@ -8,7 +8,25 @@ import Title from '../../../components/title/Title';
 import MaterialTable from 'material-table';
 
 function IM_NR_AD() {
-    
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+            if(userRol == "Analista de Compras"){
+                navigate(-1);
+            }
+        };
+        isLoggedIn()
+    }, []);
 
     const columnas = [
         {
@@ -81,7 +99,6 @@ function IM_NR_AD() {
     }, [nroNotaRecepcionKeeper, stateKeeper, reload]); // previously: [nroNotaRecepcionKeeper]
     // https://stackoverflow.com/questions/66017049/react-hook-useeffect-has-missing-dependencies-colors-and-options-either-in
 
-    const navigate = useNavigate();
     const view = (id) => {
         navigate(`/importaciones/nota-recepcion/visualizar-documento/${id}`);
     };

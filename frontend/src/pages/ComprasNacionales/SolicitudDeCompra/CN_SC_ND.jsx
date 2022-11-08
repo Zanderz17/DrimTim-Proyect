@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 import Sidebar from '../../../components/sidebar/Sidebar'
@@ -7,13 +8,29 @@ import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
 
 function CN_SC_ND() {
-    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:''}]);
+    const navigate = useNavigate();
+    var userRol = '';
+    useEffect( () => {    
+        const isLoggedIn = async () => {
+            const user = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/users/login/return"
+            })).data;
+            userRol = user.rol;
+            if(!user){
+                navigate('/users/signin');
+            }
+        };
+        isLoggedIn()
+    }, []);
 
+    const [inputList, setinputList]= useState([{id_material:'', cant_requerida:''}]);
     const [nroSolicitudCompra, setNroSolicitudCompra] = useState("");
     const [fechaElaboracion, setFechaElaboracion] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [puntoPedido, setPuntoPedido] = useState("");
-    
+
     const registrar = (e) => {
         Axios({
             method: 'POST',
