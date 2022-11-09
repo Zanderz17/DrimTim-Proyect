@@ -7,7 +7,7 @@ function RegisterForm() {
     const [registerCorreo, setRegisterCorreo] = useState("");
     const [registerNombre, setRegisterNombre] = useState("");
     const [registerApellidos, setRegisterApellidos] = useState("");
-    const [registerRol, setRegisterRol] = useState("");
+    const [registerRol, setRegisterRol] = useState("Analista de Compras");
     const [registerPassword, setRegisterPassword] = useState("");
     const navigate = useNavigate();
     const register = (e) => {
@@ -53,7 +53,11 @@ function RegisterForm() {
 
                     <div className="form-group">
                         <label className="form-label" htmlFor="role">Rol</label>
-                        <input className="form-control" type="text" id="role" placeholder="Jefe de Compras" onChange={e => setRegisterRol(e.target.value)} required />
+                        <select className="form-select" aria-label="Default" onChange={e => setRegisterRol(e.target.value)} required>
+                            <option value="Analista de Compras">Analista de Compras</option>
+                            <option value="Jefe de Compras">Jefe de Compras</option>
+                        </select>
+
                     </div>
 
                     <div className="form-group">

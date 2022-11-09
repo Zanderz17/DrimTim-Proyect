@@ -113,14 +113,6 @@ function CN_SCZ_ND() {
         getNSolicitudesCompra();
     }, []);
 
-    /* Start Example test */
-    const example = [
-        "3113313",
-        "43243242",
-        "234243242"
-    ]
-    /* End Example test */
-
     return (
         <div className='d-flex'>
             <div><Toaster/></div>
