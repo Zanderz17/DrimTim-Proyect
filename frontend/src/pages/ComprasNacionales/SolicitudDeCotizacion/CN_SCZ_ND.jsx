@@ -98,6 +98,8 @@ function CN_SCZ_ND() {
         setPlazoMaximoEntrega("");
         setNombreReceptor("");
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
+        console.log(ids);
     };
 
     const [ids, setIds] = useState([]);
@@ -162,9 +164,9 @@ function CN_SCZ_ND() {
                                     */}
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
                                         {
-                                            example.map ( (numberSol, numberSolIndex) => {
+                                            ids.map ( (numberSol, numberSolIndex) => {
                                                 return(
-                                                    <option value={numberSol} key={numberSolIndex}>{numberSol}</option>
+                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
                                                 )
                                             })
                                         }
