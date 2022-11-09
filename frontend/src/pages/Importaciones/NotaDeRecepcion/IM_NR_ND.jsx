@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/NotaDeRecepcion/CN_NR_ND.css'
@@ -55,6 +56,16 @@ function IM_NR_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/importaciones/nota-recepcion/nuevo-documento"
+        })
+        .then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
         });
         e.preventDefault();
         resetAll();
@@ -111,6 +122,7 @@ function IM_NR_ND() {
 
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -143,7 +155,18 @@ function IM_NR_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
-                                    <input className="form-control" type="number" id="IDOrCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroOrdenCompra(e.target.value)} value={nroOrdenCompra} required/>
+                                    { /* COMPLETAR 
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setNroOrdenCompra(e.target.value)}  value={nroOrdenCompra} required >
+                                    <option value="">Elige una opción</option>
+                                        {
+                                            ids.map ( (numberSol, numberSolIndex) => {
+                                                return(
+                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    */}
                                 </div>
                             </div>
 
