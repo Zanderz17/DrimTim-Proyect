@@ -146,6 +146,19 @@ function IM_OC_ND() {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     };
 
+    const [nSolicitudesCotizacion, setNSolicitudesCotizacion] = useState([]);
+    useEffect( () => {    
+        const getNSolicitudesCotizacion = async () => {
+            const arr = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
+            })).data;
+            setNSolicitudesCotizacion(nSolicitudesCotizacion);
+        };
+        getNSolicitudesCotizacion();    
+    }, []);
+
     return (
         <div className='d-flex'>
             <Sidebar />
