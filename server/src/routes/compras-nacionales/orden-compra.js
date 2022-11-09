@@ -12,6 +12,15 @@ router.post('/compras-nacionales/orden-compra/nuevo-documento', async (req, res)
         .catch((error) => res.json({message: error}));
 });
 
+// Get id of all orden-compra documents
+router.get('/compras-nacionales/orden-compra/get-ids', (req, res) => {
+    OrdenCompra
+        .find()
+        .select(['nro_orden_compra'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+})
+
 /* Aceptar documento */
 // Get all orden-compra with a pending state
 router.get('/compras-nacionales/orden-compra/aceptar-documento/pendiente', (req, res) => {

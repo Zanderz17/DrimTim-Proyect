@@ -12,6 +12,15 @@ router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (r
         .catch((error) => res.json({message: error}));
 });
 
+// Get id of all solicitud-cotizacion documents
+router.get('/compras-nacionales/solicitud-cotizacion/get-ids', (req, res) => {
+    SolicitudCotizacion
+        .find()
+        .select(['nro_solicitud_cotizacion'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+})
+
 /* Aceptar documento */
 // Get all solicitud-cotizacion with a pending state
 router.get('/compras-nacionales/solicitud-cotizacion/aceptar-documento/pendiente', (req, res) => {

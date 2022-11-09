@@ -13,6 +13,15 @@ router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) 
     
 });
 
+// Get id of all solicitud-compra documents
+router.get('/importaciones/solicitud-compra/get-ids', (req, res) => {
+    SolicitudCompra
+        .find()
+        .select(['nro_solicitud_compra'])
+        .then((data) => res.json(data))
+        .catch((error) => res.json({message: error}));
+})
+
 /* Aceptar documento */
 // Get all solicitud-compra with a pending state
 router.get('/importaciones/solicitud-compra/aceptar-documento/pendiente', (req, res) => {
