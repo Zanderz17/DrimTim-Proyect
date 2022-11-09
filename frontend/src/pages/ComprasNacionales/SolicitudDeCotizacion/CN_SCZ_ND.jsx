@@ -100,6 +100,20 @@ function CN_SCZ_ND() {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     };
 
+    const [ids, setIds] = useState([]);
+
+    useEffect( () => {    
+        const getNSolicitudesCompra = async () => {
+            const arr = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
+            })).data;
+            setIds(arr);
+        };
+        getNSolicitudesCompra();
+    }, []);
+
     /* Start Example test */
     const example = [
         "3113313",

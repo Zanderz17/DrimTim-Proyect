@@ -16,7 +16,7 @@ router.post('/importaciones/orden-compra/nuevo-documento', async (req, res) => {
 router.get('/compras-nacionales/orden-compra/get-ids', (req, res) => {
     OrdenCompra
         .find()
-        .select(['nro_orden_compra'])
+        .select(['-_id', 'nro_orden_compra'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 })

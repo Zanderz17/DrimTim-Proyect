@@ -17,7 +17,7 @@ router.post('/importaciones/solicitud-compra/nuevo-documento', async (req, res) 
 router.get('/importaciones/solicitud-compra/get-ids', (req, res) => {
     SolicitudCompra
         .find()
-        .select(['nro_solicitud_compra'])
+        .select(['-_id', 'nro_solicitud_compra'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 })

@@ -16,7 +16,7 @@ router.post('/compras-nacionales/solicitud-cotizacion/nuevo-documento', async (r
 router.get('/compras-nacionales/solicitud-cotizacion/get-ids', (req, res) => {
     SolicitudCotizacion
         .find()
-        .select(['nro_solicitud_cotizacion'])
+        .select(['-_id', 'nro_solicitud_cotizacion'])
         .then((data) => res.json(data))
         .catch((error) => res.json({message: error}));
 })
