@@ -217,7 +217,7 @@ function IM_NR_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="importeTotal">Importe total de la mercancia recibida</label>
-                                    <input className="form-control" type="number" id="importeTotal" placeholder='000' onChange={(e) => setImporteTotalMercanciaRecibida(e.target.value)} value={importeTotalMercanciaRecibida} required/>
+                                    <input className="form-control" type="number" id="importeTotal" placeholder='000' onChange={(e) => setImporteTotalMercanciaRecibida(e.target.value)} value={importeTotalMercanciaRecibida} disabled/>
                                 </div>
                             </div>
 
