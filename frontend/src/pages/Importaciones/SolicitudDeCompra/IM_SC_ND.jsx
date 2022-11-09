@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
@@ -45,6 +46,16 @@ function IM_SC_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/importaciones/solicitud-compra/nuevo-documento"
+        })
+        .then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
         });
         e.preventDefault();
         resetAll();
@@ -79,6 +90,7 @@ function IM_SC_ND() {
 
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -106,14 +118,14 @@ function IM_SC_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de compra</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha de elaboración</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} value={fechaElaboracion} required/>
                                 </div>
                             </div>
 
@@ -123,11 +135,11 @@ function IM_SC_ND() {
                                     <div className="list-products row form-group" key={i}>
                                         <div className='col-5'>
                                             <label className="form-label" htmlFor="id_material">Identificador del material</label>
-                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="text" name="id_material" placeholder="XXXX-XXXX-XXXX-XXXX" onChange={e=>handleinputchange(e,i)} value={x.id_material} required />
                                         </div>
                                         <div className='col-3'>
                                             <label className="form-label" htmlFor="cant_requerida">Cantidad Requerida</label>
-                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} required />
+                                            <input className="form-control" type="number" name="cant_requerida" placeholder="000" onChange={e=>handleinputchange(e,i)} value={x.cant_requerida} required />
                                         </div>
                                         {
                                             inputList.length!==1 &&
@@ -149,14 +161,14 @@ function IM_SC_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} value={descripcion} required/>
                                     </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="puntoDePedido">Punto de pedido</label>
-                                    <input className="form-control" type="text" id="puntoDePedido" placeholder='Punto de pedido...' onChange={(e) => setPuntoPedido(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="puntoDePedido" placeholder='Punto de pedido...' onChange={(e) => setPuntoPedido(e.target.value)} value={puntoPedido} required/>
                                 </div>
                             </div>
 

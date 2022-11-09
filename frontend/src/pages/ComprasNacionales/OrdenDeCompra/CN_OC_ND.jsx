@@ -66,7 +66,7 @@ function CN_OC_ND() {
             toast.error("Ocurrió un error", {
                 duration: 3000
             });
-        })
+        });
         e.preventDefault();
         resetAll();
     };
@@ -169,7 +169,18 @@ function CN_OC_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required/>
+                                    { /* DESCOMENTAR CUANDO SE TERMINE 
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required >
+                                    <option value="">Elige una opción</option>
+                                        {
+                                            ids.map ( (numberSol, numberSolIndex) => {
+                                                return(
+                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    */}
                                 </div>
                             </div>
 

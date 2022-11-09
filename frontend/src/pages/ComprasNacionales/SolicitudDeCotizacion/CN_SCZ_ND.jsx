@@ -149,10 +149,8 @@ function CN_SCZ_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de compra</label>
-                                    {/*
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required />
-                                    */}
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
+                                    <option value="">Elige una opción</option>
                                         {
                                             ids.map ( (numberSol, numberSolIndex) => {
                                                 return(
