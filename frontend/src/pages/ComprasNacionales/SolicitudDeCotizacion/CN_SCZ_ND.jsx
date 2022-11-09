@@ -98,8 +98,6 @@ function CN_SCZ_ND() {
         setPlazoMaximoEntrega("");
         setNombreReceptor("");
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-
-        console.log(ids);
     };
 
     const [ids, setIds] = useState([]);
@@ -115,14 +113,6 @@ function CN_SCZ_ND() {
         };
         getNSolicitudesCompra();
     }, []);
-
-    /* Start Example test */
-    const example = [
-        "3113313",
-        "43243242",
-        "234243242"
-    ]
-    /* End Example test */
 
     return (
         <div className='d-flex'>

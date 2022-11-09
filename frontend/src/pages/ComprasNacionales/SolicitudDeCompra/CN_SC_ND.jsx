@@ -84,12 +84,13 @@ function CN_SC_ND() {
         setDescripcion("");
         setPuntoPedido("");
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        console.log(userRol);
     };
 
     return (
         <div className='d-flex'>
             <div><Toaster/></div>
-            <Sidebar />
+            <Sidebar/>
             <div className='w-100'>
                 <Title 
                     document="Solicitud de compra" 
