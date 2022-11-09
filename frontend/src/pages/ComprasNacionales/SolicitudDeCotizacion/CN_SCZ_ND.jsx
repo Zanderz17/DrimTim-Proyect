@@ -100,8 +100,7 @@ function CN_SCZ_ND() {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     };
 
-    const [ids, setIds] = useState([]);
-
+    const [nSolicitudesCompra, setNSolicitudesCompra] = useState([]);
     useEffect( () => {    
         const getNSolicitudesCompra = async () => {
             const arr = (await Axios({
@@ -109,7 +108,7 @@ function CN_SCZ_ND() {
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
             })).data;
-            setIds(arr);
+            setNSolicitudesCompra(nSolicitudesCompra);
         };
         getNSolicitudesCompra();
     }, []);
@@ -152,7 +151,7 @@ function CN_SCZ_ND() {
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
                                     <option value="">Elige una opción</option>
                                         {
-                                            ids.map ( (numberSol, numberSolIndex) => {
+                                            nSolicitudesCompra.map ( (numberSol, numberSolIndex) => {
                                                 return(
                                                     <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
                                                 )
