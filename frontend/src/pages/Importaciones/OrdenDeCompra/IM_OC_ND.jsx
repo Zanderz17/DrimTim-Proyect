@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/OrdenDeCompra/CN_OC_AD.css'
@@ -64,6 +65,15 @@ function IM_OC_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/importaciones/orden-compra/nuevo-documento"
+        }).then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
         });
         e.preventDefault();
         resetAll();
@@ -161,6 +171,7 @@ function IM_OC_ND() {
 
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -193,7 +204,18 @@ function IM_OC_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required/>
+                                    { /* DESCOMENTAR CUANDO SE TERMINE 
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required >
+                                    <option value="">Elige una opción</option>
+                                        {
+                                            ids.map ( (numberSol, numberSolIndex) => {
+                                                return(
+                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    */}
                                 </div>
                             </div>
 

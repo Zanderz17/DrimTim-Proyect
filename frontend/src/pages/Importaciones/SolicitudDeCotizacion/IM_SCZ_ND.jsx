@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import toast, { Toaster } from 'react-hot-toast';
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCotizacion/CN_SCZ_ND.css'
@@ -53,6 +54,16 @@ function IM_SCZ_ND() {
             },
             withCredentials: true,
             url: "http://localhost:9000/importaciones/solicitud-cotizacion/nuevo-documento"
+        })
+        .then(() => {
+            toast.success("Documento Registrado", {
+                duration: 3000
+            });
+        })
+        .catch(() => {
+            toast.error("Ocurrió un error", {
+                duration: 3000
+            });
         });
         e.preventDefault();
         resetAll();
@@ -104,6 +115,7 @@ function IM_SCZ_ND() {
 
     return (
         <div className='d-flex'>
+            <div><Toaster/></div>
             <Sidebar />
             <div className='w-100'>
                 <Title 
@@ -131,31 +143,42 @@ function IM_SCZ_ND() {
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} required/>
+                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required/>
                                 </div>
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de compra</label>
-                                    <input className="form-control" type="number" id="IDSolCompra" placeholder="0000-0000-0000-0000" onChange={(e) => setNroSolicitudCompra(e.target.value)} required/>
+                                    {/*  HERE
+                                    <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
+                                    <option value="">Elige una opción</option>
+                                        {
+                                            ids.map ( (numberSol, numberSolIndex) => {
+                                                return(
+                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    */}
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha de elaboración</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaElaboracion(e.target.value)} value={fechaElaboracion} required/>
                                 </div>
                                 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="fechaSolCompra">Fecha límite de respuesta</label>
-                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaLimiteRespuesta(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaSolCompra" onChange={(e) => setFechaLimiteRespuesta(e.target.value)} value={fechaLimiteRespuesta} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="proveedor">Nombre del proveedor</label>
-                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="proveedor" placeholder="DrimTim" onChange={(e) => setNombreProveedor(e.target.value)} value={nombreProveedor} required/>
                                 </div>
                             </div>
 
@@ -195,21 +218,21 @@ function IM_SCZ_ND() {
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="descripcion">Descripción</label>
-                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="descripcion" placeholder='Descripción...' onChange={(e) => setDescripcion(e.target.value)} value={descripcion} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="fechaMax">Plazo máximo de entrega de mercancias</label>
-                                    <input className="form-control" type="date" id="fechaMax" onChange={(e) => setPlazoMaximoEntrega(e.target.value)} required/>
+                                    <input className="form-control" type="date" id="fechaMax" onChange={(e) => setPlazoMaximoEntrega(e.target.value)} value={plazoMaximoEntrega} required/>
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <div className='col-12'>
                                     <label className="form-label" htmlFor="receptor">Nombre del receptor</label>
-                                    <input className="form-control" type="text" id="receptor" placeholder="DrimTim" onChange={(e) => setNombreReceptor(e.target.value)} required/>
+                                    <input className="form-control" type="text" id="receptor" placeholder="DrimTim" onChange={(e) => setNombreReceptor(e.target.value)} value={nombreReceptor} required/>
                                 </div>
                             </div>
 
