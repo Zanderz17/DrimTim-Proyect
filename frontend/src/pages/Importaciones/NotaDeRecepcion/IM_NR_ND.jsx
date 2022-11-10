@@ -106,6 +106,19 @@ function IM_NR_ND() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputList]);
 
+    const [nOrdenesCompra, setNOrdenesCompra] = useState([]);
+    useEffect( () => {    
+        const getNOrdenesCompra = async () => {
+            const arr = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/importaciones/orden-compra/get-ids"
+            })).data;
+            setNOrdenesCompra(arr);
+        };
+        getNOrdenesCompra();
+    }, []);
+
     const resetAll = () => {
         setinputList([{id_material:'', cant_recibida:'', precio_unitario: ''}]);
         setNroNotaRecepcion("");
@@ -155,18 +168,18 @@ function IM_NR_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label>
-                                    { /* COMPLETAR 
+
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroOrdenCompra(e.target.value)}  value={nroOrdenCompra} required >
                                     <option value="">Elige una opción</option>
                                         {
-                                            ids.map ( (numberSol, numberSolIndex) => {
+                                            nOrdenesCompra.map ( (numberSol, numberSolIndex) => {
                                                 return(
-                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                    <option value={numberSol.nro_orden_compra} key={numberSolIndex}>{numberSol.nro_orden_compra}</option>
                                                 )
                                             })
                                         }
                                     </select>
-                                    */}
+
                                 </div>
                             </div>
 
