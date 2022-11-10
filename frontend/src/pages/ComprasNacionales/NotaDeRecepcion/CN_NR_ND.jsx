@@ -121,6 +121,19 @@ function CN_NR_ND() {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     };
 
+    const [nOrdenesCompra, setNOrdenesCompra] = useState([]);
+    useEffect( () => {    
+        const getNOrdenesCompra = async () => {
+            const arr = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/compras-nacionales/orden-compra/get-ids"
+            })).data;
+            setNOrdenesCompra(arr);
+        };
+        getNOrdenesCompra();
+    }, []);
+
     return (
         <div className='d-flex'>
             <div><Toaster/></div>
@@ -155,18 +168,18 @@ function CN_NR_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDOrCompra">Número de orden de compra</label> 
-                                    { /* COMPLETAR 
+
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroOrdenCompra(e.target.value)}  value={nroOrdenCompra} required >
                                     <option value="">Elige una opción</option>
                                         {
-                                            ids.map ( (numberSol, numberSolIndex) => {
+                                            nOrdenesCompra.map ( (numberSol, numberSolIndex) => {
                                                 return(
-                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                    <option value={numberSol.nro_orden_compra} key={numberSolIndex}>{numberSol.nro_orden_compra}</option>
                                                 )
                                             })
                                         }
                                     </select>
-                                    */}
+
                                 </div>
                             </div>
 

@@ -106,9 +106,9 @@ function IM_SCZ_ND() {
             const arr = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
+                url: "http://localhost:9000/importaciones/solicitud-compra/get-ids"
             })).data;
-            setNSolicitudesCompra(nSolicitudesCompra);
+            setNSolicitudesCompra(arr);
         };
         getNSolicitudesCompra();
     }, []);
@@ -148,18 +148,18 @@ function IM_SCZ_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de compra</label>
-                                    {/*  HERE
+
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCompra(e.target.value)} value={nroSolicitudCompra} required >
                                     <option value="">Elige una opción</option>
                                         {
-                                            ids.map ( (numberSol, numberSolIndex) => {
+                                            nSolicitudesCompra.map ( (numberSol, numberSolIndex) => {
                                                 return(
                                                     <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
                                                 )
                                             })
                                         }
                                     </select>
-                                    */}
+
                                 </div>
                             </div>
 

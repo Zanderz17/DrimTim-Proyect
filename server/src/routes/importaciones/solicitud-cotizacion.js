@@ -13,7 +13,7 @@ router.post('/importaciones/solicitud-cotizacion/nuevo-documento', async (req, r
 });
 
 // Get id of all solicitud-cotizacion documents
-router.get('/compras-nacionales/solicitud-cotizacion/get-ids', (req, res) => {
+router.get('/importaciones/solicitud-cotizacion/get-ids', (req, res) => {
     SolicitudCotizacion
         .find()
         .select(['-_id', 'nro_solicitud_cotizacion'])

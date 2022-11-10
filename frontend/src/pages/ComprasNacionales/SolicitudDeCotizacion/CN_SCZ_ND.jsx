@@ -108,7 +108,7 @@ function CN_SCZ_ND() {
                 withCredentials: true,
                 url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
             })).data;
-            setNSolicitudesCompra(nSolicitudesCompra);
+            setNSolicitudesCompra(arr);
         };
         getNSolicitudesCompra();
     }, []);

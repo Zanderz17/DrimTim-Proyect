@@ -13,7 +13,7 @@ router.post('/importaciones/orden-compra/nuevo-documento', async (req, res) => {
 });
 
 // Get id of all orden-compra documents
-router.get('/compras-nacionales/orden-compra/get-ids', (req, res) => {
+router.get('/importaciones/orden-compra/get-ids', (req, res) => {
     OrdenCompra
         .find()
         .select(['-_id', 'nro_orden_compra'])

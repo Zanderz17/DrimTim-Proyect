@@ -162,9 +162,10 @@ function IM_OC_ND() {
             const arr = (await Axios({
                 method: 'GET',
                 withCredentials: true,
-                url: "http://localhost:9000/compras-nacionales/solicitud-compra/get-ids"
+                url: "http://localhost:9000/importaciones/solicitud-cotizacion/get-ids"
             })).data;
-            setNSolicitudesCotizacion(nSolicitudesCotizacion);
+            console.log(arr);
+            setNSolicitudesCotizacion(arr);
         };
         getNSolicitudesCotizacion();    
     }, []);
@@ -204,18 +205,18 @@ function IM_OC_ND() {
 
                                 <div className='col-6'>
                                     <label className="form-label" htmlFor="IDSolCompra">Número de solicitud de cotización</label>
-                                    { /* DESCOMENTAR CUANDO SE TERMINE 
+
                                     <select className="form-select" aria-label="Default" onChange={(e) => setNroSolicitudCotizacion(e.target.value)} value={nroSolicitudCotizacion} required >
                                     <option value="">Elige una opción</option>
                                         {
-                                            ids.map ( (numberSol, numberSolIndex) => {
+                                            nSolicitudesCotizacion.map ( (numberSol, numberSolIndex) => {
                                                 return(
-                                                    <option value={numberSol.nro_solicitud_compra} key={numberSolIndex}>{numberSol.nro_solicitud_compra}</option>
+                                                    <option value={numberSol.nro_solicitud_cotizacion} key={numberSolIndex}>{numberSol.nro_solicitud_cotizacion}</option>
                                                 )
                                             })
                                         }
                                     </select>
-                                    */}
+
                                 </div>
                             </div>
 
