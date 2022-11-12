@@ -54,6 +54,7 @@ import IM_NR_ND from './pages/Importaciones/NotaDeRecepcion/IM_NR_ND';
 import IM_NR_AD from './pages/Importaciones/NotaDeRecepcion/IM_NR_AD';
 import IM_NR_HD from './pages/Importaciones/NotaDeRecepcion/IM_NR_HD';
 import IM_NR_VD_ID from './pages/Importaciones/NotaDeRecepcion/IM_NR_VD_ID';
+import Notifications from './pages/Notifications';
 
 /*
   IMPORTANT!
@@ -84,6 +85,10 @@ function App() {
             <Route exact path='/users/signin' element={<LoginForm />} />
             <Route exact path='/users/signup' element={<RegisterForm />} />
             <Route exact path='/codeVerification' element={<CodeVerification />} />
+
+            {/* ---- START NOTIFICACIONES ---- */}
+            <Route exact path='/Notificaciones' element={<Notifications />} />
+            {/* ---- END NOTIFICACIONES ---- */}
 
             {/* ---- START COMPRAS NACIONALES ---- */}
             <Route exact path='/compras-nacionales/solicitud-compra/nuevo-documento' element={<CN_SC_ND />} />
