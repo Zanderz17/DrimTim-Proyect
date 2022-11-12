@@ -1,0 +1,23 @@
+.notifications .buttonCompras-div{
+    margin-top: 10px;
+    margin-right: 100px;
+    margin-left: auto; 
+    margin-bottom: 30px;
+}
+
+.notifications .buttonCompras-div button{
+    background-color: #F0AD4E;
+    color: white;
+}
+
+.icon-red{
+    color: #FF3C3C;
+}
+
+.icon-green{
+    color: #16A34A;
+}
+
+.icon-normal{
+    color: #4763E4;
+}
