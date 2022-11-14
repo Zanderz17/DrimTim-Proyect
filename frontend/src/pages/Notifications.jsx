@@ -34,14 +34,14 @@ function Notifications() {
             id_producto: 43243,
             stock: 3424,
             prioridad: 422442,
-            agregado: true
+            agregado: true  // Propiedad que no se muestra pero sirve para estilizar el carrito
         },
         {
             nro_notificacion: 313131,
             id_producto: 43243,
             stock: 3424,
             prioridad: 422442,
-            agregado: false
+            agregado: false   // Propiedad que no se muestra pero sirve para estilizar el carrito
         }
     ]
 

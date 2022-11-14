@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
+import { jsPDF } from "jspdf";
 import Sidebar from '../../../components/sidebar/Sidebar'
 import Title from '../../../components/title/Title'
 import '../../../css/pages-styles/ComprasNacionales/SolicitudDeCompra/CN_SC_ND.css'
@@ -58,6 +59,16 @@ function IM_NR_VD() {
         };
         getData();
     }, []);
+
+    const generatePDF = () => {
+        var doc = new jsPDF("l", "pt", "a3",true);
+
+        doc.html(document.querySelector('#content'),{
+            callback: function(pdf){
+                pdf.save('Importaciones-NotaDeRecepcion-' + id + '.pdf')
+            },
+        })
+    }
     
     return (
         <div className='d-flex'>
@@ -77,7 +88,7 @@ function IM_NR_VD() {
                 </Title>
 
                 <div className='new-doc-form'>
-                    <form>
+                    <div id='content'>
                         <div className='container'>
                             <div className='row'>
                                 <div className='col-12'>
@@ -162,18 +173,17 @@ function IM_NR_VD() {
                                     <input className="form-control" type="text" id="receptor" value={nombreReceptor} disabled/>
                                 </div>
                             </div>
-
-                            <div className='final-submit row'>
-                                <div className='col-2'>
-                                    <button className="btn btn-success register w-100">Regresar</button>
-                                </div>
-                                <div className='col-2'>
-                                    <button className="btn btn-danger anular w-100">Descargar</button>
-                                </div>
-                            </div>
-
                         </div>
-                    </form>
+                    </div>
+
+                    <div className='final-submit row'>
+                        <div className='col-2'>
+                            <button className="btn btn-success register w-100">Regresar</button>
+                        </div>
+                        <div className='col-2'>
+                            <button className="btn btn-danger anular w-100" onClick={generatePDF}>Descargar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
