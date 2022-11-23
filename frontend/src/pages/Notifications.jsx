@@ -34,6 +34,9 @@ function Notifications() {
     const [nroNotificacionKeeper, setNroNotificacionKeeper] = useState('');
     const [stateKeeper, setStateKeeper] = useState('');
 
+    /*New*/
+    const [typeDoc, setTypeDoc] = useState("");
+
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
 
@@ -115,9 +118,17 @@ function Notifications() {
                 <div className='w-100'>
                     <TitleNotification />
 
-                    <div className='d-flex'> 
+                    <div className='d-flex'>
                         <div className='buttonCompras-div'>
-                            <button type="button" class="btn btn-warning" onClick={() => {travel('compras-nacionales')}}>Generar Solicitud de compra</button>
+                            <button type="button" className="btn btn-warning" onClick={() => {travel('compras-nacionales')}}>Generar Solicitud de compra</button>
+                        </div>
+
+                        <div className='selectDocument-div'>
+                            <select className="form-select" aria-label="Default" onChange={(e) => setTypeDoc(e.target.value)} value={typeDoc} required>
+                                <option value="">Elige una opción</option>
+                                <option value="Compras Nacionales">Compras Nacionales</option>
+                                <option value="Importaciones">Importaciones</option>
+                            </select>
                         </div>
                     </div>
 
@@ -130,18 +141,18 @@ function Notifications() {
                                 (rowData) => {
                                     return rowData.agregado=="true"? 
                                         {
-                                            icon: () => <i class="bi bi-cart-check icon-green"></i>,
+                                            icon: () => <i className="bi bi-cart-check icon-green"></i>,
                                             tooltip: 'Agregado',
                                             onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('false'); },
                                         }:
                                         {
-                                            icon: () => <i class="bi bi-cart-plus icon-normal"></i>,
+                                            icon: () => <i className="bi bi-cart-plus icon-normal"></i>,
                                             tooltip: 'Agregar',
                                             onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('true'); },
                                         }  
                                 },
                                 {
-                                    icon: () => <i class="bi bi-trash icon-red"></i>,
+                                    icon: () => <i className="bi bi-trash icon-red"></i>,
                                     tooltip: 'ELiminar',
                                     onClick: (event, rowData) => { },
                                     iconProps: { style: { color: "#FF3C3C" } }
