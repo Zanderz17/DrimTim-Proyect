@@ -34,6 +34,9 @@ function Notifications() {
     const [nroNotificacionKeeper, setNroNotificacionKeeper] = useState('');
     const [stateKeeper, setStateKeeper] = useState('');
 
+    /*New*/
+    const [typeDoc, setTypeDoc] = useState("");
+
     const [reload, setReload] = useState(false);
     useEffect( () => {}, [reload]);
 
@@ -144,9 +147,17 @@ function Notifications() {
                 <div className='w-100'>
                     <TitleNotification />
 
-                    <div className='d-flex'> 
+                    <div className='d-flex'>
                         <div className='buttonCompras-div'>
                             <button type="button" className="btn btn-warning" onClick={() => {setTravel('true')}}>Generar Solicitud de compra</button>
+                        </div>
+
+                        <div className='selectDocument-div'>
+                            <select className="form-select" aria-label="Default" onChange={(e) => setTypeDoc(e.target.value)} value={typeDoc} required>
+                                <option value="">Elige una opción</option>
+                                <option value="Compras Nacionales">Compras Nacionales</option>
+                                <option value="Importaciones">Importaciones</option>
+                            </select>
                         </div>
                     </div>
 
