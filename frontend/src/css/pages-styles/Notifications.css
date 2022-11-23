@@ -1,6 +1,14 @@
-.notifications .buttonCompras-div{
+.notifications .selectDocument-div{
     margin-top: 10px;
     margin-right: 100px;
+    margin-left: auto; 
+    margin-bottom: 30px;
+}
+
+
+.notifications .buttonCompras-div{
+    margin-top: 10px;
+    margin-right: -400px;
     margin-left: auto; 
     margin-bottom: 30px;
 }
