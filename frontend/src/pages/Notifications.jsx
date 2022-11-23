@@ -101,10 +101,39 @@ function Notifications() {
         }
     ]
     */
+    
+    const [type, setType] = useState('compras-nacionales');
+    const [travel, setTravel] = useState('');
+    
     const navigate = useNavigate();
-    const travel = (type) => {
-        navigate(`/${type}/solicitud-compra/nuevo-documento`);
-    };
+    useEffect( () => {
+        const getListAdded = async () => {
+            const dataToSend = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/notificaciones/to-send"
+            })).data;
+            navigate(`/Notificaciones/${type}/solicitud-compra/nuevo-documento`, { state: dataToSend});
+        };
+        if(travel !== ''){
+            getListAdded();
+        }
+    }, [travel]);
+
+    const [id, setId] = useState('');
+    useEffect( () => {
+        const remove = async () => {
+            const req = (await Axios({
+                method: 'DELETE',
+                withCredentials: true,
+                url: `http://localhost:9000/notificaciones/${id}`
+            })).data;
+            setReload(!reload);
+        };
+        if(id != ''){
+            remove();
+        }
+    }, [id, reload]);
 
     return (
         <div>
@@ -117,7 +146,7 @@ function Notifications() {
 
                     <div className='d-flex'> 
                         <div className='buttonCompras-div'>
-                            <button type="button" class="btn btn-warning" onClick={() => {travel('compras-nacionales')}}>Generar Solicitud de compra</button>
+                            <button type="button" className="btn btn-warning" onClick={() => {setTravel('true')}}>Generar Solicitud de compra</button>
                         </div>
                     </div>
 
@@ -130,20 +159,20 @@ function Notifications() {
                                 (rowData) => {
                                     return rowData.agregado=="true"? 
                                         {
-                                            icon: () => <i class="bi bi-cart-check icon-green"></i>,
+                                            icon: () => <i className="bi bi-cart-check icon-green"></i>,
                                             tooltip: 'Agregado',
                                             onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('false'); },
                                         }:
                                         {
-                                            icon: () => <i class="bi bi-cart-plus icon-normal"></i>,
+                                            icon: () => <i className="bi bi-cart-plus icon-normal"></i>,
                                             tooltip: 'Agregar',
                                             onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('true'); },
                                         }  
                                 },
                                 {
-                                    icon: () => <i class="bi bi-trash icon-red"></i>,
+                                    icon: () => <i className="bi bi-trash icon-red"></i>,
                                     tooltip: 'ELiminar',
-                                    onClick: (event, rowData) => { },
+                                    onClick: (event, rowData) => { setId(rowData.nro_notificacion) },
                                     iconProps: { style: { color: "#FF3C3C" } }
                                 }
                             ]}
