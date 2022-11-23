@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 import '../css/pages-styles/Notifications.css';
 
@@ -28,6 +30,60 @@ function Notifications() {
         }
     ];
 
+    const [data, setData] = useState([]);
+    const [nroNotificacionKeeper, setNroNotificacionKeeper] = useState('');
+    const [stateKeeper, setStateKeeper] = useState('');
+
+    const [reload, setReload] = useState(false);
+    useEffect( () => {}, [reload]);
+
+    useEffect( () => {
+        const getList = async () => {
+            const req = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/notificaciones"
+            })).data;
+            setData(req);
+        };
+        getList();
+    }, [reload]);
+    
+    useEffect( () => {
+        const agregar = async (nNotificacion) => { 
+            (await Axios({
+                method: 'PUT',
+                params: { nroNotificacion: nNotificacion },
+                data: { state: 'true' },
+                withCredentials: true,
+                url: "http://localhost:9000/notificaciones/agregar"
+            }));
+            setStateKeeper(''); 
+            setReload(!reload);
+        };
+        if (stateKeeper === 'true'){
+            agregar(nroNotificacionKeeper);
+        }
+    }, [nroNotificacionKeeper, stateKeeper, reload]); // previously: [nroNotificacionKeeper]
+
+    useEffect( () => {
+        const desagregar = async (nNotificacion) => {
+            (await Axios({
+                method: 'PUT',
+                params: { nroNotificacion: nNotificacion },
+                data: { state: 'false' },
+                withCredentials: true,
+                url: "http://localhost:9000/notificaciones/desagregar"
+            }));
+            setStateKeeper('');
+            setReload(!reload);
+        };
+        if (stateKeeper === 'false'){
+            desagregar(nroNotificacionKeeper);
+        }
+    }, [nroNotificacionKeeper, stateKeeper, reload]); // previously: [nroNotificacionKeeper]
+
+    /*
     const data = [
         {
             nro_notificacion: 313131,
@@ -44,6 +100,11 @@ function Notifications() {
             agregado: false   // Propiedad que no se muestra pero sirve para estilizar el carrito
         }
     ]
+    */
+    const navigate = useNavigate();
+    const travel = (type) => {
+        navigate(`/${type}/solicitud-compra/nuevo-documento`);
+    };
 
     return (
         <div>
@@ -56,7 +117,7 @@ function Notifications() {
 
                     <div className='d-flex'> 
                         <div className='buttonCompras-div'>
-                            <button type="button" class="btn btn-warning">Generar Solicitud de compra</button>
+                            <button type="button" class="btn btn-warning" onClick={() => {travel('compras-nacionales')}}>Generar Solicitud de compra</button>
                         </div>
                     </div>
 
@@ -67,16 +128,16 @@ function Notifications() {
                             title='Lista de solicitudes de cotización'
                             actions={[
                                 (rowData) => {
-                                    return rowData.agregado? 
+                                    return rowData.agregado=="true"? 
                                         {
                                             icon: () => <i class="bi bi-cart-check icon-green"></i>,
                                             tooltip: 'Agregado',
-                                            onClick: (event, rowData) => { },
+                                            onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('false'); },
                                         }:
                                         {
                                             icon: () => <i class="bi bi-cart-plus icon-normal"></i>,
                                             tooltip: 'Agregar',
-                                            onClick: (event, rowData) => {},
+                                            onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('true'); },
                                         }  
                                 },
                                 {
