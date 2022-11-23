@@ -31,6 +31,7 @@ require('./config/passport')(passport);
 
 // Routes
 app.use(require('./routes/user'));
+app.use(require('./routes/notificacion'));
 app.use(require('./routes/compras-nacionales/nota-recepcion'));
 app.use(require('./routes/compras-nacionales/orden-compra'));
 app.use(require('./routes/compras-nacionales/solicitud-compra'));
