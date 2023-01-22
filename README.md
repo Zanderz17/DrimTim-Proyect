@@ -4,65 +4,55 @@ Project developed for the software engineering course (CC1143). Purchase module 
 
 ## :sparkles: Contributors
 
-* Sanders Chancan Chanca
-* Gomero Castillo, Brayan Eduardo 
-* Zapata Gallegos, Neo Marcelo
-* Leandro Blas, Juan Jose 
-
-
+- Sanders Chancan Chanca
+- Gomero Castillo, Brayan Eduardo
+- Zapata Gallegos, Neo Marcelo
+- Leandro Blas, Juan Jose
 
 ## :rocket: Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### :computer: Prerequisites
 
 The things you need before installing the software.
 
-* You need this
-* And you need this
-* Oh, and don't forget this
+- Node js
+- npm
+- Access to your system terminal
 
 ### :cd: Installation
 
 A step by step guide that will tell you how to get the development environment up and running.
 
 ```
-$ First step
-$ Another step
-$ Final step
+$ cd frontend
+$ npm start
+$ cd ..
+$ cd server
+$ npm run dev
 ```
 
-## :pushpin: Usage
+Done! now just wait for the browser to open the application.
 
-A few examples of useful commands and/or tasks.
+## :pushpin: Screenshots
 
-```
-$ First example
-$ Second example
-$ And keep this in mind
-```
+#### Login
 
-## :mag_right: Deployment
+![Image text](./readme_img/1.png)
 
-Additional notes on how to deploy this on a live or release system. Explaining the most important branches, what pipelines they trigger and how to update the database (if anything special).
+#### Registro de documento: Solicitud de compra
 
-### :electric_plug: Server
+![Image text](./readme_img/2.png)
 
-* Live:
-* Release:
-* Development:
+#### Historial de documento: Solicitud de compra
 
-### :exclamation: Branches
+![Image text](./readme_img/3.png)
 
-* Master:
-* Feature:
-* Bugfix:
-* etc...
+#### Ver de documento: Solicitud de compra
 
-## :closed_book: Additional Documentation and Acknowledgments
+![Image text](./readme_img/4.png)
 
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
+#### Notificaciones de inventario
+
+![Image text](./readme_img/5.png)
