@@ -104,45 +104,103 @@ function Notifications() {
             agregado: false   // Propiedad que no se muestra pero sirve para estilizar el carrito
         }
     ]
-    */
-  const navigate = useNavigate();
-  const travel = (type) => {
-    navigate(`/${type}/solicitud-compra/nuevo-documento`);
-  };
+   
+    const [type, setType] = useState('compras-nacionales');
+    const [travel, setTravel] = useState('');
+    
+    const navigate = useNavigate();
+    useEffect( () => {
+        const getListAdded = async () => {
+            const dataToSend = (await Axios({
+                method: 'GET',
+                withCredentials: true,
+                url: "http://localhost:9000/notificaciones/to-send"
+            })).data;
+            navigate(`/Notificaciones/${type}/solicitud-compra/nuevo-documento`, { state: dataToSend});
+        };
+        if(travel !== ''){
+            getListAdded();
+        }
+    }, [travel]);
 
-  return (
-    <div>
-      <div className="notifications d-flex">
-        <Sidebar />
+    const [id, setId] = useState('');
+    useEffect( () => {
+        const remove = async () => {
+            const req = (await Axios({
+                method: 'DELETE',
+                withCredentials: true,
+                url: `http://localhost:9000/notificaciones/${id}`
+            })).data;
+            setReload(!reload);
+        };
+        if(id != ''){
+            remove();
+        }
+    }, [id, reload]);
 
-        <div className="w-100">
-          <TitleNotification />
-          <div className="d-flex">
-            <div className="buttonCompras-div">
-              <button
-                type="button"
-                className="btn btn-warning"
-                onClick={() => {
-                  travel("compras-nacionales");
-                }}
-              >
-                Generar Solicitud de compra
-              </button>
-            </div>
+    return (
+        <div>
+            <div className='notifications d-flex'>
 
-            {/*New. Tratar de jugar con la variable "typeDoc" Ej: Si es Importatación navegar a /imporaciones/nuevo-documento*/}
-            <div className="selectDocument-div">
-              <select
-                className="form-select"
-                aria-label="Default"
-                onChange={(e) => setTypeDoc(e.target.value)}
-                value={typeDoc}
-                required
-              >
-                <option value="">Elige una opción</option>
-                <option value="Compras Nacionales">Compras Nacionales</option>
-                <option value="Importaciones">Importaciones</option>
-              </select>
+                <Sidebar />
+                
+                <div className='w-100'>
+                    <TitleNotification />
+
+                    <div className='d-flex'>
+                        <div className='buttonCompras-div'>
+                            <button type="button" className="btn btn-warning" onClick={() => {setTravel('true')}}>Generar Solicitud de compra</button>
+                        </div>
+
+                        <div className='selectDocument-div'>
+                            <select className="form-select" aria-label="Default" onChange={(e) => setTypeDoc(e.target.value)} value={typeDoc} required>
+                                <option value="">Elige una opción</option>
+                                <option value="Compras Nacionales">Compras Nacionales</option>
+                                <option value="Importaciones">Importaciones</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className='dataTable container'>
+                        <MaterialTable
+                            columns={columnas}
+                            data={data}
+                            title='Lista de solicitudes de cotización'
+                            actions={[
+                                (rowData) => {
+                                    return rowData.agregado=="true"? 
+                                        {
+                                            icon: () => <i className="bi bi-cart-check icon-green"></i>,
+                                            tooltip: 'Agregado',
+                                            onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('false'); },
+                                        }:
+                                        {
+                                            icon: () => <i className="bi bi-cart-plus icon-normal"></i>,
+                                            tooltip: 'Agregar',
+                                            onClick: (event, rowData) => { setNroNotificacionKeeper(rowData.nro_notificacion); setStateKeeper('true'); },
+                                        }  
+                                },
+                                {
+                                    icon: () => <i className="bi bi-trash icon-red"></i>,
+                                    tooltip: 'ELiminar',
+                                    onClick: (event, rowData) => { setId(rowData.nro_notificacion) },
+                                    iconProps: { style: { color: "#FF3C3C" } }
+                                }
+                            ]}
+                            options= {{
+                                actionsColumnIndex: -1,
+                                exportButton: true,
+                                exportAllData: true,
+                                exportFileName: 'Notificaciones'
+                            }}
+                            localization = {{
+                                header:{
+                                    actions:'Acciones'
+                                }
+                            }}
+                        />
+                    </div>
+                </div>
             </div>
             {/* */}
           </div>
