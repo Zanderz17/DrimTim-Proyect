@@ -27,9 +27,11 @@ A step by step guide that will tell you how to get the development environment u
 
 ```
 $ cd frontend
+$ npm install
 $ npm start
 $ cd ..
 $ cd server
+$ npm install
 $ npm run dev
 ```
 

@@ -104,7 +104,8 @@ function Notifications() {
             agregado: false   // Propiedad que no se muestra pero sirve para estilizar el carrito
         }
     ]
-   
+  
+  */
     const [type, setType] = useState('compras-nacionales');
     const [travel, setTravel] = useState('');
     
@@ -139,6 +140,7 @@ function Notifications() {
     }, [id, reload]);
 
     return (
+      <>
         <div>
             <div className='notifications d-flex'>
 
@@ -202,62 +204,61 @@ function Notifications() {
                     </div>
                 </div>
             </div>
-            {/* */}
-          </div>
-
-          <div className="dataTable container">
-            <MaterialTable
-              columns={columnas}
-              data={data}
-              title="Lista de solicitudes de cotización"
-              actions={[
-                (rowData) => {
-                  return rowData.agregado == "true"
-                    ? {
-                        icon: () => (
-                          <i className="bi bi-cart-check icon-green"></i>
-                        ),
-                        tooltip: "Agregado",
-                        onClick: (event, rowData) => {
-                          setNroNotificacionKeeper(rowData.nro_notificacion);
-                          setStateKeeper("false");
-                        },
-                      }
-                    : {
-                        icon: () => (
-                          <i className="bi bi-cart-plus icon-normal"></i>
-                        ),
-                        tooltip: "Agregar",
-                        onClick: (event, rowData) => {
-                          setNroNotificacionKeeper(rowData.nro_notificacion);
-                          setStateKeeper("true");
-                        },
-                      };
-                },
-                {
-                  icon: () => <i className="bi bi-trash icon-red"></i>,
-                  tooltip: "ELiminar",
-                  onClick: (event, rowData) => {},
-                  iconProps: { style: { color: "#FF3C3C" } },
-                },
-              ]}
-              options={{
-                actionsColumnIndex: -1,
-                exportButton: true,
-                exportAllData: true,
-                exportFileName: "Notificaciones",
-              }}
-              localization={{
-                header: {
-                  actions: "Acciones",
-                },
-              }}
-            />
-          </div>
         </div>
-      </div>
-    </div>
-  );
+        
+        <div>
+            <div className="dataTable container">
+                <MaterialTable
+                    columns={columnas}
+                    data={data}
+                    title="Lista de solicitudes de cotización"
+                    actions={[
+                        (rowData) => {
+                            return rowData.agregado == "true"
+                                ? {
+                                    icon: () => (
+                                        <i className="bi bi-cart-check icon-green"></i>
+                                    ),
+                                    tooltip: "Agregado",
+                                    onClick: (event, rowData) => {
+                                        setNroNotificacionKeeper(rowData.nro_notificacion);
+                                        setStateKeeper("false");
+                                    },
+                                }
+                                : {
+                                    icon: () => (
+                                        <i className="bi bi-cart-plus icon-normal"></i>
+                                    ),
+                                    tooltip: "Agregar",
+                                    onClick: (event, rowData) => {
+                                        setNroNotificacionKeeper(rowData.nro_notificacion);
+                                        setStateKeeper("true");
+                                    },
+                                };
+                        },
+                        {
+                            icon: () => <i className="bi bi-trash icon-red"></i>,
+                            tooltip: "ELiminar",
+                            onClick: (event, rowData) => {},
+                            iconProps: { style: { color: "#FF3C3C" } },
+                        },
+                    ]}
+                    options={{
+                        actionsColumnIndex: -1,
+                        exportButton: true,
+                        exportAllData: true,
+                        exportFileName: "Notificaciones",
+                    }}
+                    localization={{
+                        header: {
+                            actions: "Acciones",
+                        },
+                    }}
+                />
+            </div>
+        </div>
+      </>
+    );
 }
 
 export default Notifications;

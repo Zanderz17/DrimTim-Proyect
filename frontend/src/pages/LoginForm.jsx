@@ -35,12 +35,12 @@ function LoginForm() {
                 <form className="needs-validation" onSubmit={login}>
                     <div className="form-group">
                         <label className="form-label" htmlFor="email">Correo electrónico</label>
-                        <input className="form-control" type="email" id="email" placeholder="sanders@hotmail.com" onChange={(e) => setLoginCorreo(e.target.value)} required />
+                        <input className="form-control" type="email" id="email" placeholder="brayan@gmail.com" onChange={(e) => setLoginCorreo(e.target.value)} required />
                     </div>
 
                     <div className="form-group">
                         <label className="form-label" htmlFor="password">Contraseña</label>
-                        <input className="form-control" type="password" id="password" placeholder="********************" onChange={(e) => setLoginPassword(e.target.value)} required />
+                        <input className="form-control" type="password" id="password" placeholder="*********" onChange={(e) => setLoginPassword(e.target.value)} required />
                         {/* 
                             <div className="invalid-feedback">
                                 Su correo electrónico o contraseña no coinciden

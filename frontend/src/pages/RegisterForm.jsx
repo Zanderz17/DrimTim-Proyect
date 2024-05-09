@@ -38,17 +38,17 @@ function RegisterForm() {
                 <form className="needs-validation" onSubmit={register}>
                     <div className="form-group">
                         <label className="form-label" htmlFor="email">Correo electrónico</label>
-                        <input className="form-control" type="email" id="email" placeholder="sanderschancan@hotmail.com" onChange={e => setRegisterCorreo(e.target.value)} required />
+                        <input className="form-control" type="email" id="email" placeholder="brayan@gmail.com" onChange={e => setRegisterCorreo(e.target.value)} required />
                     </div>
 
                     <div className="form-group">
                         <label className="form-label" htmlFor="name">Nombre</label>
-                        <input className="form-control" type="text" id="name" placeholder="Sanders" onChange={e => setRegisterNombre(e.target.value)} required />
+                        <input className="form-control" type="text" id="name" placeholder="Brayan" onChange={e => setRegisterNombre(e.target.value)} required />
                     </div>  
 
                     <div className="form-group">
                         <label className="form-label" htmlFor="lastName">Apellidos</label>
-                        <input className="form-control" type="text" id="lastName" placeholder="Chancan Chanca" onChange={e => setRegisterApellidos(e.target.value)} required />
+                        <input className="form-control" type="text" id="lastName" placeholder="Gomero" onChange={e => setRegisterApellidos(e.target.value)} required />
                     </div>
 
                     <div className="form-group">

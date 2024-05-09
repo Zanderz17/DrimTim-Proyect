@@ -29,7 +29,7 @@ function Sidebar() {
       { items.map((item, index) => <SidebarItem key={index} item={item}></SidebarItem>)}
       <div className='footer sticky-top'>
         <div className='footer-name'>
-          Sanders Chancan Chanca
+          Brayan Gomero
         </div>
         <div className='footer-job'>
           Jefe de compras
